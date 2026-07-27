@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustSignals />
-      ₹<ProductShowcase />
+      <ProductShowcase />
       <WhyChooseUs />
       <About />
       {/* <Services /> */}

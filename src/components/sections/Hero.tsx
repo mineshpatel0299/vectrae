@@ -95,7 +95,7 @@ export default function Hero() {
           >
             For{" "}
             <TypewriterWord
-              words={["AV", "Data Centers", "Power", "The Modern Enterprise"]}
+              words={["Audio Visuals", "Data Centers", "Power", "The Modern Enterprise"]}
               className="text-[#29B9F2]"
               cursorClassName="bg-[#29B9F2]"
             />
@@ -108,7 +108,7 @@ export default function Hero() {
           data-aos-delay="250"
           data-aos-once="true"
         >
-From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end enterprise technology across PAN-India.
+          From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end enterprise technology across PAN-India.
         </p>
 
         <div
