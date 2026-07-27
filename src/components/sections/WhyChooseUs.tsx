@@ -65,8 +65,8 @@ export default function WhyChooseUs() {
                   <motion.div
                     initial={{ opacity: 0, x: fromRight ? 40 : -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    viewport={{ once: true, margin: "-200px" }}
+                    transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     className="py-4 sm:w-1/2 sm:py-8"
                   >
                     <div
