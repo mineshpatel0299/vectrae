@@ -1,84 +1,86 @@
-import { Award, Building2, Handshake, Users } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
-import { StaggerGroup, StaggerItem } from "@/components/ui/Stagger";
-import StatCounter from "@/components/ui/StatCounter";
-import TiltCard from "@/components/ui/TiltCard";
-import { stats } from "@/data/stats";
-import { BRAND_GRADIENT } from "@/lib/brand";
+"use client";
 
-const statIcons = [Building2, Users, Handshake, Award];
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import StatCounter from "@/components/ui/StatCounter";
+import Reveal from "@/components/ui/Reveal";
+import { BRAND_GRADIENT } from "@/lib/brand";
+import { stats } from "@/data/stats";
 
 export default function About() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const lineWidth = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "100%"]);
+
   return (
-    <section className="relative overflow-hidden border-t border-white/5 bg-black py-24 sm:py-32">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-125 w-225 -translate-x-1/2 rounded-full bg-blue-600/20 blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-100 w-100 translate-x-1/3 translate-y-1/3 rounded-full bg-emerald-500/10 blur-[120px]" />
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden border-t border-white/5 bg-black py-24 sm:py-32"
+    >
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[#29B9F2]/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
+
+        {/* Label */}
+        <Reveal>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">
             About Vectrae
           </p>
-          <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-            Simplifying Enterprise Technology, End to End
+        </Reveal>
+
+        {/* Big editorial statement */}
+        <Reveal delay={0.08}>
+          <h2 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-6xl">
+            India&apos;s most trusted full-spectrum{" "}
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: BRAND_GRADIENT }}
+            >
+              enterprise technology
+            </span>{" "}
+            partner.
           </h2>
         </Reveal>
 
-        <StaggerGroup className="mt-16 grid grid-cols-1 gap-5 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 lg:gap-6">
-          <StaggerItem className="sm:col-span-2 lg:col-span-2 lg:row-span-2">
-            <TiltCard className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm sm:p-10">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 animate-pulse rounded-full bg-[#29B9F2]/20 blur-[80px]" />
+        {/* Animated horizontal rule */}
+        <div className="relative mt-10 h-px w-full bg-white/8">
+          <motion.div
+            style={{ width: lineWidth }}
+            className="absolute left-0 top-0 h-px bg-gradient-to-r from-[#29B9F2] to-[#25D9C7]"
+          />
+        </div>
 
-              <div className="relative flex h-full flex-col justify-between gap-8">
-                <div className="space-y-5">
-                  <p className="text-lg leading-relaxed text-white/60">
-                    Vectrae Infotech is a full-spectrum enterprise technology
-                    solutions provider, delivering Audio Visual, IT
-                    Infrastructure, Networking &amp; Security, Data Center,
-                    End Computing, and Power solutions to enterprises across
-                    India.
-                  </p>
-                  <p className="text-lg leading-relaxed text-white/60">
-                    With 250+ technology experts, 43 OEM and technology
-                    partnerships, and a PAN-India delivery footprint, Vectrae
-                    has supported 2,300+ enterprise clients from initial
-                    consultation through to long-term managed support.
-                  </p>
-                </div>
+        {/* Stats row + mission — single clean row */}
+        <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-0">
 
-                <blockquote className="border-l-2 border-[#29B9F2]/50 pl-6 text-xl font-medium leading-relaxed text-white sm:text-2xl">
-                  &ldquo;Our mission is to simplify technology decisions for
-                  enterprises — delivering the right solutions, the right
-                  partners, and the right outcomes, every time.&rdquo;
-                </blockquote>
+          {/* Stats — 4-col grid, consistent alignment */}
+          <div className="grid grid-cols-2 gap-x-0 gap-y-8 lg:flex lg:flex-1 lg:divide-x lg:divide-white/10">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col lg:px-8 lg:py-2 lg:first:pl-0">
+                <span
+                  className="bg-clip-text text-4xl font-bold tabular-nums text-transparent sm:text-5xl"
+                  style={{ backgroundImage: BRAND_GRADIENT }}
+                >
+                  <StatCounter value={stat.value} suffix={stat.suffix} />
+                </span>
+                <span className="mt-1 max-w-[120px] text-xs font-semibold uppercase leading-snug tracking-wider text-white/40">
+                  {stat.label}
+                </span>
               </div>
-            </TiltCard>
-          </StaggerItem>
+            ))}
+          </div>
 
-          {stats.map((stat, i) => {
-            const Icon = statIcons[i];
-            return (
-              <StaggerItem key={stat.label}>
-                <TiltCard className="h-full">
-                  <div className="flex h-full flex-col items-center justify-center gap-4 rounded-3xl border border-white/10 bg-white/[0.03] px-4 py-8 text-center backdrop-blur-sm transition duration-300 hover:border-white/20 hover:bg-white/[0.05]">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div
-                      className="bg-clip-text text-4xl font-bold text-transparent sm:text-5xl"
-                      style={{ backgroundImage: BRAND_GRADIENT }}
-                    >
-                      <StatCounter value={stat.value} suffix={stat.suffix} />
-                    </div>
-                    <p className="text-sm font-medium text-white/50">
-                      {stat.label}
-                    </p>
-                  </div>
-                </TiltCard>
-              </StaggerItem>
-            );
-          })}
-        </StaggerGroup>
+          {/* Mission pull-quote — right side */}
+          <Reveal delay={0.2} className="lg:max-w-xs lg:pb-2 lg:pl-12">
+            <p className="border-l border-[#29B9F2]/40 pl-5 text-sm leading-relaxed text-white/50">
+              Delivering the right solutions, the right partners, and the right outcomes — from initial consultation through long-term managed support.
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
