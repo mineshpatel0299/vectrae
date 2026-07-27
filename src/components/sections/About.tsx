@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import StatCounter from "@/components/ui/StatCounter";
+import Odometer from "@/components/ui/Odometer";
 import Reveal from "@/components/ui/Reveal";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { stats } from "@/data/stats";
@@ -36,11 +36,17 @@ export default function About() {
         <Reveal delay={0.08}>
           <h2 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-6xl">
             India&apos;s most trusted full-spectrum{" "}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: BRAND_GRADIENT }}
-            >
-              enterprise technology
+            <span className="relative inline-block text-[#29B9F2]">
+              <span className="relative z-10">enterprise technology</span>
+              <motion.span
+                aria-hidden
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                style={{ originX: 0, backgroundImage: BRAND_GRADIENT }}
+                className="absolute inset-x-0 bottom-1 z-0 h-3 rounded-sm opacity-25 sm:bottom-2 sm:h-4"
+              />
             </span>{" "}
             partner.
           </h2>
@@ -61,12 +67,11 @@ export default function About() {
           <div className="grid grid-cols-2 gap-x-0 gap-y-8 lg:flex lg:flex-1 lg:divide-x lg:divide-white/10">
             {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col lg:px-8 lg:py-2 lg:first:pl-0">
-                <span
-                  className="bg-clip-text text-4xl font-bold tabular-nums text-transparent sm:text-5xl"
-                  style={{ backgroundImage: BRAND_GRADIENT }}
-                >
-                  <StatCounter value={stat.value} suffix={stat.suffix} />
-                </span>
+                <Odometer
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  className="text-4xl font-bold text-white sm:text-5xl"
+                />
                 <span className="mt-1 max-w-[120px] text-xs font-semibold uppercase leading-snug tracking-wider text-white/40">
                   {stat.label}
                 </span>

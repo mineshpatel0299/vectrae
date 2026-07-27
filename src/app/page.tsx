@@ -15,10 +15,10 @@ export default function Home() {
     <>
       <Hero />
       <TrustSignals />
-      <About />
+      ₹<ProductShowcase />
       <WhyChooseUs />
-      <ProductShowcase />
-      <Services />
+      <About />
+      {/* <Services /> */}
       <CoreValues />
       <Blog />
       <FootprintMap />

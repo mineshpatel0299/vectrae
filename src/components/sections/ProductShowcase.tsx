@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Monitor, Server, ShieldCheck, Zap, Sparkles, Laptop, Cpu, Wifi } from "lucide-react";
+import { ArrowRight, Monitor, Server, ShieldCheck, Zap, Laptop, Cpu, Wifi } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
@@ -185,83 +185,144 @@ export default function ProductShowcase() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
 
               {/* Interactive Product Pointers */}
-              {filteredProducts.map((product) => {
-                const Icon = product.icon;
-                const isActive = activeId === product.id;
-
-                return (
-                  <div
-                    key={product.id}
-                    style={{ top: product.top, left: product.left }}
-                    className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
-                    onMouseEnter={() => setActiveId(product.id)}
-                    onMouseLeave={() => setActiveId(null)}
-                  >
-                    <div className="relative flex items-center justify-center">
-                      {/* Pulsing Outer Aura */}
-                      <span className="absolute h-10 w-10 animate-ping rounded-full bg-[#25D9C7]/40 opacity-75 sm:h-12 sm:w-12" />
-
-                      {/* Hotspot Pin Trigger */}
-                      <Link
-                        href={product.href}
-                        className={`group/pin relative flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/90 text-white shadow-[0_0_20px_rgba(37,217,199,0.5)] transition duration-300 hover:scale-125 hover:border-[#25D9C7] hover:bg-[#25D9C7] hover:text-black sm:h-11 sm:w-11 ${
-                          isActive ? "scale-125 border-[#25D9C7] bg-[#25D9C7] text-black shadow-[0_0_30px_rgba(37,217,199,0.8)]" : ""
-                        }`}
-                      >
-                        <Icon className="h-4 w-4 transition duration-300 group-hover/pin:rotate-12 sm:h-5 sm:w-5" />
-                      </Link>
-
-                      {/* Hover Popover Tooltip */}
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 5 }}
-                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                            className={`absolute ${getPopoverClasses(
-                              product.popoverPosition
-                            )} pointer-events-auto z-30 w-72 rounded-2xl border border-white/15 bg-black/95 p-5 shadow-2xl backdrop-blur-xl sm:w-80`}
-                          >
-                            <div className="flex items-center gap-2">
-                              <span className="rounded-md border border-[#29B9F2]/30 bg-[#29B9F2]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#29B9F2]">
-                                {product.category}
-                              </span>
-                            </div>
-
-                            <h3 className="mt-2.5 text-base font-semibold text-white sm:text-lg">
-                              {product.name}
-                            </h3>
-
-                            <p className="mt-1.5 text-xs leading-relaxed text-white/60 sm:text-sm">
-                              {product.description}
-                            </p>
-
-                            <div className="mt-3 flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-medium text-white/70">
-                              <Sparkles className="h-3 w-3 shrink-0 text-[#25D9C7]" />
-                              <span>{product.specs}</span>
-                            </div>
-
-                            <Link
-                              href={product.href}
-                              style={{ backgroundImage: BRAND_GRADIENT }}
-                              className="group/btn mt-4 inline-flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-xs font-semibold text-black transition duration-300 hover:opacity-90"
-                            >
-                              <span>View Product Details</span>
-                              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                            </Link>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                );
-              })}
+              {filteredProducts.map((product) => (
+                <MagneticPin
+                  key={product.id}
+                  product={product}
+                  isActive={activeId === product.id}
+                  onMouseEnter={() => setActiveId(product.id)}
+                  onMouseLeave={() => setActiveId(null)}
+                  getPopoverClasses={getPopoverClasses}
+                />
+              ))}
             </div>
           </div>
         </Reveal>
 
       </div>
     </section>
+  );
+}
+
+function MagneticPin({
+  product,
+  isActive,
+  onMouseEnter,
+  onMouseLeave,
+  getPopoverClasses,
+}: {
+  product: ProductPoint;
+  isActive: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  getPopoverClasses: (position: ProductPoint["popoverPosition"]) => string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springX = useSpring(x, { stiffness: 150, damping: 15 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const distX = e.clientX - centerX;
+    const distY = e.clientY - centerY;
+    const distance = Math.hypot(distX, distY);
+
+    if (distance < 45) {
+      const pullX = Math.max(-6, Math.min(6, (distX / 45) * 6));
+      const pullY = Math.max(-6, Math.min(6, (distY / 45) * 6));
+      x.set(pullX);
+      y.set(pullY);
+    } else {
+      x.set(0);
+      y.set(0);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    onMouseLeave();
+  };
+
+  const Icon = product.icon;
+
+  return (
+    <div
+      ref={ref}
+      style={{ top: product.top, left: product.left }}
+      className={`absolute -translate-x-1/2 -translate-y-1/2 p-6 -m-6 ${
+        isActive ? "z-50" : "z-20"
+      }`}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Magnetic wrapper for pin + aura */}
+      <motion.div
+        style={{ x: springX, y: springY }}
+        className="relative flex items-center justify-center"
+      >
+        {/* Pulsing Outer Aura */}
+        <span className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-[#25D9C7]/40 opacity-75 sm:h-12 sm:w-12" />
+
+        {/* Hotspot Pin */}
+        <div
+          className={`relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-black/90 text-white shadow-[0_0_20px_rgba(37,217,199,0.5)] transition duration-300 sm:h-11 sm:w-11 ${
+            isActive
+              ? "scale-125 border-[#25D9C7] bg-[#25D9C7] text-black shadow-[0_0_30px_rgba(37,217,199,0.8)]"
+              : "hover:scale-125 hover:border-[#25D9C7] hover:bg-[#25D9C7] hover:text-black"
+          }`}
+        >
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+        </div>
+      </motion.div>
+
+      {/* Popover — sibling to motion.div so it stays stable while pin nudges */}
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 4 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className={`absolute ${getPopoverClasses(
+              product.popoverPosition
+            )} pointer-events-auto w-72 rounded-2xl border border-white/15 bg-black/95 p-5 shadow-2xl backdrop-blur-xl sm:w-80`}
+            style={{ zIndex: 9999 }}
+          >
+            <span className="rounded-md border border-[#29B9F2]/30 bg-[#29B9F2]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#29B9F2]">
+              {product.category}
+            </span>
+
+            <h3 className="mt-2.5 text-base font-semibold text-white sm:text-lg">
+              {product.name}
+            </h3>
+
+            <p className="mt-1.5 text-xs leading-relaxed text-white/60 sm:text-sm">
+              {product.description}
+            </p>
+
+            <div className="mt-3 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-mono font-medium text-white/70">
+              {product.specs}
+            </div>
+
+            <Link
+              href={product.href}
+              style={{ backgroundImage: BRAND_GRADIENT }}
+              className="group/btn mt-4 inline-flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-xs font-semibold text-black transition duration-300 hover:opacity-90"
+            >
+              <span>View Product Details</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
