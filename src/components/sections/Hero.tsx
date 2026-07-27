@@ -19,11 +19,21 @@ export default function Hero() {
       <div className="absolute bottom-0 left-1/2 h-105 w-225 -translate-x-1/2 rounded-full bg-blue-600/30 blur-[120px]" />
 
       <header className="relative z-20 grid grid-cols-2 items-center px-6 py-6 md:grid-cols-3 md:px-10">
-        <div className="flex items-center">
+        <div
+          className="flex items-center"
+          data-aos="fade-down"
+          data-aos-duration="600"
+          data-aos-once="true"
+        >
           <Image src="/logo.png" alt="Vectrae" width={154} height={32} className="h-8 w-auto" priority />
         </div>
 
-        <nav className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm md:flex">
+        <nav
+          className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm md:flex"
+          data-aos="fade-down"
+          data-aos-delay="100"
+          data-aos-once="true"
+        >
           <a
             href="#"
             className="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white"
@@ -44,7 +54,12 @@ export default function Hero() {
           </a>
         </nav>
 
-        <div className="col-span-1 flex justify-self-end">
+        <div
+          className="col-span-1 flex justify-self-end"
+          data-aos="fade-down"
+          data-aos-delay="200"
+          data-aos-once="true"
+        >
           <a
             href="#"
             className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15"
@@ -58,14 +73,26 @@ export default function Hero() {
       </header>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
-        <div className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70 backdrop-blur-sm">
+        <div
+          className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70 backdrop-blur-sm"
+          data-aos="fade-up"
+          data-aos-delay="50"
+          data-aos-once="true"
+        >
           Trusted by <span className="font-semibold text-white">2,300+ Enterprises</span>{" "}
           Across India
         </div>
 
         <h1 className="flex max-w-6xl flex-col items-center text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
-          <span>Integrated Technology Solutions</span>
-          <span className="inline-flex items-baseline gap-2 whitespace-nowrap">
+          <span data-aos="fade-up" data-aos-duration="900" data-aos-once="true">
+            Integrated Technology Solutions
+          </span>
+          <span
+            className="inline-flex items-baseline gap-2 whitespace-nowrap"
+            data-aos="fade-up"
+            data-aos-delay="150"
+            data-aos-once="true"
+          >
             For{" "}
             <TypewriterWord
               words={["AV", "Data Centers", "Power", "The Modern Enterprise"]}
@@ -75,11 +102,21 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="mt-6 max-w-2xl text-lg text-white/60">
+        <p
+          className="mt-6 max-w-2xl text-lg text-white/60"
+          data-aos="fade-up"
+          data-aos-delay="250"
+          data-aos-once="true"
+        >
 From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end enterprise technology across PAN-India.
         </p>
 
-        <div className="mt-10 flex w-full max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div
+          className="mt-10 flex w-full max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center"
+          data-aos="fade-up"
+          data-aos-delay="350"
+          data-aos-once="true"
+        >
           <button
             className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl px-6 py-3.5 text-sm font-semibold text-black transition hover:brightness-110 sm:w-auto"
             style={{
@@ -95,12 +132,22 @@ From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end
           </button>
         </div>
 
-        <p className="mt-6 text-xs font-medium tracking-wide text-white/40">
+        <p
+          className="mt-6 text-xs font-medium tracking-wide text-white/40"
+          data-aos="fade-up"
+          data-aos-delay="450"
+          data-aos-once="true"
+        >
           Trusted by 2,300+ enterprises&nbsp;|&nbsp;250+ Technology Experts&nbsp;|&nbsp;PAN-India Delivery
         </p>
       </div>
 
-      <div className="relative z-10 flex items-center justify-end gap-2 px-8 pb-8 text-sm font-medium text-white/50">
+      <div
+        className="relative z-10 flex items-center justify-end gap-2 px-8 pb-8 text-sm font-medium text-white/50"
+        data-aos="fade-in"
+        data-aos-delay="600"
+        data-aos-once="true"
+      >
         Scroll to explore
         <ChevronDown className="h-4 w-4" />
       </div>

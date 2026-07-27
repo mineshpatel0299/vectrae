@@ -39,7 +39,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 pt-14 pb-10 md:grid-cols-4">
 
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-1" data-aos="fade-up">
             <Image src="/logo.png" alt="Vectrae" width={120} height={26} className="h-7 w-auto brightness-0 invert" />
             <p className="mt-4 text-sm leading-relaxed text-white/40">
               End-to-end enterprise technology. PAN-India delivery & support.
@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
 
           {/* Solutions */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="100">
             <h4 className="text-[11px] font-semibold uppercase tracking-widest text-white/25">Solutions</h4>
             <ul className="mt-4 space-y-2.5">
               {links.solutions.map((item) => (
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200">
             <h4 className="text-[11px] font-semibold uppercase tracking-widest text-white/25">Company</h4>
             <ul className="mt-4 space-y-2.5">
               {links.company.map((item) => (
@@ -94,7 +94,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="300">
             <h4 className="text-[11px] font-semibold uppercase tracking-widest text-white/25">Contact</h4>
             <ul className="mt-4 space-y-3">
               <li>
@@ -130,7 +130,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] py-5 text-xs text-white/25 sm:flex-row">
+        <div
+          className="flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] py-5 text-xs text-white/25 sm:flex-row"
+          data-aos="fade-in"
+          data-aos-delay="300"
+          data-aos-once="true"
+        >
           <p>© {new Date().getFullYear()} Vectrae Infotech Pvt. Ltd.</p>
           <p>Trusted by 2,300+ enterprises across India</p>
         </div>

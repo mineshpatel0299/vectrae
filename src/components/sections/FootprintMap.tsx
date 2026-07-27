@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { MapPin, Users, Building, ShieldCheck } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
 const metrics = [
@@ -38,7 +37,7 @@ export default function FootprintMap() {
 
           {/* Left: text + stats */}
           <div>
-            <Reveal>
+            <div data-aos="fade-right">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
                 National Coverage
               </p>
@@ -48,13 +47,15 @@ export default function FootprintMap() {
               <p className="mt-4 text-base leading-relaxed text-neutral-500">
                 From initial consultation to long-term managed support, Vectrae delivers end-to-end enterprise technology solutions across India.
               </p>
-            </Reveal>
+            </div>
 
-            <Reveal delay={0.1} className="mt-10 grid grid-cols-2 gap-4">
-              {metrics.map((metric) => (
+            <div className="mt-10 grid grid-cols-2 gap-4">
+              {metrics.map((metric, i) => (
                 <div
                   key={metric.label}
                   className="group rounded-2xl border border-black/10 bg-white p-5 shadow-sm transition hover:border-black/20 hover:shadow-md"
+                  data-aos="fade-up"
+                  data-aos-delay={i * 100}
                 >
                   <metric.icon className="h-4 w-4 text-neutral-400 transition duration-300 group-hover:text-[#29B9F2]" />
                   <div
@@ -68,11 +69,11 @@ export default function FootprintMap() {
                   </p>
                 </div>
               ))}
-            </Reveal>
+            </div>
           </div>
 
           {/* Right: compact map */}
-          <Reveal delay={0.2}>
+          <div data-aos="fade-left" data-aos-delay="200">
             <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
               {/* Dot grid */}
               <div
@@ -147,7 +148,7 @@ export default function FootprintMap() {
                 Active delivery locations
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

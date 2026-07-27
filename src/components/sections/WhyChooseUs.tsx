@@ -22,24 +22,19 @@ export default function WhyChooseUs() {
 
       <div className="relative mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          <p
             className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]"
+            data-aos="fade-up"
           >
             Why Choose Us
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          </p>
+          <h2
             className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-5xl"
+            data-aos="fade-up"
+            data-aos-delay="100"
           >
             Five Reasons Enterprises Choose Vectrae
-          </motion.h2>
+          </h2>
         </div>
 
         <div ref={containerRef} className="relative mt-20 sm:mt-24">
@@ -62,11 +57,8 @@ export default function WhyChooseUs() {
                 >
                   <span className="absolute left-6 top-1.5 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white bg-[#29B9F2] shadow-md sm:left-1/2" />
 
-                  <motion.div
-                    initial={{ opacity: 0, x: fromRight ? 40 : -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-200px" }}
-                    transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  <div
+                    data-aos={fromRight ? "fade-left" : "fade-right"}
                     className="py-4 sm:w-1/2 sm:py-8"
                   >
                     <div
@@ -74,7 +66,11 @@ export default function WhyChooseUs() {
                         fromRight ? "sm:ml-auto sm:items-end sm:text-right" : "sm:items-start sm:text-left"
                       }`}
                     >
-                      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-black/3 text-[#0f9ac9]">
+                      <span
+                        className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-black/3 text-[#0f9ac9]"
+                        data-aos="zoom-in"
+                        data-aos-delay="100"
+                      >
                         <Icon className="h-5 w-5" />
                       </span>
                       <h3 className="relative text-lg font-semibold text-neutral-900">
@@ -84,7 +80,7 @@ export default function WhyChooseUs() {
                         {item.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="hidden sm:block sm:w-1/2" />
                 </div>

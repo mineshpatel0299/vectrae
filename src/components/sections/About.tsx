@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Odometer from "@/components/ui/Odometer";
-import Reveal from "@/components/ui/Reveal";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { stats } from "@/data/stats";
 
@@ -26,31 +25,34 @@ export default function About() {
       <div className="relative mx-auto max-w-6xl px-6">
 
         {/* Label */}
-        <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">
-            About Vectrae
-          </p>
-        </Reveal>
+        <p
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]"
+          data-aos="fade-right"
+        >
+          About Vectrae
+        </p>
 
         {/* Big editorial statement */}
-        <Reveal delay={0.08}>
-          <h2 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-6xl">
-            India&apos;s most trusted full-spectrum{" "}
-            <span className="relative inline-block text-[#29B9F2]">
-              <span className="relative z-10">enterprise technology</span>
-              <motion.span
-                aria-hidden
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                style={{ originX: 0, backgroundImage: BRAND_GRADIENT }}
-                className="absolute inset-x-0 bottom-1 z-0 h-3 rounded-sm opacity-25 sm:bottom-2 sm:h-4"
-              />
-            </span>{" "}
-            partner.
-          </h2>
-        </Reveal>
+        <h2
+          className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-6xl"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          India&apos;s most trusted full-spectrum{" "}
+          <span className="relative inline-block text-[#29B9F2]">
+            <span className="relative z-10">enterprise technology</span>
+            <motion.span
+              aria-hidden
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ originX: 0, backgroundImage: BRAND_GRADIENT }}
+              className="absolute inset-x-0 bottom-1 z-0 h-3 rounded-sm opacity-25 sm:bottom-2 sm:h-4"
+            />
+          </span>{" "}
+          partner.
+        </h2>
 
         {/* Animated horizontal rule */}
         <div className="relative mt-10 h-px w-full bg-white/8">
@@ -65,8 +67,13 @@ export default function About() {
 
           {/* Stats — 4-col grid, consistent alignment */}
           <div className="grid grid-cols-2 gap-x-0 gap-y-8 lg:flex lg:flex-1 lg:divide-x lg:divide-white/10">
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col lg:px-8 lg:py-2 lg:first:pl-0">
+            {stats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className="flex flex-col lg:px-8 lg:py-2 lg:first:pl-0"
+                data-aos="fade-up"
+                data-aos-delay={i * 100}
+              >
                 <Odometer
                   value={stat.value}
                   suffix={stat.suffix}
@@ -80,11 +87,15 @@ export default function About() {
           </div>
 
           {/* Mission pull-quote — right side */}
-          <Reveal delay={0.2} className="lg:max-w-xs lg:pb-2 lg:pl-12">
+          <div
+            className="lg:max-w-xs lg:pb-2 lg:pl-12"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
             <p className="border-l border-[#29B9F2]/40 pl-5 text-sm leading-relaxed text-white/50">
               Delivering the right solutions, the right partners, and the right outcomes — from initial consultation through long-term managed support.
             </p>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

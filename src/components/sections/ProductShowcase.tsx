@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Monitor, Server, ShieldCheck, Zap, Laptop, Cpu, Wifi } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
 type ProductPoint = {
@@ -134,7 +133,7 @@ export default function ProductShowcase() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         {/* Section Header matching theme styling */}
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
             Interactive Showcase
           </p>
@@ -144,10 +143,14 @@ export default function ProductShowcase() {
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
             Hover or tap any product hotspot on the video frame to inspect specifications, key features, and enterprise deployment options.
           </p>
-        </Reveal>
+        </div>
 
         {/* Category Filter Pills */}
-        <Reveal delay={0.1} className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        <div
+          className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           {categories.map((cat) => {
             const isSelected = selectedCategory === cat;
             return (
@@ -165,10 +168,10 @@ export default function ProductShowcase() {
               </button>
             );
           })}
-        </Reveal>
+        </div>
 
         {/* Video Frame Canvas */}
-        <Reveal delay={0.15} className="mt-12 sm:mt-16">
+        <div className="mt-12 sm:mt-16" data-aos="zoom-in" data-aos-delay="150">
           <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-2.5 backdrop-blur-sm sm:p-4">
             <div className="relative overflow-hidden rounded-2xl bg-black">
               {/* Main Video */}
@@ -197,7 +200,7 @@ export default function ProductShowcase() {
               ))}
             </div>
           </div>
-        </Reveal>
+        </div>
 
       </div>
     </section>

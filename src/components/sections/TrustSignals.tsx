@@ -3,10 +3,12 @@ import LogoMarquee from "@/components/ui/LogoMarquee";
 import { clientLogos } from "@/data/clients";
 
 export default function TrustSignals() {
-  const clientItems = clientLogos.map(({ name, logo }) => (
+  const clientItems = clientLogos.map(({ name, logo }, i) => (
     <div
       key={name}
       className="flex h-20 w-36 items-center justify-center px-2 sm:h-28 sm:w-48 lg:h-32 lg:w-56"
+      data-aos="zoom-in"
+      data-aos-delay={Math.min(i * 100, 500)}
     >
       <Image
         src={logo}
@@ -21,10 +23,13 @@ export default function TrustSignals() {
   return (
     <section className="border-t border-neutral-200 bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl">
-        <p className="px-6 text-center text-xs font-semibold uppercase tracking-widest text-neutral-500">
+        <p
+          className="px-6 text-center text-xs font-semibold uppercase tracking-widest text-neutral-500"
+          data-aos="fade-up"
+        >
           Trusted by 2,300+ enterprises across India
         </p>
-        <div className="mt-10">
+        <div className="mt-10" data-aos="fade-up" data-aos-delay="100">
           <LogoMarquee items={clientItems} durationSeconds={60} />
         </div>
       </div>

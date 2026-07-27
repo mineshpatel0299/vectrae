@@ -118,7 +118,10 @@ export default function Services() {
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden border-t border-white/5">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#84D96C]/10 blur-[140px]" />
 
-        <div className="relative mx-auto mb-12 w-full max-w-6xl px-6 text-center">
+        <div
+          className="relative mx-auto mb-12 w-full max-w-6xl px-6 text-center"
+          data-aos="fade-up"
+        >
           <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
             Solutions &amp; Services
           </p>

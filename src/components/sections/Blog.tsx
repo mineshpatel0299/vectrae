@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock, ChevronRight } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
@@ -81,7 +80,7 @@ export default function Blog() {
       <div className="pointer-events-none absolute bottom-0 right-0 h-150 w-150 translate-x-1/3 translate-y-1/3 rounded-full bg-[#25D9C7]/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
             Industry Insights
           </p>
@@ -91,11 +90,16 @@ export default function Blog() {
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
             Stay updated with the latest trends, technologies, and strategies driving modern enterprise IT infrastructure.
           </p>
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.15} className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post) => (
-            <div key={post.id} className="group relative h-full">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {blogPosts.slice(0, 3).map((post, i) => (
+            <div
+              key={post.id}
+              className="group relative h-full"
+              data-aos="fade-up"
+              data-aos-delay={Math.min(i * 100, 300)}
+            >
               <SpotlightCard className="flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-8 transition duration-500 hover:border-white/20 hover:bg-white/[0.04]">
                 <div>
                   <div className="flex items-center gap-3">
@@ -133,9 +137,9 @@ export default function Blog() {
               </SpotlightCard>
             </div>
           ))}
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.25} className="mt-16 flex justify-center">
+        <div className="mt-16 flex justify-center" data-aos="fade-up" data-aos-delay="400">
           <Link
             href="/blog"
             className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:border-white/20 hover:bg-white/[0.08]"
@@ -143,7 +147,7 @@ export default function Blog() {
             <span>View All Articles</span>
             <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
