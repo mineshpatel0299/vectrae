@@ -1,0 +1,40 @@
+export type ClientLogo = {
+  name: string;
+  logo: string;
+};
+
+export const clientLogos: ClientLogo[] = [
+  { name: "BT", logo: "/client/1-1.png" },
+  { name: "Deloitte", logo: "/client/2-1.png" },
+  { name: "MongoDB", logo: "/client/3-1.png" },
+  { name: "HDFC Bank", logo: "/client/4-1.png" },
+  { name: "Ford", logo: "/client/5-1.png" },
+  { name: "Adobe", logo: "/client/6-1.png" },
+  { name: "Compass Group", logo: "/client/7-1.png" },
+  { name: "HCL", logo: "/client/8-1.png" },
+  { name: "Accenture", logo: "/client/9-1.png" },
+  { name: "Tech Mahindra", logo: "/client/11-1.png" },
+  { name: "Siemens", logo: "/client/12-1.png" },
+  { name: "Aditya Birla Group", logo: "/client/13-2.png" },
+  { name: "Concentrix", logo: "/client/14-1.png" },
+  { name: "Acuity Knowledge Partners", logo: "/client/15-1.png" },
+  { name: "G4S", logo: "/client/16-2.png" },
+  { name: "Genpact", logo: "/client/17-1.png" },
+  { name: "GMR Group", logo: "/client/18-1.png" },
+  { name: "J.P. Morgan", logo: "/client/19-1.png" },
+  { name: "KPMG", logo: "/client/20-1.png" },
+  { name: "PepsiCo", logo: "/client/21-1.png" },
+  { name: "Maruti Suzuki", logo: "/client/22-1.png" },
+  { name: "GE", logo: "/client/23-2.png" },
+  { name: "Forvis Mazars", logo: "/client/24-1.png" },
+  { name: "McKinsey & Company", logo: "/client/25-1.png" },
+  { name: "IndusInd Bank", logo: "/client/26-1.png" },
+  { name: "PwC", logo: "/client/27-2.png" },
+  { name: "JLL", logo: "/client/28-2.png" },
+  { name: "Thales", logo: "/client/29-1.png" },
+  { name: "Tata Consultancy Services", logo: "/client/30-1.png" },
+  { name: "Airtel", logo: "/client/31-1.png" },
+  { name: "Moody's", logo: "/client/32-1.png" },
+  { name: "American Express", logo: "/client/34-1.png" },
+  { name: "Valvoline", logo: "/client/35-1.png" },
+];

@@ -1,6 +1,6 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import TypewriterWord from "./TypewriterWord";
+import TypewriterWord from "@/components/ui/TypewriterWord";
 
 export default function Hero() {
   return (
@@ -15,8 +15,8 @@ export default function Hero() {
       />
 
       <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/60 to-black" />
-      <div className="absolute inset-x-0 top-0 h-[520px] bg-linear-to-b from-black via-black/40 to-transparent" />
-      <div className="absolute bottom-0 left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-blue-600/30 blur-[120px]" />
+      <div className="absolute inset-x-0 top-0 h-130 bg-linear-to-b from-black via-black/40 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 h-105 w-225 -translate-x-1/2 rounded-full bg-blue-600/30 blur-[120px]" />
 
       <header className="relative z-20 grid grid-cols-2 items-center px-6 py-6 md:grid-cols-3 md:px-10">
         <div className="flex items-center">
@@ -87,13 +87,17 @@ From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end
                 "linear-gradient(90deg, #B6D93B 0%, #84D96C 35%, #25D9C7 68%, #29B9F2 100%)",
             }}
           >
-            Talk to an Expert
+            Request a Free Consultation
             <ArrowRight className="h-4 w-4" />
           </button>
           <button className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 sm:w-auto">
-            Explore Solutions
+            Explore Our Solutions
           </button>
         </div>
+
+        <p className="mt-6 text-xs font-medium tracking-wide text-white/40">
+          Trusted by 2,300+ enterprises&nbsp;|&nbsp;250+ Technology Experts&nbsp;|&nbsp;PAN-India Delivery
+        </p>
       </div>
 
       <div className="relative z-10 flex items-center justify-end gap-2 px-8 pb-8 text-sm font-medium text-white/50">
