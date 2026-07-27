@@ -8,6 +8,7 @@ type TypewriterWordProps = {
   className?: string;
   cursorClassName?: string;
   pauseDuration?: number;
+  align?: "left" | "center";
 };
 
 export default function TypewriterWord({
@@ -15,6 +16,7 @@ export default function TypewriterWord({
   className = "",
   cursorClassName = "bg-sky-300",
   pauseDuration = 1800,
+  align = "center",
 }: TypewriterWordProps) {
   const [wordIndex, setWordIndex] = useState(0);
   const [text, setText] = useState("");
@@ -59,10 +61,16 @@ export default function TypewriterWord({
 
   return (
     <span
-      className="relative inline-flex items-baseline"
+      className={`relative inline-flex items-baseline ${
+        align === "center" ? "justify-center" : "justify-start"
+      }`}
       style={{ minWidth: `${longest.length}ch` }}
     >
-      <span className={`text-left ${className}`}>{text}</span>
+      <span
+        className={`${align === "center" ? "text-center" : "text-left"} ${className}`}
+      >
+        {text}
+      </span>
       <motion.span
         aria-hidden
         className={`ml-1 inline-block w-0.75 rounded-full ${cursorClassName}`}

@@ -83,21 +83,26 @@ export default function Hero() {
           Across India
         </div>
 
-        <h1 className="flex max-w-6xl flex-col items-center text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
-          <span data-aos="fade-up" data-aos-duration="900" data-aos-once="true">
-            Integrated Technology Solutions
+        <h1 className="flex max-w-6xl flex-col items-center text-center text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+          <span
+            className="text-center whitespace-nowrap"
+            data-aos="fade-up"
+            data-aos-duration="900"
+            data-aos-once="true"
+          >
+            Integrated Technology Solutions For
           </span>
           <span
-            className="inline-flex items-baseline gap-2 whitespace-nowrap"
+            className="inline-flex items-baseline justify-center text-center whitespace-nowrap"
             data-aos="fade-up"
             data-aos-delay="150"
             data-aos-once="true"
           >
-            For{" "}
             <TypewriterWord
-              words={["Audio Visuals", "Data Centers", "Power", "The Modern Enterprise"]}
+              words={["Audio Visual Setup", "Data Centers", "Power", "The Modern Enterprise"]}
               className="text-[#29B9F2]"
               cursorClassName="bg-[#29B9F2]"
+              align="center"
             />
           </span>
         </h1>
