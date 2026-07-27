@@ -74,9 +74,6 @@ export default function WhyChooseUs() {
                         fromRight ? "sm:ml-auto sm:items-end sm:text-right" : "sm:items-start sm:text-left"
                       }`}
                     >
-                      <span className="pointer-events-none absolute -top-3 right-3 text-6xl font-bold text-black/5">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
                       <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-black/3 text-[#0f9ac9]">
                         <Icon className="h-5 w-5" />
                       </span>
