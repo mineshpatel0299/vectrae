@@ -2,6 +2,7 @@ import About from "@/components/sections/About";
 import CoreValues from "@/components/sections/CoreValues";
 import Hero from "@/components/sections/Hero";
 import ProductShowcase from "@/components/sections/ProductShowcase";
+import Workspace from "@/components/sections/Workspace";
 import Services from "@/components/sections/Services";
 import TrustSignals from "@/components/sections/TrustSignals";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <TrustSignals />
       <ProductShowcase />
+      <Workspace />
       <WhyChooseUs />
       <About />
       {/* <Services /> */}

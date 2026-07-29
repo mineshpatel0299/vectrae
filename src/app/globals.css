@@ -41,3 +41,63 @@ body {
 .animate-marquee-reverse {
   animation: marquee linear infinite reverse;
 }
+
+@keyframes column-scroll-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes column-scroll-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-column-up {
+  animation: column-scroll-up linear infinite;
+}
+
+.animate-column-down {
+  animation: column-scroll-down linear infinite;
+}
+
+@keyframes grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 56px;
+  }
+}
+
+.animate-grid-pan {
+  animation: grid-pan 10s linear infinite;
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-scan-sweep {
+  animation: scan-sweep 7s ease-in-out infinite;
+}
