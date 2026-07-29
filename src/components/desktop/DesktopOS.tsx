@@ -264,21 +264,14 @@ export default function DesktopOS() {
                     openFolder(folder.id);
                   }
                 }}
-                className="group flex w-28 cursor-pointer flex-col items-center gap-2 outline-none sm:w-32"
+                className="group flex cursor-pointer flex-col items-center gap-2 outline-none"
               >
-                <span
-                   className={`relative flex h-20 w-22 items-center justify-center border transition duration-200 sm:h-24 sm:w-28 ${
-                    isSelected
-                      ? "border-white/25 bg-black/85"
-                      : "border-white/10 bg-black/50 group-hover:border-white/20 group-hover:bg-black/70"
-                  }`}
-                  style={{
-                    clipPath: FOLDER_CLIP,
-                    boxShadow: isSelected ? `0 0 28px ${folder.accent}55` : undefined,
-                  }}
-                >
-                  <Icon className="h-9 w-9 translate-y-2 sm:h-11 sm:w-11 sm:translate-y-2.5" style={{ color: folder.accent }} />
-                </span>
+                <FolderShape
+                  folderId={folder.id}
+                  accent={folder.accent}
+                  isSelected={isSelected}
+                  icon={Icon}
+                />
                 <span className={`text-xs sm:text-sm ${isSelected ? "text-white" : "text-white/75"}`}>
                   {folder.label}
                 </span>
@@ -662,5 +655,75 @@ function FileDetail({ file, accent }: { file: OSFile; accent: string }) {
         </Link>
       )}
     </div>
+  );
+}
+
+function FolderShape({
+  folderId,
+  accent,
+  isSelected,
+  icon: Icon,
+}: {
+  folderId: string;
+  accent: string;
+  isSelected: boolean;
+  icon: LucideIcon;
+}) {
+  const bodyPath =
+    "M 0 76 Q 0 84 8 84 L 92 84 Q 100 84 100 76 L 100 26 Q 100 18 92 18 L 54 18 L 48 4 Q 46 0 40 0 L 12 0 Q 6 0 4 6 L 4 18 Q 0 18 0 26 Z";
+  const glossPath =
+    "M 0 26 Q 0 18 4 18 L 4 6 Q 6 0 12 0 L 40 0 Q 46 0 48 4 L 54 18 L 92 18 Q 100 18 100 26 L 100 50 L 0 50 Z";
+  const gradId = `fb-${folderId}`;
+  const glossId = `fgl-${folderId}`;
+
+  return (
+    <span
+      className="relative block transition-all duration-200 group-hover:scale-110"
+      style={{
+        width: 112,
+        height: 95,
+        filter: isSelected
+          ? `drop-shadow(0 0 12px rgba(255,255,255,0.5))`
+          : `drop-shadow(0 2px 8px rgba(0,0,0,0.6))`,
+      }}
+    >
+      <svg viewBox="0 0 100 84" className="absolute inset-0 w-full h-full" fill="none">
+        <defs>
+          <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0d2d47" />
+            <stop offset="100%" stopColor="#040f1a" />
+          </linearGradient>
+          <linearGradient id={glossId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.18)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+        </defs>
+        {/* Folder body */}
+        <path
+          d={bodyPath}
+          fill={`url(#${gradId})`}
+          stroke="white"
+          strokeOpacity={isSelected ? 0.6 : 0.25}
+          strokeWidth="1.5"
+          style={{ filter: isSelected ? "drop-shadow(0 0 4px rgba(255,255,255,0.8))" : "drop-shadow(0 0 3px rgba(255,255,255,0.15))" }}
+        />
+        {/* Glossy top highlight */}
+        <path d={glossPath} fill={`url(#${glossId})`} />
+      </svg>
+      {/* Glowing icon */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        style={{ paddingTop: 20 }}
+      >
+        <Icon
+          style={{
+            color: accent,
+            width: 36,
+            height: 36,
+            filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}99)`,
+          }}
+        />
+      </div>
+    </span>
   );
 }
