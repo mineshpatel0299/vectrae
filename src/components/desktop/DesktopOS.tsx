@@ -87,7 +87,7 @@ const FOLDER_CLIP =
   "polygon(0 22%, 10% 22%, 16% 6%, 46% 6%, 52% 22%, 100% 22%, 100% 100%, 0 100%)";
 
 const TASKBAR_HEIGHT = 48;
-const MENUBAR_HEIGHT = 44;
+const MENUBAR_HEIGHT = 60;
 
 export default function DesktopOS() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -124,6 +124,11 @@ export default function DesktopOS() {
       return next;
     });
     setOpenIds((prev) => (prev.includes(id) ? [...prev.filter((x) => x !== id), id] : [...prev, id]));
+    setMaximizedIds((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
   };
 
   const closeFolder = (id: string) => {
@@ -224,25 +229,13 @@ export default function DesktopOS() {
         className="absolute inset-x-0 top-0 z-40 flex items-center justify-between border-b border-white/10 bg-black/40 px-4 backdrop-blur-md"
         style={{ height: MENUBAR_HEIGHT }}
       >
-        <div className="flex items-center gap-5">
-          <Image src="/logo.png" alt="Vectrae" width={110} height={23} className="h-4 w-auto" priority />
-          <div className="hidden items-center gap-4 text-xs text-white/50 sm:flex">
-            <span>File</span>
-            <span>Edit</span>
-            <span>View</span>
-            <span>Help</span>
-          </div>
+        <div className="flex items-center">
+          <Image src="/logo.png" alt="Vectrae" width={140} height={29} className="h-6 w-auto" priority />
         </div>
-        <div className="flex items-center gap-3">
-          <span className="hidden text-xs text-white/50 sm:inline" suppressHydrationWarning>
+        <div className="flex items-center">
+          <span className="hidden text-sm text-white/50 sm:inline" suppressHydrationWarning>
             {formattedNow}
           </span>
-          <Link
-            href="/"
-            className="rounded-full border border-white/15 px-3 py-1 text-[11px] font-medium text-white/70 transition hover:border-white/30 hover:text-white"
-          >
-            Exit to Website
-          </Link>
         </div>
       </div>
 
@@ -263,7 +256,7 @@ export default function DesktopOS() {
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleFolderActivate(folder.id);
+                  openFolder(folder.id);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -271,10 +264,10 @@ export default function DesktopOS() {
                     openFolder(folder.id);
                   }
                 }}
-                className="group flex w-20 cursor-pointer flex-col items-center gap-2 outline-none sm:w-24"
+                className="group flex w-28 cursor-pointer flex-col items-center gap-2 outline-none sm:w-32"
               >
                 <span
-                  className={`relative flex h-16 w-18 items-center justify-center border transition duration-200 sm:h-20 sm:w-24 ${
+                   className={`relative flex h-20 w-22 items-center justify-center border transition duration-200 sm:h-24 sm:w-28 ${
                     isSelected
                       ? "border-white/25 bg-black/85"
                       : "border-white/10 bg-black/50 group-hover:border-white/20 group-hover:bg-black/70"
@@ -284,7 +277,7 @@ export default function DesktopOS() {
                     boxShadow: isSelected ? `0 0 28px ${folder.accent}55` : undefined,
                   }}
                 >
-                  <Icon className="h-7 w-7 translate-y-1.5 sm:h-9 sm:w-9 sm:translate-y-2" style={{ color: folder.accent }} />
+                  <Icon className="h-9 w-9 translate-y-2 sm:h-11 sm:w-11 sm:translate-y-2.5" style={{ color: folder.accent }} />
                 </span>
                 <span className={`text-xs sm:text-sm ${isSelected ? "text-white" : "text-white/75"}`}>
                   {folder.label}
@@ -434,7 +427,7 @@ function OSWindow({
   };
 
   const style: React.CSSProperties = isMaximized
-    ? { position: "absolute", top: 0, left: 0, right: 0, bottom: TASKBAR_HEIGHT, zIndex }
+    ? { position: "absolute", top: -MENUBAR_HEIGHT, left: 0, right: 0, bottom: TASKBAR_HEIGHT, zIndex: 60 }
     : {
         position: "absolute",
         top: 0,
