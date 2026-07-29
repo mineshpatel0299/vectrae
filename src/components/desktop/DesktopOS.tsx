@@ -43,6 +43,12 @@ import {
   Minus,
   Maximize2,
   Minimize2,
+  Wifi,
+  BatteryLow,
+  BatteryMedium,
+  BatteryFull,
+  Sun,
+  Volume2,
   type LucideIcon,
 } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
@@ -97,7 +103,35 @@ export default function DesktopOS() {
   const [activeFile, setActiveFile] = useState<Record<string, string | null>>({});
   const [now, setNow] = useState(() => new Date());
   const [booted, setBooted] = useState(false);
+  const [brightness, setBrightness] = useState(80);
+  const [controlsOpen, setControlsOpen] = useState(false);
+  const [batteryLevel, setBatteryLevel] = useState(100);
+  const [batteryCharging, setBatteryCharging] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    // Battery Status API
+    if (typeof navigator !== "undefined" && "getBattery" in navigator) {
+      (navigator as Navigator & { getBattery: () => Promise<unknown> })
+        .getBattery()
+        .then((bat: unknown) => {
+          const battery = bat as {
+            level: number;
+            charging: boolean;
+            addEventListener: (event: string, cb: () => void) => void;
+          };
+          setBatteryLevel(Math.round(battery.level * 100));
+          setBatteryCharging(battery.charging);
+          battery.addEventListener("levelchange", () =>
+            setBatteryLevel(Math.round(battery.level * 100))
+          );
+          battery.addEventListener("chargingchange", () =>
+            setBatteryCharging(battery.charging)
+          );
+        })
+        .catch(() => {}); // silently ignore if not supported
+    }
+  }, []);
 
   const screenRef = useRef<HTMLDivElement>(null);
   const clickTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
@@ -224,15 +258,102 @@ export default function DesktopOS() {
       <div className="pointer-events-none absolute left-1/4 top-0 h-100 w-100 -translate-y-1/2 rounded-full bg-[#25D9C7]/15 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-1/4 h-100 w-100 translate-y-1/2 rounded-full bg-[#29B9F2]/15 blur-[120px]" />
 
+      {/* Brightness overlay — opacity = inverse of brightness */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundColor: "black",
+          opacity: ((100 - brightness) / 100) * 0.92,
+          zIndex: 30,
+          transition: "opacity 0.15s ease",
+        }}
+      />
+
       {/* Menu bar */}
       <div
-        className="absolute inset-x-0 top-0 z-40 flex items-center justify-between border-b border-white/10 bg-black/40 px-4 backdrop-blur-md"
+        className="absolute inset-x-0 top-0 z-40 flex items-center justify-between border-b border-white/10 bg-black/40 px-5 backdrop-blur-md"
         style={{ height: MENUBAR_HEIGHT }}
       >
+        {/* Left — Logo */}
         <div className="flex items-center">
           <Image src="/logo.png" alt="Vectrae" width={140} height={29} className="h-6 w-auto" priority />
         </div>
-        <div className="flex items-center">
+
+        {/* Right — system icons + clock */}
+        <div className="flex items-center gap-4">
+          {/* WiFi */}
+          <Wifi className="h-4 w-4 text-white/60" />
+
+          {/* Battery */}
+          <div className="flex items-center gap-1">
+            {batteryCharging ? (
+              <Zap className="h-4 w-4 text-green-400" />
+            ) : batteryLevel <= 20 ? (
+              <BatteryLow className="h-4 w-4 text-red-400" />
+            ) : batteryLevel >= 80 ? (
+              <BatteryFull className="h-4 w-4 text-white/60" />
+            ) : (
+              <BatteryMedium className="h-4 w-4 text-white/60" />
+            )}
+            <span
+              className={`text-xs ${
+                batteryCharging
+                  ? "text-green-400"
+                  : batteryLevel <= 20
+                  ? "text-red-400"
+                  : "text-white/50"
+              }`}
+            >
+              {batteryLevel}%
+            </span>
+          </div>
+
+          {/* Brightness + Volume toggle */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setControlsOpen((v) => !v)}
+              className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-xs transition ${
+                controlsOpen ? "bg-white/15 text-white" : "text-white/60 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              <Sun className="h-3.5 w-3.5" />
+            </button>
+
+            <AnimatePresence>
+              {controlsOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute right-0 top-full mt-2 w-60 rounded-2xl border border-white/15 bg-black/80 p-4 shadow-2xl backdrop-blur-xl"
+                  style={{ zIndex: 9999 }}
+                >
+                  {/* Brightness */}
+                  <div>
+                    <div className="mb-2 flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-white/70">
+                        <Sun className="h-3.5 w-3.5 text-yellow-400" />
+                        <span>Brightness</span>
+                      </div>
+                      <span className="text-xs text-white/40">{brightness}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      value={brightness}
+                      onChange={(e) => setBrightness(Number(e.target.value))}
+                      className="w-full accent-[#29B9F2] cursor-pointer"
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Clock */}
           <span className="hidden text-sm text-white/50 sm:inline" suppressHydrationWarning>
             {formattedNow}
           </span>
