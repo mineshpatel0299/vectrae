@@ -7,6 +7,7 @@ import {
   useDragControls,
   useMotionValue,
 } from "framer-motion";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -35,6 +36,7 @@ import {
   StickyNote,
   MapPin,
   Phone,
+  Home,
   ArrowUpRight,
   ChevronRight,
   X,
@@ -72,7 +74,14 @@ const ICONS: Record<string, LucideIcon> = {
   stickyNote: StickyNote,
   mapPin: MapPin,
   phone: Phone,
+  home: Home,
 };
+
+/** Flat list of every folder including nested sub-folders, used for window ID lookups. */
+function flattenFolders(folders: OSFolder[]): OSFolder[] {
+  return folders.flatMap((f) => [f, ...(f.subFolders ? flattenFolders(f.subFolders) : [])]);
+}
+const allFolders = flattenFolders(desktopFolders);
 
 const FOLDER_CLIP =
   "polygon(0 22%, 10% 22%, 16% 6%, 46% 6%, 52% 22%, 100% 22%, 100% 100%, 0 100%)";
@@ -88,6 +97,7 @@ export default function DesktopOS() {
   const [activeFile, setActiveFile] = useState<Record<string, string | null>>({});
   const [now, setNow] = useState(() => new Date());
   const [booted, setBooted] = useState(false);
+  const router = useRouter();
 
   const screenRef = useRef<HTMLDivElement>(null);
   const clickTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
@@ -243,7 +253,7 @@ export default function DesktopOS() {
         className="absolute inset-x-0 bottom-0"
         style={{ top: MENUBAR_HEIGHT }}
       >
-        <div className="grid w-fit grid-flow-col grid-rows-3 gap-x-2 gap-y-4 p-4 sm:gap-x-4 sm:gap-y-6 sm:p-6">
+        <div className="flex h-full w-full flex-wrap content-center justify-center gap-x-4 gap-y-6 p-4 sm:gap-x-6 sm:p-6 pb-20">
           {desktopFolders.map((folder) => {
             const Icon = ICONS[folder.icon];
             const isSelected = selectedId === folder.id;
@@ -286,7 +296,7 @@ export default function DesktopOS() {
 
         <AnimatePresence>
           {openIds.map((id, index) => {
-            const folder = desktopFolders.find((f) => f.id === id);
+            const folder = allFolders.find((f) => f.id === id);
             if (!folder) return null;
             return (
               <OSWindow
@@ -304,6 +314,7 @@ export default function DesktopOS() {
                 onMinimize={() => toggleMinimize(id)}
                 onMaximize={() => toggleMaximize(id)}
                 onFocus={() => bringToFront(id)}
+                onOpenSubFolder={(sfId) => openFolder(sfId)}
               />
             );
           })}
@@ -315,7 +326,7 @@ export default function DesktopOS() {
             style={{ height: TASKBAR_HEIGHT }}
           >
             {openIds.map((id) => {
-              const folder = desktopFolders.find((f) => f.id === id);
+              const folder = allFolders.find((f) => f.id === id);
               if (!folder) return null;
               const Icon = ICONS[folder.icon];
               const focused = openIds[openIds.length - 1] === id && !minimizedIds.has(id);
@@ -385,6 +396,7 @@ function OSWindow({
   onMinimize,
   onMaximize,
   onFocus,
+  onOpenSubFolder,
 }: {
   folder: OSFolder;
   index: number;
@@ -399,6 +411,7 @@ function OSWindow({
   onMinimize: () => void;
   onMaximize: () => void;
   onFocus: () => void;
+  onOpenSubFolder?: (id: string) => void;
 }) {
   const controls = useDragControls();
   const dragX = useMotionValue(index * 18);
@@ -527,31 +540,65 @@ function OSWindow({
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 sm:p-5">
-        {!file ? (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {folder.files.map((f) => {
-              const FIcon = ICONS[f.icon];
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => onOpenFile(f.id)}
-                  className="group flex flex-col items-center gap-2 rounded-lg p-2 outline-none transition hover:bg-white/5"
-                >
-                  <span
-                    className="relative flex h-14 w-16 items-center justify-center border border-white/10 bg-black/50 transition duration-200 group-hover:border-white/20"
-                    style={{ clipPath: FOLDER_CLIP }}
+
+      <div className={`flex-1 overflow-y-auto ${folder.id === "homepage" ? "" : "p-4 sm:p-5"}`}>
+        {folder.id === "homepage" ? (
+          <iframe src="/" className="h-full w-full border-0 bg-white" title="Homepage" />
+        ) : !file ? (
+          folder.subFolders && folder.subFolders.length > 0 ? (
+            // Folder contains sub-folders — render them as clickable folder icons
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {folder.subFolders.map((sf) => {
+                const SFIcon = ICONS[sf.icon];
+                return (
+                  <button
+                    key={sf.id}
+                    type="button"
+                    onClick={() => onOpenSubFolder?.(sf.id)}
+                    className="group flex flex-col items-center gap-2 rounded-lg p-2 outline-none transition hover:bg-white/5"
                   >
-                    <FIcon className="h-6 w-6 translate-y-1" style={{ color: folder.accent }} />
-                  </span>
-                  <span className="line-clamp-2 text-center text-[11px] leading-snug text-white/70">
-                    {f.title}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                    <span
+                      className="relative flex h-14 w-16 items-center justify-center border border-white/10 bg-black/50 transition duration-200 group-hover:border-white/20 group-hover:shadow-lg"
+                      style={{
+                        clipPath: FOLDER_CLIP,
+                        boxShadow: undefined,
+                      }}
+                    >
+                      <SFIcon className="h-6 w-6 translate-y-1" style={{ color: sf.accent }} />
+                    </span>
+                    <span className="line-clamp-2 text-center text-[11px] leading-snug text-white/70">
+                      {sf.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            // Regular folder — render files
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {folder.files.map((f) => {
+                const FIcon = ICONS[f.icon];
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => onOpenFile(f.id)}
+                    className="group flex flex-col items-center gap-2 rounded-lg p-2 outline-none transition hover:bg-white/5"
+                  >
+                    <span
+                      className="relative flex h-14 w-16 items-center justify-center border border-white/10 bg-black/50 transition duration-200 group-hover:border-white/20"
+                      style={{ clipPath: FOLDER_CLIP }}
+                    >
+                      <FIcon className="h-6 w-6 translate-y-1" style={{ color: folder.accent }} />
+                    </span>
+                    <span className="line-clamp-2 text-center text-[11px] leading-snug text-white/70">
+                      {f.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )
         ) : (
           <FileDetail file={file} accent={folder.accent} />
         )}
