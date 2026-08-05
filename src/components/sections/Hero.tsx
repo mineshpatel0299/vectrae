@@ -1,22 +1,16 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
-
+import { WovenCanvas } from "@/components/ui/woven-light-hero";
 
 export default function Hero() {
   return (
     <section className="relative isolate flex min-h-screen flex-col overflow-hidden bg-black">
-      <video
-        className="absolute inset-0 h-full w-full object-cover opacity-60"
-        src="/hero-bg.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      <WovenCanvas />
 
-      <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/60 to-black" />
-      <div className="absolute inset-x-0 top-0 h-130 bg-linear-to-b from-black via-black/40 to-transparent" />
-      <div className="absolute bottom-0 left-1/2 h-105 w-225 -translate-x-1/2 rounded-full bg-blue-600/30 blur-[120px]" />
+      {/* Subtle overlays to ensure text readability without hiding the 3D canvas */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/80" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[130px] bg-gradient-to-b from-black via-black/40 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-[105px] w-[225px] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[120px]" />
 
       <header className="relative z-20 grid grid-cols-2 items-center px-6 py-6 md:grid-cols-3 md:px-10">
         <div
@@ -83,16 +77,16 @@ export default function Hero() {
           Across India
         </div>
 
-        <h1 className="w-full px-4 text-center text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+        <h1 className="w-full px-4 text-center text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-[0_4px_30px_rgba(0,0,0,1)]">
           <span
-            className="block"
+            className="block drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
             data-aos="fade-up"
             data-aos-duration="900"
             data-aos-once="true"
           >
             <span className="xl:whitespace-nowrap">Integrated Technology Solutions&nbsp;For</span> <br className="hidden md:block" />
             <span
-              className="text-transparent bg-clip-text"
+              className="text-transparent bg-clip-text drop-shadow-sm"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, #B6D93B 0%, #84D96C 35%, #25D9C7 68%, #29B9F2 100%)",
