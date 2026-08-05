@@ -92,6 +92,12 @@ const allFolders = flattenFolders(desktopFolders);
 const FOLDER_CLIP =
   "polygon(0 22%, 10% 22%, 16% 6%, 46% 6%, 52% 22%, 100% 22%, 100% 100%, 0 100%)";
 
+/** Top-level folders that are live, built pages — opening them previews the real route in an iframe. */
+const LIVE_PREVIEW_ROUTES: Record<string, string> = {
+  homepage: "/",
+  "about-page": "/about",
+};
+
 const TASKBAR_HEIGHT = 48;
 const MENUBAR_HEIGHT = 60;
 
@@ -648,9 +654,13 @@ function OSWindow({
       </div>
 
 
-      <div className={`flex-1 overflow-y-auto ${folder.id === "homepage" ? "" : "p-4 sm:p-5"}`}>
-        {folder.id === "homepage" ? (
-          <iframe src="/" className="h-full w-full border-0 bg-white" title="Homepage" />
+      <div className={`flex-1 overflow-y-auto ${LIVE_PREVIEW_ROUTES[folder.id] ? "" : "p-4 sm:p-5"}`}>
+        {LIVE_PREVIEW_ROUTES[folder.id] ? (
+          <iframe
+            src={LIVE_PREVIEW_ROUTES[folder.id]}
+            className="h-full w-full border-0 bg-white"
+            title={folder.label}
+          />
         ) : !file ? (
           folder.subFolders && folder.subFolders.length > 0 ? (
             // Folder contains sub-folders — render them as clickable folder icons

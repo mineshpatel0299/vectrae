@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Odometer from "@/components/ui/Odometer";
@@ -19,10 +20,23 @@ export default function About() {
       ref={sectionRef}
       className="relative overflow-hidden border-t border-white/5 bg-black py-24 sm:py-32"
     >
-      {/* Ambient glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[#29B9F2]/10 blur-[120px]" />
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/about-bg.png"
+          alt="About Vectrae Background"
+          fill
+          className="object-cover opacity-100"
+          priority
+        />
+        {/* Overlay gradient to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80" />
+      </div>
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-0 z-10 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[#29B9F2]/20 blur-[120px]" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
 
         {/* Label */}
         <p

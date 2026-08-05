@@ -133,11 +133,11 @@ export default function ProductShowcase() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         {/* Section Header matching theme styling */}
-        <div className="mx-auto max-w-3xl text-center" data-aos="fade-up">
+        <div className="mx-auto w-full max-w-5xl text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
             Interactive Showcase
           </p>
-          <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
+          <h2 className="mx-auto mt-4 w-full text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:whitespace-nowrap">
             Explore Hardware &amp; Enterprise Solutions
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">

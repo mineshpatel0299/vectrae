@@ -1,13 +1,13 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import TypewriterWord from "@/components/ui/TypewriterWord";
+
 
 export default function Hero() {
   return (
     <section className="relative isolate flex min-h-screen flex-col overflow-hidden bg-black">
       <video
         className="absolute inset-0 h-full w-full object-cover opacity-60"
-        src="/1.mp4"
+        src="/hero-bg.mp4"
         autoPlay
         loop
         muted
@@ -83,27 +83,23 @@ export default function Hero() {
           Across India
         </div>
 
-        <h1 className="flex max-w-6xl flex-col items-center text-center text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+        <h1 className="w-full px-4 text-center text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-7xl">
           <span
-            className="text-center whitespace-nowrap"
+            className="block"
             data-aos="fade-up"
             data-aos-duration="900"
             data-aos-once="true"
           >
-            Integrated Technology Solutions For
-          </span>
-          <span
-            className="inline-flex items-baseline justify-center text-center whitespace-nowrap"
-            data-aos="fade-up"
-            data-aos-delay="150"
-            data-aos-once="true"
-          >
-            <TypewriterWord
-              words={["Audio Visual Setup", "Data Centers", "Power", "The Modern Enterprise"]}
-              className="text-[#29B9F2]"
-              cursorClassName="bg-[#29B9F2]"
-              align="center"
-            />
+            <span className="xl:whitespace-nowrap">Integrated Technology Solutions&nbsp;For</span> <br className="hidden md:block" />
+            <span
+              className="text-transparent bg-clip-text"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #B6D93B 0%, #84D96C 35%, #25D9C7 68%, #29B9F2 100%)",
+              }}
+            >
+              The Modern Enterprise
+            </span>
           </span>
         </h1>
 
@@ -147,15 +143,7 @@ export default function Hero() {
         </p>
       </div>
 
-      <div
-        className="relative z-10 flex items-center justify-end gap-2 px-8 pb-8 text-sm font-medium text-white/50"
-        data-aos="fade-in"
-        data-aos-delay="600"
-        data-aos-once="true"
-      >
-        Scroll to explore
-        <ChevronDown className="h-4 w-4" />
-      </div>
+
     </section>
   );
 }
