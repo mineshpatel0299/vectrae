@@ -5,6 +5,7 @@ import ProductShowcase from "@/components/sections/ProductShowcase";
 import Workspace from "@/components/sections/Workspace";
 import Services from "@/components/sections/Services";
 import TrustSignals from "@/components/sections/TrustSignals";
+import SampleAboutUs from "@/components/sections/SampleAboutUs";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Blog from "@/components/sections/Blog";
 import FootprintMap from "@/components/sections/FootprintMap";
@@ -18,8 +19,9 @@ export default function Home() {
       <TrustSignals />
       <ProductShowcase />
       {/* <Workspace /> */}
+      {/* <About /> */}
+      <SampleAboutUs />
       <WhyChooseUs />
-      <About />
       {/* <Services /> */}
       <CoreValues />
       <Blog />

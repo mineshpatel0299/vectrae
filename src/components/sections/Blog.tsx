@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, Clock, ChevronRight } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import { BRAND_GRADIENT } from "@/lib/brand";
@@ -13,6 +14,7 @@ type BlogPost = {
   readTime: string;
   href: string;
   color: string;
+  image?: string;
 };
 
 const blogPosts: BlogPost[] = [
@@ -24,6 +26,7 @@ const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     href: "#",
     color: "#29B9F2",
+    image: "/images/blog/av-tech.png",
   },
   {
     id: "managed-it",
@@ -33,6 +36,7 @@ const blogPosts: BlogPost[] = [
     readTime: "5 min read",
     href: "#",
     color: "#25D9C7",
+    image: "/images/blog/managed-it.png",
   },
   {
     id: "teams-vs-zoom",
@@ -42,6 +46,7 @@ const blogPosts: BlogPost[] = [
     readTime: "8 min read",
     href: "#",
     color: "#29B9F2",
+    image: "/images/blog/teams-zoom.png",
   },
   {
     id: "choose-ups",
@@ -100,37 +105,51 @@ export default function Blog() {
               data-aos="fade-up"
               data-aos-delay={Math.min(i * 100, 300)}
             >
-              <SpotlightCard className="flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-8 transition duration-500 hover:border-white/20 hover:bg-white/[0.04]">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-wider"
-                      style={{
-                        color: post.color,
-                        borderColor: `${post.color}40`,
-                        backgroundColor: `${post.color}10`,
-                      }}
-                    >
-                      {post.category}
-                    </span>
+              <SpotlightCard className="flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] transition duration-500 hover:border-white/20 hover:bg-white/[0.04]">
+                {post.image && (
+                  <div className="relative h-56 w-full overflow-hidden border-b border-white/5">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                   </div>
-                  <h3 className="mt-6 text-xl font-semibold leading-snug text-white transition duration-300 group-hover:text-[#29B9F2]">
-                    <Link href={post.href}>
-                      <span className="absolute inset-0" />
-                      {post.title}
-                    </Link>
-                  </h3>
-                </div>
-
-                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6 text-xs font-medium text-white/50">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="h-3.5 w-3.5" />
-                      <span>{post.date}</span>
+                )}
+                
+                <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-wider"
+                        style={{
+                          color: post.color,
+                          borderColor: `${post.color}40`,
+                          backgroundColor: `${post.color}10`,
+                        }}
+                      >
+                        {post.category}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5" />
-                      <span>{post.readTime}</span>
+                    <h3 className="mt-6 text-xl font-semibold leading-snug text-white transition duration-300 group-hover:text-[#29B9F2]">
+                      <Link href={post.href}>
+                        <span className="absolute inset-0" />
+                        {post.title}
+                      </Link>
+                    </h3>
+                  </div>
+  
+                  <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6 text-xs font-medium text-white/50">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="h-3.5 w-3.5" />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5" />
+                        <span>{post.readTime}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

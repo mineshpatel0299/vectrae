@@ -83,7 +83,7 @@ export default function Hero() {
           Across India
         </div>
 
-        <h1 className="w-full px-4 text-center text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-7xl">
+        <h1 className="w-full px-4 text-center text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           <span
             className="block"
             data-aos="fade-up"
