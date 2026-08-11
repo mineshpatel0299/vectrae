@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import {
   MapPin,
   Globe2,
@@ -11,6 +9,7 @@ import {
   Clock,
 } from "lucide-react";
 import Odometer from "@/components/ui/Odometer";
+import Navbar from "@/components/sections/Navbar";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 import { BRAND_GRADIENT } from "@/lib/brand";
@@ -37,39 +36,7 @@ export default function AboutPage() {
       <section className="relative overflow-hidden bg-black">
         <div className="pointer-events-none absolute left-1/2 top-0 h-130 w-225 -translate-x-1/2 -translate-y-1/3 rounded-full bg-[#29B9F2]/15 blur-[140px]" />
 
-        <header className="relative z-20 grid grid-cols-2 items-center px-6 py-6 md:grid-cols-3 md:px-10">
-          <div className="flex items-center" data-aos="fade-down" data-aos-duration="600">
-            <Link href="/">
-              <Image src="/logo.png" alt="Vectrae" width={154} height={32} className="h-8 w-auto" priority />
-            </Link>
-          </div>
-
-          <nav
-            className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm md:flex"
-            data-aos="fade-down"
-            data-aos-delay="100"
-          >
-            <Link href="/" className="rounded-full px-4 py-2 text-sm font-medium text-white/60 transition hover:text-white">
-              Product
-            </Link>
-            <Link href="/about" className="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white">
-              Company
-            </Link>
-            <a href="#" className="rounded-full px-4 py-2 text-sm font-medium text-white/60 transition hover:text-white">
-              Enterprise
-            </a>
-          </nav>
-
-          <div className="col-span-1 flex justify-self-end" data-aos="fade-down" data-aos-delay="200">
-            <a
-              href="#"
-              style={{ backgroundImage: BRAND_GRADIENT }}
-              className="rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
-            >
-              Request access
-            </a>
-          </div>
-        </header>
+        <Navbar />
 
         <div className="relative mx-auto max-w-4xl px-6 pb-20 pt-10 text-center sm:pb-28 sm:pt-16">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">

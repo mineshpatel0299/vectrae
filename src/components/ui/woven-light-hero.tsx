@@ -153,7 +153,7 @@ export const WovenCanvas = () => {
         vertexColors: true,
         blending: THREE.AdditiveBlending, // Always additive for glowing effect
         transparent: true,
-        opacity: 0.4, // Reduced opacity so it doesn't blind the text
+        opacity: 0.15, // Slightly visible structure while keeping text readable
     });
 
     const points = new THREE.Points(geometry, material);

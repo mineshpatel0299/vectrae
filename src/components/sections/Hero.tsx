@@ -1,6 +1,6 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
-import Image from "next/image";
 import { WovenCanvas } from "@/components/ui/woven-light-hero";
+import Navbar from "@/components/sections/Navbar";
 
 export default function Hero() {
   return (
@@ -12,59 +12,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[130px] bg-gradient-to-b from-black via-black/40 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-[105px] w-[225px] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[120px]" />
 
-      <header className="relative z-20 grid grid-cols-2 items-center px-6 py-6 md:grid-cols-3 md:px-10">
-        <div
-          className="flex items-center"
-          data-aos="fade-down"
-          data-aos-duration="600"
-          data-aos-once="true"
-        >
-          <Image src="/logo.png" alt="Vectrae" width={154} height={32} className="h-8 w-auto" priority />
-        </div>
-
-        <nav
-          className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm md:flex"
-          data-aos="fade-down"
-          data-aos-delay="100"
-          data-aos-once="true"
-        >
-          <a
-            href="#"
-            className="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white"
-          >
-            Product
-          </a>
-          <a
-            href="#"
-            className="rounded-full px-4 py-2 text-sm font-medium text-white/60 transition hover:text-white"
-          >
-            Company
-          </a>
-          <a
-            href="#"
-            className="rounded-full px-4 py-2 text-sm font-medium text-white/60 transition hover:text-white"
-          >
-            Enterprise
-          </a>
-        </nav>
-
-        <div
-          className="col-span-1 flex justify-self-end"
-          data-aos="fade-down"
-          data-aos-delay="200"
-          data-aos-once="true"
-        >
-          <a
-            href="#"
-            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15"
-          >
-            Request access
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-black">
-              <ArrowRight className="h-3 w-3" />
-            </span>
-          </a>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
         <div
@@ -98,7 +46,7 @@ export default function Hero() {
         </h1>
 
         <p
-          className="mt-6 max-w-2xl text-lg text-white/60"
+          className="mt-6 max-w-2xl text-lg text-white"
           data-aos="fade-up"
           data-aos-delay="250"
           data-aos-once="true"
