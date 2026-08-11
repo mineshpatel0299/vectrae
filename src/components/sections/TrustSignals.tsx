@@ -39,16 +39,24 @@ export default function TrustSignals() {
           {featured.map(({ name, logo }, i) => (
             <div
               key={name}
-              className="group flex h-24 items-center justify-center bg-white p-6 transition-colors duration-300 hover:bg-neutral-50 sm:h-32"
+              className="group relative flex h-28 items-center justify-center overflow-hidden bg-white p-5 sm:h-40 sm:p-7"
               data-aos="zoom-in"
               data-aos-delay={Math.min(i * 50, 400)}
             >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(132,217,108,0.16), rgba(37,217,199,0.14) 45%, transparent 75%)",
+                }}
+              />
               <Image
                 src={logo}
                 alt={name}
-                width={140}
-                height={70}
-                className="h-full w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                width={180}
+                height={100}
+                className="relative h-full w-full object-contain grayscale transition-all duration-300 group-hover:scale-110 group-hover:grayscale-0"
               />
             </div>
           ))}

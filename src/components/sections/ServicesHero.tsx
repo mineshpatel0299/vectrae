@@ -36,11 +36,7 @@ export default function ServicesHero() {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <Link href="/" className="transition hover:text-white/70">
-            Home
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-white/70">Services</span>
+
         </div>
       </div>
 

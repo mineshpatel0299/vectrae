@@ -117,7 +117,7 @@ export default function ServiceCards() {
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-neutral-500">
-            From boardroom AV and networking to data centers and end-computing — every solution,
+            From boardroom AV and networking to data centers and end-computing  every solution,
             every scale, delivered PAN-India.
           </p>
         </div>
