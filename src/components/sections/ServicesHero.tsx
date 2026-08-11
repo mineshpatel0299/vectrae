@@ -19,7 +19,7 @@ export default function ServicesHero() {
           Solutions &amp; Services
         </p> */}
         <h1
-          className="mt-4 text-6xl font-semibold tracking-tight text-white sm:text-7xl lg:text-8xl"
+          className="mt-4 text-6xl font-normal tracking-normal text-white sm:text-7xl lg:text-8xl"
           data-aos="fade-up"
           data-aos-delay="100"
         >
@@ -67,7 +67,7 @@ export default function ServicesHero() {
             initial={{ opacity: 0, x: -48, scale: 0.94 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute -left-8 top-16 rounded-2xl bg-white p-2 shadow-2xl sm:-left-18 sm:top-20"
+            className="absolute -left-8 top-16 rounded-2xl bg-white p-1 shadow-2xl sm:-left-18 sm:top-20"
           >
             <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
               <Image
@@ -84,7 +84,7 @@ export default function ServicesHero() {
             initial={{ opacity: 0, x: 48, scale: 0.94 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-16 -right-6 rounded-2xl bg-white p-2 shadow-2xl sm:bottom-20 sm:-right-16"
+            className="absolute bottom-16 -right-6 rounded-2xl bg-white p-1 shadow-2xl sm:bottom-20 sm:-right-16"
           >
             <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
               <Image
