@@ -2,80 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, Clock, ChevronRight } from "lucide-react";
+import { Calendar, Clock, ChevronRight } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import { BRAND_GRADIENT } from "@/lib/brand";
-
-type BlogPost = {
-  id: string;
-  title: string;
-  category: string;
-  date: string;
-  readTime: string;
-  href: string;
-  color: string;
-  image?: string;
-};
-
-const blogPosts: BlogPost[] = [
-  {
-    id: "av-tech-2026",
-    title: "Top 10 AV Technologies for Enterprise Meeting Rooms in 2026",
-    category: "Audio Visual",
-    date: "March 12, 2026",
-    readTime: "6 min read",
-    href: "#",
-    color: "#29B9F2",
-    image: "/images/blog/av-tech.png",
-  },
-  {
-    id: "managed-it",
-    title: "Why Every Enterprise Needs a Managed IT Services Provider",
-    category: "Managed Services",
-    date: "March 08, 2026",
-    readTime: "5 min read",
-    href: "#",
-    color: "#25D9C7",
-    image: "/images/blog/managed-it.png",
-  },
-  {
-    id: "teams-vs-zoom",
-    title: "Microsoft Teams Rooms vs Zoom Rooms — Which Is Right for Your Enterprise?",
-    category: "Collaboration",
-    date: "March 02, 2026",
-    readTime: "8 min read",
-    href: "#",
-    color: "#29B9F2",
-    image: "/images/blog/teams-zoom.png",
-  },
-  {
-    id: "choose-ups",
-    title: "How to Choose the Right UPS for Your Data Center",
-    category: "Power Solutions",
-    date: "February 25, 2026",
-    readTime: "7 min read",
-    href: "#",
-    color: "#25D9C7",
-  },
-  {
-    id: "network-security",
-    title: "5 Signs Your Enterprise Network Needs a Security Overhaul",
-    category: "Networking & Security",
-    date: "February 18, 2026",
-    readTime: "5 min read",
-    href: "#",
-    color: "#29B9F2",
-  },
-  {
-    id: "dc-decision",
-    title: "Greenfield vs Brownfield Data Center — Decision Guide",
-    category: "Data Center",
-    date: "February 10, 2026",
-    readTime: "9 min read",
-    href: "#",
-    color: "#25D9C7",
-  },
-];
+import { blogPosts } from "@/data/blogPosts";
 
 export default function Blog() {
   return (
@@ -100,7 +29,7 @@ export default function Blog() {
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.slice(0, 3).map((post, i) => (
             <div
-              key={post.id}
+              key={post.slug}
               className="group relative h-full"
               data-aos="fade-up"
               data-aos-delay={Math.min(i * 100, 300)}
@@ -133,7 +62,7 @@ export default function Blog() {
                       </span>
                     </div>
                     <h3 className="mt-6 text-xl font-semibold leading-snug text-white transition duration-300 group-hover:text-[#29B9F2]">
-                      <Link href={post.href}>
+                      <Link href={`/blog/${post.slug}`}>
                         <span className="absolute inset-0" />
                         {post.title}
                       </Link>

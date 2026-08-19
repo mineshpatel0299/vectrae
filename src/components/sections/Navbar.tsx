@@ -7,7 +7,7 @@ import { BRAND_GRADIENT } from "@/lib/brand";
 
 const NAV_LINKS = [
   // { label: "Product", href: "/" },
-  // { label: "Company", href: "/about" },
+  // { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   // { label: "Enterprise", href: "#" },
 ];

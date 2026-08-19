@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import ProductShowcase from "@/components/sections/ProductShowcase";
 import Workspace from "@/components/sections/Workspace";
 import Services from "@/components/sections/Services";
+import ServicesOverview from "@/components/sections/ServicesOverview";
 import TrustSignals from "@/components/sections/TrustSignals";
 import SampleAboutUs from "@/components/sections/SampleAboutUs";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustSignals />
+      <ServicesOverview />
       <ProductShowcase />
       <FootprintMap />
       {/* <Workspace /> */}
