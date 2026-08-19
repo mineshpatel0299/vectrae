@@ -107,3 +107,17 @@ a, button, [role="button"] {
 .animate-scan-sweep {
   animation: scan-sweep 7s ease-in-out infinite;
 }
+
+@keyframes travel-dot {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+.animate-travel-dot {
+  offset-rotate: 0deg;
+  animation: travel-dot 2.4s linear infinite;
+}

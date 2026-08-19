@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { MapPin, Users, Building, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Building, MapPin, ShieldCheck, Users } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
 const metrics = [
@@ -11,41 +12,71 @@ const metrics = [
   { label: "Years of Experience", value: "25+", icon: MapPin },
 ];
 
-const nodes = [
-  { id: "delhi",     label: "Delhi NCR",  svgX: 189, svgY: 215 },
-  { id: "mumbai",    label: "Mumbai",     svgX: 101, svgY: 436 },
-  { id: "bangalore", label: "Bangalore",  svgX: 196, svgY: 579 },
-  { id: "hyderabad", label: "Hyderabad",  svgX: 214, svgY: 476 },
-  { id: "chennai",   label: "Chennai",    svgX: 250, svgY: 576 },
-  { id: "pune",      label: "Pune",       svgX: 122, svgY: 449 },
-  { id: "kolkata",   label: "Kolkata",    svgX: 410, svgY: 355 },
-  { id: "ahmedabad", label: "Ahmedabad",  svgX:  97, svgY: 345 },
+type Node = {
+  id: string;
+  label: string;
+  svgX: number;
+  svgY: number;
+  hub?: boolean;
+  side: "left" | "right";
+};
+
+const nodes: Node[] = [
+  { id: "delhi", label: "Delhi NCR", svgX: 189, svgY: 215, hub: true, side: "right" },
+  { id: "ahmedabad", label: "Ahmedabad", svgX: 97, svgY: 345, side: "left" },
+  { id: "kolkata", label: "Kolkata", svgX: 410, svgY: 355, side: "right" },
+  { id: "mumbai", label: "Mumbai", svgX: 101, svgY: 436, side: "left" },
+  { id: "pune", label: "Pune", svgX: 122, svgY: 449, side: "right" },
+  { id: "hyderabad", label: "Hyderabad", svgX: 214, svgY: 476, side: "right" },
+  { id: "bangalore", label: "Bangalore", svgX: 196, svgY: 579, side: "left" },
+  { id: "chennai", label: "Chennai", svgX: 250, svgY: 576, side: "right" },
 ];
 
 const SVG_W = 612;
 const SVG_H = 696;
+const hub = nodes.find((n) => n.hub)!;
+const spokes = nodes.filter((n) => !n.hub);
+
+function curvePath(x1: number, y1: number, x2: number, y2: number, bow = 0.18) {
+  const mx = (x1 + x2) / 2;
+  const my = (y1 + y2) / 2;
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const len = Math.hypot(dx, dy) || 1;
+  const cx = mx + (-dy / len) * len * bow;
+  const cy = my + (dx / len) * len * bow;
+  return { d: `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}` };
+}
 
 export default function FootprintMap() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [cycleIndex, setCycleIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setCycleIndex((v) => (v + 1) % spokes.length), 2600);
+    return () => clearInterval(id);
+  }, []);
+
+  const activeId = hoveredId ?? spokes[cycleIndex].id;
 
   return (
-    <section className="relative overflow-hidden border-t border-black/5 bg-white py-24 sm:py-32">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#25D9C7]/10 blur-[140px]" />
+    <section className="relative overflow-hidden border-t border-neutral-200 bg-white py-20 sm:py-28">
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-125 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#25D9C7]/[0.06] blur-[140px]" />
 
-      <div className="relative mx-auto max-w-5xl px-6">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[320px_1fr] lg:items-center lg:gap-16">
           {/* Left: text + stats */}
           <div>
             <div data-aos="fade-right">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#29B9F2]">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#25D9C7]">
                 National Coverage
               </p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
-                PAN-India Delivery &amp; Support Footprint
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-4xl">
+                A Live Network Across India
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-500">
-                From initial consultation to long-term managed support, Vectrae delivers end-to-end enterprise technology solutions across India.
+                Every delivery hub connects back to our Delhi command center —
+                from initial consultation to long-term managed support, PAN-India.
               </p>
             </div>
 
@@ -53,11 +84,11 @@ export default function FootprintMap() {
               {metrics.map((metric, i) => (
                 <div
                   key={metric.label}
-                  className="group rounded-2xl border border-black/10 bg-white p-5 shadow-sm transition hover:border-black/20 hover:shadow-md"
+                  className="group rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition duration-300 hover:border-neutral-300 hover:shadow-md"
                   data-aos="fade-up"
                   data-aos-delay={i * 100}
                 >
-                  <metric.icon className="h-4 w-4 text-neutral-400 transition duration-300 group-hover:text-[#29B9F2]" />
+                  <metric.icon className="h-4 w-4 text-neutral-400 transition duration-300 group-hover:text-[#25D9C7]" />
                   <div
                     className="mt-2 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl"
                     style={{ backgroundImage: BRAND_GRADIENT }}
@@ -72,80 +103,132 @@ export default function FootprintMap() {
             </div>
           </div>
 
-          {/* Right: compact map */}
+          {/* Right: live network map — large */}
           <div data-aos="fade-left" data-aos-delay="200">
-            <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
-              {/* Dot grid */}
+            <div className="relative overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-50/60 shadow-sm">
+              {/* Static dot grid texture */}
               <div
-                className="pointer-events-none absolute inset-0 opacity-[0.06]"
+                className="pointer-events-none absolute inset-0 opacity-[0.05]"
                 style={{
                   backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
-                  backgroundSize: "20px 20px",
+                  backgroundSize: "28px 28px",
                 }}
               />
 
-              {/* Map container — constrained height */}
-              <div
-                className="relative mx-auto w-full max-w-[320px]"
-                style={{ aspectRatio: `${SVG_W} / ${SVG_H}` }}
-              >
-                <img
-                  src="/india-map.svg"
-                  alt="Map of India"
-                  className="pointer-events-none absolute inset-0 h-full w-full opacity-20"
-                  style={{ objectFit: "fill" }}
-                />
+              <div className="relative mx-auto w-full max-w-2xl px-14 pb-8 pt-12 sm:px-16">
+                <div
+                  className="relative mx-auto w-full"
+                  style={{ aspectRatio: `${SVG_W} / ${SVG_H}` }}
+                >
+                  {/* Gradient-filled silhouette with a true drop shadow (follows the shape, not a blurred ghost copy) */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0"
+                    style={{
+                      WebkitMaskImage: "url(/india-map.svg)",
+                      maskImage: "url(/india-map.svg)",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskPosition: "center",
+                      maskPosition: "center",
+                      WebkitMaskSize: "contain",
+                      maskSize: "contain",
+                      background:
+                        "linear-gradient(160deg, #29B9F2 0%, #25D9C7 55%, #84D96C 100%)",
+                      filter:
+                        "drop-shadow(0 18px 28px rgba(15,23,42,0.18)) drop-shadow(0 4px 10px rgba(15,23,42,0.10))",
+                    }}
+                  />
 
-                {nodes.map((node) => {
-                  const leftPct = (node.svgX / SVG_W) * 100;
-                  const topPct  = (node.svgY / SVG_H) * 100;
-                  const isHovered = hoveredId === node.id;
+                  {/* Connection paths */}
+                  <svg
+                    viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+                    className="pointer-events-none absolute inset-0 h-full w-full"
+                  >
+                    {spokes.map((node) => {
+                      const { d } = curvePath(hub.svgX, hub.svgY, node.svgX, node.svgY);
+                      const isActive = activeId === node.id;
+                      return (
+                        <g key={node.id}>
+                          <motion.path
+                            d={d}
+                            fill="none"
+                            stroke="#ffffff"
+                            strokeOpacity={isActive ? 0.95 : 0.35}
+                            strokeWidth={isActive ? 2 : 1.25}
+                            initial={{ pathLength: 0 }}
+                            whileInView={{ pathLength: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, delay: 0.1 }}
+                          />
+                          {isActive && (
+                            <circle
+                              r={3}
+                              fill="#ffffff"
+                              className="animate-travel-dot"
+                              style={{ offsetPath: `path("${d}")` }}
+                            />
+                          )}
+                        </g>
+                      );
+                    })}
+                  </svg>
 
-                  return (
-                    <div
-                      key={node.id}
-                      className="absolute -translate-x-1/2 -translate-y-1/2"
-                      style={{ left: `${leftPct}%`, top: `${topPct}%`, zIndex: isHovered ? 30 : 10 }}
-                      onMouseEnter={() => setHoveredId(node.id)}
-                      onMouseLeave={() => setHoveredId(null)}
-                    >
-                      {/* Pulse ring */}
-                      <span
-                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full"
-                        style={{ width: 16, height: 16, backgroundColor: "rgba(41,185,242,0.3)" }}
-                      />
-                      {/* Dot */}
-                      <span
-                        className="relative block cursor-pointer rounded-full bg-[#29B9F2] transition-all duration-150"
-                        style={{
-                          width: isHovered ? 12 : 8,
-                          height: isHovered ? 12 : 8,
-                          boxShadow: isHovered
-                            ? "0 0 0 3px rgba(41,185,242,0.2), 0 0 12px rgba(41,185,242,0.7)"
-                            : "0 0 6px rgba(41,185,242,0.5)",
-                        }}
-                      />
-                      {/* Tooltip */}
+                  {/* City nodes */}
+                  {nodes.map((node) => {
+                    const leftPct = (node.svgX / SVG_W) * 100;
+                    const topPct = (node.svgY / SVG_H) * 100;
+                    const isActive = node.hub || activeId === node.id;
+
+                    return (
                       <div
-                        className="pointer-events-none absolute bottom-full left-1/2 mb-2 whitespace-nowrap rounded-lg border border-black/10 bg-white px-2.5 py-1 text-[10px] font-bold text-neutral-900 shadow-md transition-all duration-150"
-                        style={{
-                          transform: `translateX(-50%) translateY(${isHovered ? 0 : 4}px)`,
-                          opacity: isHovered ? 1 : 0,
-                        }}
+                        key={node.id}
+                        className="absolute -translate-x-1/2 -translate-y-1/2"
+                        style={{ left: `${leftPct}%`, top: `${topPct}%`, zIndex: isActive ? 30 : 10 }}
+                        onMouseEnter={() => setHoveredId(node.id)}
+                        onMouseLeave={() => setHoveredId(null)}
                       >
-                        {node.label}
-                        <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-white" />
+                        {isActive && (
+                          <span
+                            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-white/60"
+                            style={{ width: node.hub ? 26 : 20, height: node.hub ? 26 : 20 }}
+                          />
+                        )}
+                        <span
+                          className="relative block cursor-pointer rounded-full border-2 border-white transition-all duration-300"
+                          style={{
+                            width: node.hub ? 13 : isActive ? 12 : 7,
+                            height: node.hub ? 13 : isActive ? 12 : 7,
+                            backgroundColor: node.hub ? "#0f9ac9" : "#ffffff",
+                            boxShadow: isActive
+                              ? "0 0 0 4px rgba(255,255,255,0.3), 0 2px 10px rgba(0,0,0,0.25)"
+                              : "0 1px 4px rgba(0,0,0,0.2)",
+                          }}
+                        />
+
+                        {/* City label — always a legible chip so it reads over map or card background alike */}
+                        <span
+                          className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border text-[10px] font-semibold uppercase tracking-wide transition-all duration-300 ${
+                            node.side === "left" ? "right-full mr-2 text-right" : "left-full ml-2"
+                          } ${
+                            isActive
+                              ? "border-neutral-200 bg-white px-2 py-1 text-neutral-900 shadow-md"
+                              : "border-transparent bg-white/70 px-1.5 py-0.5 text-neutral-600"
+                          }`}
+                        >
+                          {node.label}
+                          {node.hub && <span className="ml-1 text-[#0f9ac9]">HQ</span>}
+                        </span>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
 
-              {/* Legend */}
-              <div className="flex items-center gap-2 border-t border-black/5 px-5 py-3 text-[11px] font-semibold text-neutral-400">
-                <span className="inline-block h-2 w-2 animate-ping rounded-full bg-[#29B9F2]/50" />
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#29B9F2]" />
-                Active delivery locations
+              <div className="relative flex items-center gap-2 border-t border-neutral-200 bg-white px-6 py-3.5 text-[11px] font-semibold text-neutral-500">
+                <span className="inline-block h-2 w-2 animate-ping rounded-full bg-[#25D9C7]/50" />
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#25D9C7]" />
+                Live delivery network — {nodes.length} active hubs
               </div>
             </div>
           </div>
