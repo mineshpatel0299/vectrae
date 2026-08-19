@@ -8,7 +8,7 @@ import Navbar from "@/components/sections/Navbar";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { services } from "@/data/services";
 
-const HEADLINE = ["Complexity in.", "Certainty out."];
+const HEADLINE = ["Enterprise Technology", "SIMPLIFIED"];
 
 export default function AboutHero() {
   const mouseX = useMotionValue(0);
@@ -47,9 +47,9 @@ export default function AboutHero() {
           About Vectrae
         </p>
 
-        <h1 className="mt-8 text-6xl font-semibold leading-[0.95] tracking-tight text-white sm:text-8xl lg:text-[8.5rem]">
+        <h1 className="mt-8 font-semibold leading-[0.95] tracking-tight text-white sm:text-xl lg:text-[5.5rem]">
           {HEADLINE.map((line, i) => (
-            <span key={line} className="block overflow-hidden">
+            <span key={line} className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
               <motion.span
                 initial={{ y: "110%" }}
                 animate={{ y: "0%" }}
