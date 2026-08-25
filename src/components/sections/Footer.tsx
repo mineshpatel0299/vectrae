@@ -6,12 +6,12 @@ import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
 const links = {
   solutions: [
-    { label: "Audio Visual", href: "/solutions/audio-visual" },
+    { label: "Audio Visual", href: "/solutions/av-solutions" },
     { label: "Networking & Security", href: "/solutions/networking-security" },
     { label: "Data Center", href: "/solutions/data-center" },
     { label: "End Computing", href: "/solutions/end-computing" },
-    { label: "Power Solutions", href: "/solutions/power" },
-    { label: "Managed IT Services", href: "/solutions/managed-it" },
+    { label: "Power Solutions", href: "/solutions/power-solutions" },
+    { label: "Managed IT Services", href: "/solutions/managed-it-services" },
   ],
   company: [
     { label: "About Us", href: "/about" },

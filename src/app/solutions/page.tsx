@@ -8,12 +8,12 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Services | Vectrae Enterprise Technology Solutions",
+  title: "Solutions | Vectrae Enterprise Technology Solutions",
   description:
-    "Explore Vectrae's full-spectrum enterprise technology services — Audio Visual, Networking & Security, Data Center, End Computing, IT Spares, Power, and Managed IT — delivered PAN-India.",
+    "Explore Vectrae's full-spectrum enterprise technology solutions — Audio Visual, Networking & Security, Data Center, End Computing, IT Spares, Power, and Managed IT — delivered PAN-India.",
 };
 
-export default function ServicesPage() {
+export default function SolutionsPage() {
   return (
     <>
       <ServicesHero />

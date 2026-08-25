@@ -2,41 +2,41 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronRight, PhoneCall } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronRight, PhoneCall, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/sections/Navbar";
 import Odometer from "@/components/ui/Odometer";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { serviceDetails } from "@/data/serviceDetails";
+import { solutions, getSolution } from "@/data/solutions";
 import { stats } from "@/data/stats";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ vertical: string }>;
 };
 
 export function generateStaticParams() {
-  return serviceDetails.map((service) => ({ slug: service.slug }));
+  return solutions.map((solution) => ({ vertical: solution.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const service = serviceDetails.find((s) => s.slug === slug);
-  if (!service) return {};
+  const { vertical } = await params;
+  const solution = getSolution(vertical);
+  if (!solution) return {};
 
   return {
-    title: `${service.title} | Vectrae Enterprise Technology`,
-    description: service.description,
+    title: `${solution.title} | Vectrae Enterprise Technology`,
+    description: solution.description,
   };
 }
 
-export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const service = serviceDetails.find((s) => s.slug === slug);
-  if (!service) notFound();
+export default async function SolutionOverviewPage({ params }: Props) {
+  const { vertical } = await params;
+  const solution = getSolution(vertical);
+  if (!solution) notFound();
 
-  const Icon = service.icon;
-  const related = serviceDetails.filter((s) => s.slug !== slug).slice(0, 3);
+  const Icon = solution.icon;
+  const related = solutions.filter((s) => s.slug !== vertical).slice(0, 3);
 
   return (
     <>
@@ -51,11 +51,11 @@ export default async function ServiceDetailPage({ params }: Props) {
               Home
             </Link>
             <ChevronRight className="h-3.5 w-3.5" />
-            <Link href="/services" className="transition hover:text-white/70">
-              Services
+            <Link href="/solutions" className="transition hover:text-white/70">
+              Solutions
             </Link>
             <ChevronRight className="h-3.5 w-3.5" />
-            <span className="text-white/70">{service.title}</span>
+            <span className="text-white/70">{solution.title}</span>
           </div>
 
           <div className="mt-8 grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -71,17 +71,17 @@ export default async function ServiceDetailPage({ params }: Props) {
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                {service.title}
+                {solution.title}
               </h1>
               <p className="mt-4 text-lg text-white/60" data-aos="fade-up" data-aos-delay="150">
-                {service.tagline}
+                {solution.tagline}
               </p>
               <p
                 className="mt-6 max-w-xl text-base leading-relaxed text-white/50"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
-                {service.description}
+                {solution.description}
               </p>
 
               <div
@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               data-aos="fade-left"
               data-aos-delay="150"
             >
-              <Image src={service.heroImage} alt={service.title} fill priority className="object-cover" />
+              <Image src={solution.heroImage} alt={solution.title} fill priority className="object-cover" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
             </div>
           </div>
@@ -147,12 +147,12 @@ export default async function ServiceDetailPage({ params }: Props) {
               What&apos;s Included
             </p>
             <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
-              Everything under {service.title}
+              Everything under {solution.title}
             </h2>
           </div>
 
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {service.capabilities.map((cap, i) => {
+            {solution.capabilities.map((cap, i) => {
               const CapIcon = cap.icon;
               return (
                 <div
@@ -173,6 +173,47 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Sub-services */}
+      {solution.subServices.length > 0 && (
+        <section className="relative overflow-hidden bg-white py-20 sm:py-28">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="mx-auto max-w-2xl text-center" data-aos="fade-up">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">
+                Go Deeper
+              </p>
+              <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
+                {solution.title} Services
+              </h2>
+            </div>
+
+            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {solution.subServices.map((sub, i) => {
+                const SubIcon = sub.icon;
+                return (
+                  <Link
+                    key={sub.slug}
+                    href={`/solutions/${solution.slug}/${sub.slug}`}
+                    className="group rounded-2xl border border-black/10 bg-[#f5f5f0] p-6 transition hover:border-black/20 hover:bg-white hover:shadow-md"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 60}
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-white text-[#0f9ac9]">
+                      <SubIcon className="h-5 w-5" />
+                    </span>
+                    <h3 className="mt-5 text-lg font-semibold text-neutral-900">{sub.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-neutral-500">{sub.tagline}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0f9ac9]">
+                      Explore
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Benefits */}
       <section className="relative overflow-hidden bg-black py-20 sm:py-28">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#25D9C7]/10 blur-[140px]" />
@@ -190,7 +231,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </h2>
 
           <div className="mx-auto mt-12 grid max-w-2xl gap-4 text-left sm:grid-cols-2">
-            {service.benefits.map((benefit, i) => (
+            {solution.benefits.map((benefit, i) => (
               <div
                 key={benefit}
                 className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4"
@@ -202,10 +243,29 @@ export default async function ServiceDetailPage({ params }: Props) {
               </div>
             ))}
           </div>
+
+          {solution.oems.length > 0 && (
+            <div className="mx-auto mt-16 max-w-3xl" data-aos="fade-up">
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/30">
+                Technology Partners for {solution.title}
+              </p>
+              <div className="mt-5 flex flex-wrap justify-center gap-2">
+                {solution.oems.map((oem) => (
+                  <span
+                    key={oem}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/60"
+                  >
+                    <ShieldCheck className="h-3 w-3 text-[#25D9C7]" />
+                    {oem}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Related services */}
+      {/* Related solutions */}
       <section className="relative overflow-hidden bg-[#f5f5f0] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-10 text-center" data-aos="fade-up">
@@ -223,7 +283,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               return (
                 <Link
                   key={r.slug}
-                  href={`/services/${r.slug}`}
+                  href={`/solutions/${r.slug}`}
                   className="group relative h-64 overflow-hidden rounded-2xl"
                   data-aos="fade-up"
                   data-aos-delay={i * 100}

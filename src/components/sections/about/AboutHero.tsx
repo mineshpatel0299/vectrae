@@ -93,10 +93,10 @@ export default function AboutHero() {
             </span>
           </a>
           <Link
-            href="/services"
+            href="/solutions"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm font-semibold text-white/70 transition hover:border-white/25 hover:text-white"
           >
-            Explore Services
+            Explore Solutions
           </Link>
         </motion.div>
       </div>

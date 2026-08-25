@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { serviceDetails } from "@/data/serviceDetails";
+import { solutions } from "@/data/solutions";
 
 export default function ServicesOverview() {
   return (
@@ -27,12 +27,12 @@ export default function ServicesOverview() {
         </div>
 
         <div className="mt-14 flex flex-wrap justify-center gap-5">
-          {serviceDetails.map((service, i) => {
+          {solutions.map((service, i) => {
             const Icon = service.icon;
             return (
               <Link
                 key={service.slug}
-                href={`/services/${service.slug}`}
+                href={`/solutions/${service.slug}`}
                 data-aos="fade-up"
                 data-aos-delay={i * 60}
                 className="group relative flex h-[350px] w-full flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:border-neutral-200 hover:shadow-[0_28px_60px_-20px_rgba(15,23,42,0.22)] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.334px)]"
@@ -89,11 +89,11 @@ export default function ServicesOverview() {
 
         <div className="mt-12 flex justify-center" data-aos="fade-up">
           <Link
-            href="/services"
+            href="/solutions"
             className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-black shadow-lg transition hover:opacity-90"
             style={{ backgroundImage: BRAND_GRADIENT }}
           >
-            View All Services
+            View All Solutions
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -23,7 +23,7 @@ export default function ServicesHero() {
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          Services
+          Solutions
         </h1>
         <div
           className="mx-auto mt-6 h-1 w-16 rounded-full"

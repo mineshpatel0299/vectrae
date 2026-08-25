@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { BRAND_GRADIENT } from "@/lib/brand";
+import { solutions } from "@/data/solutions";
 
 type ServiceCardItem = {
   title: string;
@@ -13,38 +14,12 @@ type ServiceCardItem = {
   href: string;
 };
 
-const SERVICE_CARDS: ServiceCardItem[] = [
-  {
-    title: "Boardroom & AV Solutions",
-    image: "/images/blog/av-tech.png",
-    alt: "Vectrae AV boardroom deployment",
-    href: "/services/boardroom-av",
-  },
-  {
-    title: "Networking & Wi-Fi Solutions",
-    image: "/images/products/router.png",
-    alt: "Enterprise networking and Wi-Fi router",
-    href: "/services/networking-wifi",
-  },
-  {
-    title: "Data Center & Security Solutions",
-    image: "/images/products/server-ram.png",
-    alt: "Data center server infrastructure",
-    href: "/services/data-center-security",
-  },
-  {
-    title: "End-Computing Solutions",
-    image: "/images/products/laptop.png",
-    alt: "Enterprise laptops and end computing",
-    href: "/services/end-computing",
-  },
-  {
-    title: "IT Spare & Accessories",
-    image: "/images/products/motherboard.png",
-    alt: "IT spare parts and components",
-    href: "/services/it-spares",
-  },
-];
+const SERVICE_CARDS: ServiceCardItem[] = solutions.map((solution) => ({
+  title: solution.title,
+  image: solution.heroImage,
+  alt: solution.title,
+  href: `/solutions/${solution.slug}`,
+}));
 
 function ServiceCard({ card, index }: { card: ServiceCardItem; index: number }) {
   return (
@@ -108,7 +83,7 @@ export default function ServiceCards() {
             What We Offer
           </p>
           <h2 className="mx-auto mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
-            Five pillars of{" "}
+            Seven pillars of{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: BRAND_GRADIENT }}
@@ -117,8 +92,8 @@ export default function ServiceCards() {
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-neutral-500">
-            From boardroom AV and networking to data centers and end-computing  every solution,
-            every scale, delivered PAN-India.
+            From boardroom AV and networking to data centers, end-computing, and power — every
+            solution, every scale, delivered PAN-India.
           </p>
         </div>
 
