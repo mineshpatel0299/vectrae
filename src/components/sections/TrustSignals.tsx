@@ -67,7 +67,7 @@ function LogoCard({
     <div
       data-aos="fade-up"
       data-aos-delay={delay}
-      className={`group relative flex h-36 flex-col items-center justify-center gap-2 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md sm:h-44 ${
+      className={`group relative flex h-24 flex-col items-center justify-center gap-2 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md sm:h-28 ${
         wide ? "col-span-2" : ""
       }`}
     >
@@ -77,7 +77,7 @@ function LogoCard({
         width={wide ? 320 : 210}
         height={110}
         unoptimized
-        className="h-14 w-auto max-w-[75%] object-contain sm:h-18"
+        className="h-9 w-auto max-w-[60%] object-contain sm:h-11"
       />
       {tag && (
         <span className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">
@@ -88,16 +88,25 @@ function LogoCard({
   );
 }
 
+const BATCH_SIZE = 6;
+
 function ClientWall() {
-  const [expanded, setExpanded] = useState(false);
+  const [visibleMore, setVisibleMore] = useState(0);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const background = useMotionTemplate`radial-gradient(420px circle at ${mouseX}px ${mouseY}px, rgba(37,217,199,0.14), transparent 70%)`;
+
+  const hasMore = visibleMore < moreCards.length;
+  const visibleMoreCards = moreCards.slice(0, visibleMore);
 
   function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
+  }
+
+  function handleToggle() {
+    setVisibleMore((v) => (v < moreCards.length ? Math.min(v + BATCH_SIZE, moreCards.length) : 0));
   }
 
   return (
@@ -116,21 +125,20 @@ function ClientWall() {
           <LogoCard key={card.name} {...card} delay={Math.min(i * 40, 320)} />
         ))}
 
-        {expanded &&
-          moreCards.map((card, i) => (
-            <LogoCard key={card.name} {...card} delay={Math.min(i * 40, 320)} />
-          ))}
+        {visibleMoreCards.map((card, i) => (
+          <LogoCard key={card.name} {...card} delay={Math.min(i * 40, 320)} />
+        ))}
       </div>
 
       <div className="mt-8 flex justify-center">
         <button
           type="button"
-          onClick={() => setExpanded((v) => !v)}
+          onClick={handleToggle}
           className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-medium text-neutral-700 transition hover:border-neutral-400 hover:bg-neutral-50"
         >
-          {expanded ? "View less" : "View all clients"}
+          {hasMore ? "View more clients" : "View less"}
           <ChevronDown
-            className={`h-4 w-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+            className={`h-4 w-4 transition-transform duration-300 ${hasMore ? "" : "rotate-180"}`}
           />
         </button>
       </div>

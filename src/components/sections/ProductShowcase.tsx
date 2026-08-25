@@ -108,7 +108,7 @@ const products: ProductPoint[] = [
   },
 ];
 
-const categories = ["All Products", "Audio Visual", "Networking", "Data Center", "Power"];
+const categories = ["All Products", "End Computing", "Data Center", "Power", "Networking"];
 
 export default function ProductShowcase() {
   const [activeId, setActiveId] = useState<string | null>(null);
