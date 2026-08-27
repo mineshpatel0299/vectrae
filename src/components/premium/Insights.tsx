@@ -25,7 +25,7 @@ const posts = [
   },
   {
     id: "teams-vs-zoom",
-    title: "Microsoft Teams Rooms vs Zoom Rooms — Which Is Right for Your Enterprise?",
+    title: "Microsoft Teams Rooms vs Zoom Rooms, Which Is Right for Your Enterprise?",
     category: "Collaboration",
     date: "March 02, 2026",
     readTime: "8 min read",
@@ -49,7 +49,7 @@ const posts = [
   },
   {
     id: "dc-decision",
-    title: "Greenfield vs Brownfield Data Center — Decision Guide",
+    title: "Greenfield vs Brownfield Data Center, Decision Guide",
     category: "Data Center",
     date: "February 10, 2026",
     readTime: "9 min read",

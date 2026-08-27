@@ -208,7 +208,7 @@ export default function Workspace() {
             Everything About Vectrae, One Desktop Away
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Double-click a folder to open it, drag windows around, minimize or maximize them —
+            Double-click a folder to open it, drag windows around, minimize or maximize them,
             just like the computer on your desk.
           </p>
         </div>
@@ -277,7 +277,7 @@ export default function Workspace() {
                     </span>
                   </h3>
                   <p className="mx-auto mt-2 max-w-xs text-xs text-white/50 sm:max-w-md sm:text-sm">
-                    Double-click a folder to explore our products, people, and support — all in
+                    Double-click a folder to explore our products, people, and support, all in
                     one place.
                   </p>
 
@@ -404,7 +404,7 @@ export default function Workspace() {
                         </span>
                       </span>
                       <span className="mt-0.5 block truncate text-[11px] text-white/60">
-                        Thanks for reaching out — let&apos;s schedule a walkthrough.
+                        Thanks for reaching out, let&apos;s schedule a walkthrough.
                       </span>
                     </span>
                   </motion.button>

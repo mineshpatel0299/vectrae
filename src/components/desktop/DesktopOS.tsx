@@ -92,7 +92,7 @@ const allFolders = flattenFolders(desktopFolders);
 const FOLDER_CLIP =
   "polygon(0 22%, 10% 22%, 16% 6%, 46% 6%, 52% 22%, 100% 22%, 100% 100%, 0 100%)";
 
-/** Top-level folders that are live, built pages — opening them previews the real route in an iframe. */
+/** Top-level folders that are live, built pages, opening them previews the real route in an iframe. */
 const LIVE_PREVIEW_ROUTES: Record<string, string> = {
   homepage: "/",
   "about-page": "/about",
@@ -264,7 +264,7 @@ export default function DesktopOS() {
       <div className="pointer-events-none absolute left-1/4 top-0 h-100 w-100 -translate-y-1/2 rounded-full bg-[#25D9C7]/15 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-1/4 h-100 w-100 translate-y-1/2 rounded-full bg-[#29B9F2]/15 blur-[120px]" />
 
-      {/* Brightness overlay — opacity = inverse of brightness */}
+      {/* Brightness overlay, opacity = inverse of brightness */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -280,12 +280,12 @@ export default function DesktopOS() {
         className="absolute inset-x-0 top-0 z-40 flex items-center justify-between border-b border-white/10 bg-black/40 px-5 backdrop-blur-md"
         style={{ height: MENUBAR_HEIGHT }}
       >
-        {/* Left — Logo */}
+        {/* Left, Logo */}
         <div className="flex items-center">
           <Image src="/logo.png" alt="Vectrae" width={140} height={29} className="h-6 w-auto" priority />
         </div>
 
-        {/* Right — system icons + clock */}
+        {/* Right, system icons + clock */}
         <div className="flex items-center gap-4">
           {/* WiFi */}
           <Wifi className="h-4 w-4 text-white/60" />
@@ -663,7 +663,7 @@ function OSWindow({
           />
         ) : !file ? (
           folder.subFolders && folder.subFolders.length > 0 ? (
-            // Folder contains sub-folders — render them as clickable folder icons
+            // Folder contains sub-folders, render them as clickable folder icons
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {folder.subFolders.map((sf) => {
                 const SFIcon = ICONS[sf.icon];
@@ -691,7 +691,7 @@ function OSWindow({
               })}
             </div>
           ) : (
-            // Regular folder — render files
+            // Regular folder, render files
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {folder.files.map((f) => {
                 const FIcon = ICONS[f.icon];

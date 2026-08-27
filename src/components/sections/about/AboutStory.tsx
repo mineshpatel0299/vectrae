@@ -15,13 +15,13 @@ const chapters = [
     n: "02",
     kicker: "The Expansion",
     title: "Into Networking & Security.",
-    body: "As client needs grew, so did we — building the resilient, secure infrastructure enterprises depend on every day.",
+    body: "As client needs grew, so did we, building the resilient, secure infrastructure enterprises depend on every day.",
   },
   {
     n: "03",
     kicker: "The Scale",
     title: "Data Center. End Computing. Power.",
-    body: "One partner, every layer — from the server room to the boardroom, delivered PAN-India.",
+    body: "One partner, every layer, from the server room to the boardroom, delivered PAN-India.",
   },
   {
     n: "04",
@@ -75,7 +75,7 @@ export default function AboutStory() {
                   className="bg-clip-text text-sm font-semibold uppercase tracking-[0.25em] text-transparent"
                   style={{ backgroundImage: BRAND_GRADIENT }}
                 >
-                  {c.n} — {c.kicker}
+                  {c.n}, {c.kicker}
                 </span>
                 <h3 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-6xl">
                   {c.title}

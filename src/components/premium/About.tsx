@@ -124,7 +124,7 @@ export default function About() {
 
           <Reveal delay={0.4} className="lg:max-w-xs lg:pl-14">
             <p className="border-l border-[#29B9F2]/30 pl-5 text-sm leading-relaxed text-white/50">
-              Delivering the right solutions, the right partners, and the right outcomes — from
+              Delivering the right solutions, the right partners, and the right outcomes, from
               initial consultation through long-term managed support.
             </p>
           </Reveal>

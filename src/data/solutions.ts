@@ -64,7 +64,7 @@ export const solutions: Solution[] = [
     icon: MonitorPlay,
     heroImage: "/images/blog/av-tech.png",
     description:
-      "From huddle rooms to command centres, we design and deploy audio-visual systems that make every meeting effortless — video conferencing, digital signage, and unified communications, integrated and supported end-to-end.",
+      "From huddle rooms to command centres, we design and deploy audio-visual systems that make every meeting effortless, video conferencing, digital signage, and unified communications, integrated and supported end-to-end.",
     capabilities: [
       { icon: Video, title: "Video Conferencing Systems", description: "Zoom, Microsoft Teams & Cisco-certified room deployments for seamless hybrid meetings." },
       { icon: LayoutGrid, title: "Digital Signage & Displays", description: "Large-format displays, video walls, and interactive panels for boardrooms and lobbies." },
@@ -87,7 +87,7 @@ export const solutions: Solution[] = [
         tagline: "One-touch meetings, engineered for every room size.",
         icon: MonitorPlay,
         description:
-          "From huddle spaces to executive boardrooms, we design and integrate AV systems that make every meeting effortless — camera, audio, display, and control, working together out of the box.",
+          "From huddle spaces to executive boardrooms, we design and integrate AV systems that make every meeting effortless, camera, audio, display, and control, working together out of the box.",
         capabilities: [
           { icon: Settings2, title: "Room Scheduling & One-Touch Join", description: "Centralized booking panels and one-touch meeting start for every room." },
           { icon: Video, title: "Camera & Audio Tuning", description: "Room-tuned camera framing and audio pickup for clear hybrid calls." },
@@ -138,7 +138,7 @@ export const solutions: Solution[] = [
         tagline: "Sound and visuals engineered for the back row.",
         icon: RadioTower,
         description:
-          "We design large-venue AV systems — sound reinforcement, projection, and multi-camera capture — for auditoriums, training rooms, and town-hall spaces.",
+          "We design large-venue AV systems, sound reinforcement, projection, and multi-camera capture, for auditoriums, training rooms, and town-hall spaces.",
         capabilities: [
           { icon: RadioTower, title: "Sound Reinforcement Design", description: "Even audio coverage engineered for large and irregular-shaped venues." },
           { icon: MonitorPlay, title: "Projection & Large-Format Display", description: "High-lumen projection and display systems sized to the room." },
@@ -151,11 +151,11 @@ export const solutions: Solution[] = [
       },
       {
         slug: "command-centre-noc-soc",
-        title: "Command Centre — NOC & SOC Solutions",
+        title: "Command Centre, NOC & SOC Solutions",
         tagline: "Mission-critical video walls for 24/7 operations.",
         icon: MonitorCog,
         description:
-          "We build command-centre environments for network and security operations — multi-screen video walls, redundant switching, and control-room ergonomics engineered for round-the-clock monitoring.",
+          "We build command-centre environments for network and security operations, multi-screen video walls, redundant switching, and control-room ergonomics engineered for round-the-clock monitoring.",
         capabilities: [
           { icon: LayoutGrid, title: "Multi-Screen Video Wall Design", description: "Purpose-built video walls for NOC and SOC monitoring operations." },
           { icon: RefreshCw, title: "Redundant Signal Switching", description: "Failover-ready switching architecture for zero-downtime monitoring." },
@@ -175,7 +175,7 @@ export const solutions: Solution[] = [
     icon: Network,
     heroImage: "/images/products/router.png",
     description:
-      "We design, deploy, and secure the network backbone your business runs on — structured cabling, enterprise Wi-Fi, and firewall infrastructure built for performance at scale.",
+      "We design, deploy, and secure the network backbone your business runs on, structured cabling, enterprise Wi-Fi, and firewall infrastructure built for performance at scale.",
     capabilities: [
       { icon: Cable, title: "Structured Cabling", description: "Certified fiber & copper cabling infrastructure for new and retrofit sites." },
       { icon: Wifi, title: "Enterprise Wi-Fi", description: "Wireless site surveys and high-density Wi-Fi design for seamless coverage." },
@@ -232,7 +232,7 @@ export const solutions: Solution[] = [
         tagline: "Perimeter and internal protection, built for scale.",
         icon: ShieldCheck,
         description:
-          "We design, deploy, and manage firewall and network security infrastructure — perimeter protection, internal segmentation, and secure connectivity for the modern enterprise.",
+          "We design, deploy, and manage firewall and network security infrastructure, perimeter protection, internal segmentation, and secure connectivity for the modern enterprise.",
         capabilities: [
           { icon: ShieldCheck, title: "Perimeter Firewall Deployment", description: "Palo Alto Networks-certified perimeter defense, tuned to your traffic." },
           { icon: Network, title: "Network Segmentation", description: "Internal segmentation that contains threats before they spread." },
@@ -252,7 +252,7 @@ export const solutions: Solution[] = [
     icon: Server,
     heroImage: "/images/products/server-ram.png",
     description:
-      "We build and secure the infrastructure behind your business — from greenfield data centers to disaster recovery and physical security, engineered for enterprise-grade reliability.",
+      "We build and secure the infrastructure behind your business, from greenfield data centers to disaster recovery and physical security, engineered for enterprise-grade reliability.",
     capabilities: [
       { icon: HardDrive, title: "Data Center Build-Out", description: "Greenfield and brownfield DC infrastructure, from racks to cooling." },
       { icon: Server, title: "Server & Storage Deployment", description: "Dell & HP enterprise server and storage rollouts, sized to your workload." },
@@ -275,7 +275,7 @@ export const solutions: Solution[] = [
         tagline: "Greenfield to brownfield, built for uptime.",
         icon: HardDrive,
         description:
-          "We build data center infrastructure from the ground up — racks, cooling, cabling, and power — for both new greenfield builds and brownfield upgrades.",
+          "We build data center infrastructure from the ground up, racks, cooling, cabling, and power, for both new greenfield builds and brownfield upgrades.",
         capabilities: [
           { icon: HardDrive, title: "Greenfield DC Build-Out", description: "Full-stack infrastructure builds for new data center facilities." },
           { icon: RefreshCw, title: "Brownfield Infrastructure Upgrades", description: "Modernization of live facilities with minimal service disruption." },
@@ -306,7 +306,7 @@ export const solutions: Solution[] = [
       {
         slug: "cloud-solutions",
         title: "Cloud Solutions",
-        tagline: "Private, public, or hybrid — your call.",
+        tagline: "Private, public, or hybrid, your call.",
         icon: Cloud,
         description:
           "We guide and execute cloud migration and management across private, public, and hybrid environments, matching architecture to your compliance and performance needs.",
@@ -326,7 +326,7 @@ export const solutions: Solution[] = [
         tagline: "Business continuity, tested and ready.",
         icon: RefreshCw,
         description:
-          "We design and implement backup and disaster recovery architecture — tested, documented, and ready — so a single point of failure never becomes a business outage.",
+          "We design and implement backup and disaster recovery architecture, tested, documented, and ready, so a single point of failure never becomes a business outage.",
         capabilities: [
           { icon: RefreshCw, title: "Backup Architecture Design", description: "Backup systems designed around your recovery point objectives." },
           { icon: Cloud, title: "Disaster Recovery Planning", description: "DR architecture built for tested, predictable recovery." },
@@ -346,7 +346,7 @@ export const solutions: Solution[] = [
     icon: Laptop,
     heroImage: "/images/products/laptop.png",
     description:
-      "From laptops to thin clients, we procure, configure, and manage the devices your workforce uses every day — with lifecycle support that keeps IT overhead low.",
+      "From laptops to thin clients, we procure, configure, and manage the devices your workforce uses every day, with lifecycle support that keeps IT overhead low.",
     capabilities: [
       { icon: Laptop, title: "Laptops & Desktops", description: "Bulk procurement of Dell, HP & Microsoft devices at enterprise pricing." },
       { icon: MonitorCog, title: "Thin Client Deployment", description: "Centralized, secure thin-client environments for cost-efficient computing." },
@@ -403,7 +403,7 @@ export const solutions: Solution[] = [
         tagline: "Standardized workstations, every desk, every branch.",
         icon: LayoutGrid,
         description:
-          "From monitors to docking stations, we standardize workstation rollouts across offices and branches — consistent hardware, consistent experience.",
+          "From monitors to docking stations, we standardize workstation rollouts across offices and branches, consistent hardware, consistent experience.",
         capabilities: [
           { icon: LayoutGrid, title: "Monitor & Display Rollout", description: "Standardized display hardware across every workstation." },
           { icon: Cable, title: "Docking Station Deployment", description: "Universal docking rolled out for consistent desk setups." },
@@ -446,7 +446,7 @@ export const solutions: Solution[] = [
         tagline: "Genuine peripherals, always in stock.",
         icon: PackageCheck,
         description:
-          "A full catalog of enterprise-grade peripherals — keyboards, mice, headsets, docking accessories — sourced genuine and delivered fast, PAN-India.",
+          "A full catalog of enterprise-grade peripherals, keyboards, mice, headsets, docking accessories, sourced genuine and delivered fast, PAN-India.",
         capabilities: [
           { icon: PackageCheck, title: "Genuine OEM Peripherals", description: "Authentic peripherals sourced directly from certified partners." },
           { icon: Truck, title: "Fast-Dispatch Logistics", description: "Priority logistics network for time-critical peripheral needs." },
@@ -463,7 +463,7 @@ export const solutions: Solution[] = [
         tagline: "The small parts that keep everything running.",
         icon: Boxes,
         description:
-          "Cables, adapters, mounts, and hard-to-find legacy components — we stock and dispatch the accessories that keep enterprise IT and AV systems operational.",
+          "Cables, adapters, mounts, and hard-to-find legacy components, we stock and dispatch the accessories that keep enterprise IT and AV systems operational.",
         capabilities: [
           { icon: Cable, title: "Cables & Adapters", description: "A full range of enterprise-grade cables and adapters, in stock." },
           { icon: Settings2, title: "Mounting & Accessories", description: "Mounts and installation accessories for IT and AV hardware." },
@@ -483,7 +483,7 @@ export const solutions: Solution[] = [
     icon: Zap,
     heroImage: "/images/products/power-supply.png",
     description:
-      "From UPS systems to distribution infrastructure, Vectrae designs and deploys the power backbone that keeps enterprise operations running — critical infrastructure, engineered for zero downtime.",
+      "From UPS systems to distribution infrastructure, Vectrae designs and deploys the power backbone that keeps enterprise operations running, critical infrastructure, engineered for zero downtime.",
     capabilities: [
       { icon: BatteryCharging, title: "UPS Systems & Sizing", description: "Enterprise-grade UPS design and deployment sized to your critical load." },
       { icon: Cable, title: "Power Distribution Units", description: "Rack and floor PDUs engineered for data center and office density." },
@@ -506,7 +506,7 @@ export const solutions: Solution[] = [
         tagline: "Uninterrupted power, sized to your load.",
         icon: BatteryCharging,
         description:
-          "We design, size, and deploy enterprise UPS systems — from rack-mount to facility-scale — engineered around your critical load and runtime requirements.",
+          "We design, size, and deploy enterprise UPS systems, from rack-mount to facility-scale, engineered around your critical load and runtime requirements.",
         capabilities: [
           { icon: BatteryCharging, title: "UPS Sizing & Design", description: "UPS capacity engineered around your actual critical load." },
           { icon: Settings2, title: "Rack & Facility-Scale Deployment", description: "Deployments scaled from single racks to full facilities." },
@@ -543,7 +543,7 @@ export const solutions: Solution[] = [
     icon: LifeBuoy,
     heroImage: "/images/blog/managed-it.png",
     description:
-      "Proactive AMC, remote monitoring, and full-scope IT support — Vectrae's managed services keep enterprise technology running so your team can focus on the business, not the break-fix.",
+      "Proactive AMC, remote monitoring, and full-scope IT support, Vectrae's managed services keep enterprise technology running so your team can focus on the business, not the break-fix.",
     capabilities: [
       { icon: Settings2, title: "Annual Maintenance Contracts (AMC)", description: "Scheduled maintenance and priority support across your IT estate." },
       { icon: Gauge, title: "Remote Monitoring & Management", description: "24/7 remote monitoring that catches issues before they escalate." },

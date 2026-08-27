@@ -108,7 +108,7 @@ export default function Hero() {
 
         <Reveal delay={0.15}>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/60">
-            From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end
+            From AV and Networking to Data Centers and Power, Vectrae delivers end-to-end
             enterprise technology across PAN-India.
           </p>
         </Reveal>

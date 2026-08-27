@@ -22,12 +22,12 @@ export default function ServicesOverview() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-500">
             From the boardroom to the data center, here&apos;s exactly what
-            Vectrae delivers — engineered, deployed, and supported PAN-India.
+            Vectrae delivers, engineered, deployed, and supported PAN-India.
           </p>
         </div>
 
         <div className="mt-14 flex flex-wrap justify-center gap-5">
-          {solutions.map((service, i) => {
+          {solutions.slice(0, 5).map((service, i) => {
             const Icon = service.icon;
             return (
               <Link
@@ -35,7 +35,7 @@ export default function ServicesOverview() {
                 href={`/solutions/${service.slug}`}
                 data-aos="fade-up"
                 data-aos-delay={i * 60}
-                className="group relative flex h-[350px] w-full flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:border-neutral-200 hover:shadow-[0_28px_60px_-20px_rgba(15,23,42,0.22)] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.334px)]"
+                className="group relative flex h-[350px] w-full flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_0_0_1.5px_rgba(37,217,199,0.55),0_10px_40px_-8px_rgba(37,217,199,0.35),0_30px_60px_-20px_rgba(15,23,42,0.3)] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.334px)]"
               >
                 {/* brand accent line drawing in on hover */}
                 <span
@@ -43,7 +43,7 @@ export default function ServicesOverview() {
                   style={{ backgroundImage: BRAND_GRADIENT }}
                 />
                 {/* soft radial wash on hover */}
-                <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(120%_100%_at_50%_-10%,rgba(37,217,199,0.09),transparent_60%)]" />
+                <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(120%_100%_at_50%_-10%,rgba(37,217,199,0.12),transparent_60%)]" />
 
                 {/* index numeral */}
                 <span className="absolute right-7 top-7 text-4xl font-bold text-neutral-100 transition-colors duration-500 group-hover:text-neutral-200">
@@ -51,7 +51,7 @@ export default function ServicesOverview() {
                 </span>
 
                 <div className="relative flex h-full flex-col justify-center">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#0f9ac9] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:border-[#25D9C7]/40 group-hover:bg-[#25D9C7]/10">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#0f9ac9] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:border-[#25D9C7]/40 group-hover:bg-[#25D9C7]/10 group-hover:shadow-[0_0_20px_rgba(37,217,199,0.45)]">
                     <Icon className="h-5 w-5" />
                   </span>
                   <h3 className="mt-4 text-lg font-semibold tracking-tight text-neutral-900 sm:pr-8">

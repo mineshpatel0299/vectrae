@@ -64,7 +64,7 @@ export default function AboutImpact() {
           >
             <span className="h-8 w-8 rounded-full" style={{ backgroundImage: BRAND_GRADIENT }} />
             <p className="mt-5 text-sm leading-relaxed text-white/60">
-              Delivering the right solutions, the right partners, and the right outcomes —
+              Delivering the right solutions, the right partners, and the right outcomes,
               from initial consultation through long-term managed support.
             </p>
           </div>

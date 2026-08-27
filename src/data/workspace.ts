@@ -166,7 +166,7 @@ export const workspaceFolders: WorkspaceFolder[] = [
         icon: "messageSquare",
         title: "Sales Team",
         tag: "2m ago",
-        description: "Thanks for reaching out — let's schedule a walkthrough of the platform.",
+        description: "Thanks for reaching out, let's schedule a walkthrough of the platform.",
         action: { label: "Reply", href: "/contact" },
       },
       {

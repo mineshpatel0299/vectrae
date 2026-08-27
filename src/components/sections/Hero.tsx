@@ -51,7 +51,7 @@ export default function Hero() {
           data-aos-delay="250"
           data-aos-once="true"
         >
-          From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end enterprise technology across PAN-India.
+          From AV and Networking to Data Centers and Power, Vectrae delivers end-to-end enterprise technology across PAN-India.
         </p>
 
         <div

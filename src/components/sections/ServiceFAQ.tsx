@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "What size of company do you typically work with?",
     answer:
-      "We work exclusively with enterprises — from mid-sized organisations to large PAN-India corporates. We're currently trusted by 2,300+ enterprise clients across the country.",
+      "We work exclusively with enterprises, from mid-sized organisations to large PAN-India corporates. We're currently trusted by 2,300+ enterprise clients across the country.",
   },
   {
     question: "How does a project engagement start?",
@@ -31,7 +31,7 @@ const faqs = [
   {
     question: "Do you deliver projects outside Delhi NCR?",
     answer:
-      "Yes — we deliver and support projects PAN-India through our nationwide execution and service network, not just in our home base of New Delhi.",
+      "Yes, we deliver and support projects PAN-India through our nationwide execution and service network, not just in our home base of New Delhi.",
   },
   {
     question: "How quickly will you respond to an inquiry?",

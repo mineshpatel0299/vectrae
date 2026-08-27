@@ -25,7 +25,7 @@ export default function TrustSignals() {
           className="px-6 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-[#78716C]"
           data-aos="fade-up"
         >
-          The Enterprise Standard — Trusted PAN-India
+          The Enterprise Standard, Trusted PAN-India
         </p>
         <div className="mt-8" data-aos="fade-up" data-aos-delay="100">
           <LogoMarquee items={clientItems} durationSeconds={70} />

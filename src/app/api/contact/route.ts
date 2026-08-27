@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   }
 
   // No email/CRM provider is wired up yet (deferred at the user's request during
-  // this build phase) — submissions are only logged server-side right now and are
+  // this build phase), submissions are only logged server-side right now and are
   // NOT delivered to anyone. Wire this up to a real provider (e.g. Resend, Zoho CRM)
   // via the Vercel Marketplace before this form collects real leads.
   console.log("[contact] New enquiry received:", body);

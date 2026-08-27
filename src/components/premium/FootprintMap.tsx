@@ -55,7 +55,7 @@ export default function FootprintMap() {
                 A Live Network, Not Just a Map
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-500">
-                Every delivery hub connects back to our Delhi command center — from initial
+                Every delivery hub connects back to our Delhi command center, from initial
                 consultation to long-term managed support, PAN-India.
               </p>
             </Reveal>
@@ -163,7 +163,7 @@ export default function FootprintMap() {
               <div className="flex items-center gap-2 border-t border-black/5 px-5 py-3 text-[11px] font-semibold text-neutral-400">
                 <span className="inline-block h-2 w-2 animate-ping rounded-full bg-[#29B9F2]/50" />
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#29B9F2]" />
-                Live delivery network — cycling active locations
+                Live delivery network, cycling active locations
               </div>
             </div>
           </Reveal>

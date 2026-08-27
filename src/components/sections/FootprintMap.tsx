@@ -24,7 +24,6 @@ type Node = {
 const nodes: Node[] = [
   { id: "delhi", label: "Delhi NCR", svgX: 189, svgY: 215, hub: true, side: "right" },
   { id: "ahmedabad", label: "Ahmedabad", svgX: 97, svgY: 345, side: "left" },
-  { id: "kolkata", label: "Kolkata", svgX: 410, svgY: 355, side: "right" },
   { id: "mumbai", label: "Mumbai", svgX: 101, svgY: 436, side: "left" },
   { id: "pune", label: "Pune", svgX: 122, svgY: 449, side: "right" },
   { id: "hyderabad", label: "Hyderabad", svgX: 214, svgY: 476, side: "right" },
@@ -57,7 +56,8 @@ export default function FootprintMap() {
     return () => clearInterval(id);
   }, []);
 
-  const activeId = hoveredId ?? spokes[cycleIndex].id;
+  const activeSpoke = spokes[cycleIndex % spokes.length];
+  const activeId = hoveredId ?? activeSpoke?.id ?? spokes[0]?.id;
 
   return (
     <section className="relative overflow-hidden border-t border-neutral-200 bg-white py-20 sm:py-28">
@@ -75,7 +75,7 @@ export default function FootprintMap() {
                 A Live Network Across India
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-500">
-                Every delivery hub connects back to our Delhi command center —
+                Every delivery hub connects back to our Delhi command center,
                 from initial consultation to long-term managed support, PAN-India.
               </p>
             </div>
@@ -103,7 +103,7 @@ export default function FootprintMap() {
             </div>
           </div>
 
-          {/* Right: live network map — large */}
+          {/* Right: live network map, large */}
           <div data-aos="fade-left" data-aos-delay="200">
             <div className="relative overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-50/60 shadow-sm">
               {/* Static dot grid texture */}
@@ -206,7 +206,7 @@ export default function FootprintMap() {
                           }}
                         />
 
-                        {/* City label — always a legible chip so it reads over map or card background alike */}
+                        {/* City label, always a legible chip so it reads over map or card background alike */}
                         <span
                           className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border text-[10px] font-semibold uppercase tracking-wide transition-all duration-300 ${
                             node.side === "left" ? "right-full mr-2 text-right" : "left-full ml-2"
@@ -228,7 +228,7 @@ export default function FootprintMap() {
               <div className="relative flex items-center gap-2 border-t border-neutral-200 bg-white px-6 py-3.5 text-[11px] font-semibold text-neutral-500">
                 <span className="inline-block h-2 w-2 animate-ping rounded-full bg-[#25D9C7]/50" />
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#25D9C7]" />
-                Live delivery network — {nodes.length} active hubs
+                Live delivery network, {nodes.length} active hubs
               </div>
             </div>
           </div>

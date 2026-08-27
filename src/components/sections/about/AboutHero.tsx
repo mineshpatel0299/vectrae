@@ -70,7 +70,7 @@ export default function AboutHero() {
           className="mt-8 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg"
         >
           Vectrae Infotech Pvt. Ltd. is India&apos;s full-spectrum enterprise technology
-          partner — Audio Visual, Networking, Data Center, End Computing and Power,
+          partner, Audio Visual, Networking, Data Center, End Computing and Power,
           delivered PAN-India from a single window.
         </motion.p>
 

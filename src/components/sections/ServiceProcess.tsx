@@ -62,7 +62,7 @@ export default function ServiceProcess() {
         </div>
 
         <div ref={containerRef} className="relative mt-20">
-          {/* Connecting line — desktop only */}
+          {/* Connecting line, desktop only */}
           <div className="pointer-events-none absolute left-0 right-0 top-8 hidden h-px bg-neutral-200 lg:block" />
           <motion.div
             style={{ width: lineWidth }}

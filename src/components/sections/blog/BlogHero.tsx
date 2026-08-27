@@ -36,7 +36,7 @@ export default function BlogHero() {
           transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg"
         >
-          Practical field notes from our AV, networking, data center, and managed services teams —
+          Practical field notes from our AV, networking, data center, and managed services teams,
           {" "}{blogPosts.length} articles across {blogCategories.length} disciplines.
         </motion.p>
 

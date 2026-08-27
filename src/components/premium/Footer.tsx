@@ -111,7 +111,7 @@ export default function Footer() {
               <li>
                 <p className="flex items-start gap-2.5 text-sm text-white/40">
                   <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#29B9F2]" />
-                  Mohan Co-Op, New Delhi — 110044
+                  Mohan Co-Op, New Delhi, 110044
                 </p>
               </li>
             </ul>

@@ -21,7 +21,7 @@ export type OSFolder = {
   subFolders?: OSFolder[];
 };
 
-// Mirrors the homepage content brief (abt.md) — one folder per homepage
+// Mirrors the homepage content brief (abt.md), one folder per homepage
 // section, one subfolder per content block within that section.
 export const desktopFolders: OSFolder[] = [
   {
@@ -46,7 +46,7 @@ export const desktopFolders: OSFolder[] = [
             body: "The primary H1 headline for the hero section, with two alternates on file for A/B testing.",
             meta: [
               { label: "Alternate A", value: "One Trusted Technology Partner for 2,300+ Enterprises Across India" },
-              { label: "Alternate B", value: "Comprehensive Technology Solutions — From AV to Data Centers to Power" },
+              { label: "Alternate B", value: "Comprehensive Technology Solutions, From AV to Data Centers to Power" },
             ],
           },
           {
@@ -54,7 +54,7 @@ export const desktopFolders: OSFolder[] = [
             icon: "fileText",
             title: "Sub-headline",
             tag: "Hero Copy",
-            summary: "From AV and Networking to Data Centers and Power — Vectrae delivers end-to-end enterprise technology across PAN-India.",
+            summary: "From AV and Networking to Data Centers and Power, Vectrae delivers end-to-end enterprise technology across PAN-India.",
             body: "Sits directly beneath the primary headline in the hero section.",
           },
           {
@@ -100,7 +100,7 @@ export const desktopFolders: OSFolder[] = [
             title: "Client Logos",
             tag: "49 Enterprises",
             summary:
-              "Wipro, HCL, TCS, Accenture, HDFC Bank, JP Morgan, EY, Deloitte, KPMG, PwC, McKinsey, Maruti Suzuki, Zomato, Adobe, Airtel, Thales, American Express, Ford, MakeMyTrip, Schneider Electric — plus additional names from the full 49-client list.",
+              "Wipro, HCL, TCS, Accenture, HDFC Bank, JP Morgan, EY, Deloitte, KPMG, PwC, McKinsey, Maruti Suzuki, Zomato, Adobe, Airtel, Thales, American Express, Ford, MakeMyTrip, Schneider Electric, plus additional names from the full 49-client list.",
             body: "Displayed as a scrolling logo carousel directly beneath the hero section.",
             meta: [
               { label: "Format", value: "Carousel" },
@@ -145,7 +145,7 @@ export const desktopFolders: OSFolder[] = [
             title: "Logo Assets Needed",
             tag: "Action Required",
             summary: "High-resolution, transparent-background logos are still needed for all 43 partners.",
-            body: "The Blueprint provides names only — awaiting final logo files from the client team.",
+            body: "The Blueprint provides names only, awaiting final logo files from the client team.",
           },
         ],
       },
@@ -162,7 +162,7 @@ export const desktopFolders: OSFolder[] = [
             tag: "Section Copy",
             summary:
               "Vectrae Infotech is a full-spectrum enterprise technology solutions provider, delivering Audio Visual, IT Infrastructure, Networking & Security, Data Center, End Computing, and Power solutions to enterprises across India.",
-            body: "With 250+ technology experts, 43 OEM and technology partnerships, and a PAN-India delivery footprint, Vectrae has supported 2,300+ enterprise clients from initial consultation through to long-term managed support. Our mission is to simplify technology decisions for enterprises — delivering the right solutions, the right partners, and the right outcomes, every time.",
+            body: "With 250+ technology experts, 43 OEM and technology partnerships, and a PAN-India delivery footprint, Vectrae has supported 2,300+ enterprise clients from initial consultation through to long-term managed support. Our mission is to simplify technology decisions for enterprises, delivering the right solutions, the right partners, and the right outcomes, every time.",
           },
           {
             id: "key-statistics",
@@ -363,7 +363,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "teams-vs-zoom",
             icon: "network",
-            title: "Microsoft Teams Rooms vs Zoom Rooms — Which Is Right for Your Enterprise?",
+            title: "Microsoft Teams Rooms vs Zoom Rooms, Which Is Right for Your Enterprise?",
             tag: "Collaboration",
             summary: "A side-by-side comparison for enterprises standardizing their meeting room platform.",
             body: "Weighs licensing, hardware compatibility, and admin overhead across both platforms.",
@@ -392,7 +392,7 @@ export const desktopFolders: OSFolder[] = [
             title: "5 Signs Your Enterprise Network Needs a Security Overhaul",
             tag: "Networking & Security",
             summary: "Warning signs that your current network architecture is due for a zero-trust review.",
-            body: "From flat VLANs to unmanaged BYOD access — the red flags our security engineers see most often.",
+            body: "From flat VLANs to unmanaged BYOD access, the red flags our security engineers see most often.",
             meta: [
               { label: "Published", value: "February 18, 2026" },
               { label: "Read Time", value: "5 min" },
@@ -402,7 +402,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "dc-decision",
             icon: "database",
-            title: "Greenfield vs Brownfield Data Center — Decision Guide",
+            title: "Greenfield vs Brownfield Data Center, Decision Guide",
             tag: "Data Center",
             summary: "A framework for deciding between a new build and modernizing an existing facility.",
             body: "Compares total cost of ownership, timeline, and risk between the two approaches.",
@@ -535,7 +535,7 @@ export const desktopFolders: OSFolder[] = [
             icon: "sparkles",
             title: "Mission & Vision",
             tag: "Brand Identity",
-            summary: "To simplify technology decisions for enterprises — delivering the right solutions, the right partners, and the right outcomes, every time.",
+            summary: "To simplify technology decisions for enterprises, delivering the right solutions, the right partners, and the right outcomes, every time.",
             body: "Our vision is to be India's most trusted end-to-end enterprise technology partner, enabling organisations to grow, innovate, and operate with confidence.",
           },
           {
@@ -566,7 +566,7 @@ export const desktopFolders: OSFolder[] = [
             title: "Company History",
             tag: "Milestones",
             summary: "From a focused AV integrator to a full-spectrum enterprise technology company over 25 years.",
-            body: "Vectrae began as a specialist Audio Visual integrator serving enterprise clients in Delhi NCR. Over two decades, the company expanded into Networking, Data Centers, End Computing, and Power — growing its client base to 2,300+ enterprises and its workforce to 250+ certified technology professionals.",
+            body: "Vectrae began as a specialist Audio Visual integrator serving enterprise clients in Delhi NCR. Over two decades, the company expanded into Networking, Data Centers, End Computing, and Power, growing its client base to 2,300+ enterprises and its workforce to 250+ certified technology professionals.",
           },
           {
             id: "about-milestones",
@@ -574,7 +574,7 @@ export const desktopFolders: OSFolder[] = [
             title: "Key Milestones",
             tag: "Timeline",
             summary: "25+ years of enterprise technology milestones across India.",
-            body: "Needs client input — please provide a verified milestone timeline for the About Us page.",
+            body: "Needs client input, please provide a verified milestone timeline for the About Us page.",
             meta: [
               { label: "Status", value: "Awaiting client input" },
             ],
@@ -592,7 +592,7 @@ export const desktopFolders: OSFolder[] = [
             icon: "users",
             title: "Leadership Profiles",
             tag: "Needs Client Input",
-            summary: "Founder, Directors, and Business Unit Heads — profiles and headshots needed.",
+            summary: "Founder, Directors, and Business Unit Heads, profiles and headshots needed.",
             body: "Please share leadership names, titles, brief bios, and professional headshots for the About Us leadership section.",
           },
         ],
@@ -616,7 +616,7 @@ export const desktopFolders: OSFolder[] = [
             icon: "shieldCheck",
             title: "Certifications",
             tag: "OEM & Industry",
-            summary: "Cisco, Palo Alto, Crestron, Microsoft, Dell, HP — certified partner status across key OEMs.",
+            summary: "Cisco, Palo Alto, Crestron, Microsoft, Dell, HP, certified partner status across key OEMs.",
             body: "List of active OEM certifications held by Vectrae's technology teams. Awaiting official certificate files from client.",
           },
         ],
@@ -684,7 +684,7 @@ export const desktopFolders: OSFolder[] = [
             title: "Cloud & Software Alliances",
             tag: "Strategic",
             summary: "Microsoft, Google Workspace, and cloud infrastructure alliances that complement Vectrae's hardware deployments.",
-            body: "These alliances allow Vectrae to offer hybrid deployments — combining on-premise enterprise hardware with cloud-native services.",
+            body: "These alliances allow Vectrae to offer hybrid deployments, combining on-premise enterprise hardware with cloud-native services.",
           },
         ],
       },
@@ -961,7 +961,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "testimonial-1",
             icon: "users",
-            title: "Enterprise Client — IT Head",
+            title: "Enterprise Client, IT Head",
             tag: "Needs Client Input",
             summary: "\"Vectrae delivered our 40-room AV upgrade on time and within budget. Their post-sales support is outstanding.\"",
             body: "Awaiting verified testimonial quotes with client name, title, company, and approval to publish. Please do not use placeholder quotes on the live site.",
@@ -969,7 +969,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "testimonial-2",
             icon: "users",
-            title: "Fortune 500 — CIO",
+            title: "Fortune 500, CIO",
             tag: "Needs Client Input",
             summary: "\"Their single-window approach saved us months of coordination across multiple vendors.\"",
             body: "Awaiting verified testimonial quotes with client name, title, company, and approval to publish.",
@@ -977,7 +977,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "testimonial-3",
             icon: "users",
-            title: "BFSI Enterprise — IT Manager",
+            title: "BFSI Enterprise, IT Manager",
             tag: "Needs Client Input",
             summary: "\"We've worked with Vectrae for over 8 years. They're our go-to partner for all enterprise technology.\"",
             body: "Awaiting verified testimonial quotes with client name, title, company, and approval to publish.",
@@ -1070,7 +1070,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "blog-teams-zoom",
             icon: "network",
-            title: "Microsoft Teams Rooms vs Zoom Rooms — Which Is Right for Your Enterprise?",
+            title: "Microsoft Teams Rooms vs Zoom Rooms, Which Is Right for Your Enterprise?",
             tag: "Collaboration",
             summary: "A side-by-side comparison for enterprises standardizing their meeting room platform.",
             body: "Weighs licensing, hardware compatibility, and admin overhead across both platforms.",
@@ -1091,7 +1091,7 @@ export const desktopFolders: OSFolder[] = [
             title: "5 Signs Your Enterprise Network Needs a Security Overhaul",
             tag: "Networking & Security",
             summary: "Warning signs that your current network architecture is due for a zero-trust review.",
-            body: "From flat VLANs to unmanaged BYOD access — the red flags our security engineers see most often.",
+            body: "From flat VLANs to unmanaged BYOD access, the red flags our security engineers see most often.",
             meta: [{ label: "Published", value: "February 18, 2026" }, { label: "Read Time", value: "5 min" }],
             action: { label: "Read Article", href: "/blog/network-security" },
           },
@@ -1106,7 +1106,7 @@ export const desktopFolders: OSFolder[] = [
           {
             id: "blog-dc-decision",
             icon: "database",
-            title: "Greenfield vs Brownfield Data Center — Decision Guide",
+            title: "Greenfield vs Brownfield Data Center, Decision Guide",
             tag: "Data Center",
             summary: "A framework for deciding between a new build and modernizing an existing facility.",
             body: "Compares total cost of ownership, timeline, and risk between the two approaches.",

@@ -121,3 +121,29 @@ a, button, [role="button"] {
   offset-rotate: 0deg;
   animation: travel-dot 2.4s linear infinite;
 }
+
+@keyframes aurora-drift-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -30px) scale(1.15);
+  }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50px, 30px) scale(1.12);
+  }
+}
+
+.animate-aurora-1 {
+  animation: aurora-drift-1 14s ease-in-out infinite;
+}
+
+.animate-aurora-2 {
+  animation: aurora-drift-2 18s ease-in-out infinite;
+}

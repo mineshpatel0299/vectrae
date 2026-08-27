@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { solutions } from "@/data/solutions";
+import TiltCard from "@/components/ui/TiltCard";
 
 type ServiceCardItem = {
   title: string;
@@ -28,41 +29,58 @@ function ServiceCard({ card, index }: { card: ServiceCardItem; index: number }) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative h-[420px] w-full overflow-hidden rounded-2xl sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.334px)]"
+      className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.334px)]"
     >
-      {/* Full-bleed background photo */}
-      <Image
-        src={card.image}
-        alt={card.alt}
-        fill
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-      />
+      <Link href={card.href} className="group block">
+        <TiltCard strength={5} className="block transition-transform duration-500 ease-out group-hover:-translate-y-2">
+          <div className="relative h-[420px] w-full overflow-hidden rounded-2xl shadow-md transition-shadow duration-500 ease-out group-hover:shadow-[0_0_0_1.5px_rgba(37,217,199,0.5),0_30px_60px_-15px_rgba(0,0,0,0.55)]">
+            {/* Index numeral */}
+            <span className="absolute right-5 top-5 z-10 text-4xl font-bold text-white/25 transition-colors duration-500 group-hover:text-white/40">
+              {String(index + 1).padStart(2, "0")}
+            </span>
 
-      {/* Strong dark scrim so text is always readable */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-black/20 to-black/70" />
+            {/* Full-bleed background photo */}
+            <Image
+              src={card.image}
+              alt={card.alt}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
 
-      {/* Glass inner border frame */}
-      <div className="pointer-events-none absolute inset-3 rounded-xl border border-white/25" />
+            {/* Strong dark scrim so text is always readable */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-black/20 to-black/75" />
 
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-end p-7">
-        {/* Bottom-left: title */}
-        <h3 className="text-xl font-bold leading-snug text-white drop-shadow-md">
-          {card.title}
-        </h3>
+            {/* Diagonal shimmer sweep on hover */}
+            <div className="pointer-events-none absolute inset-0 -translate-x-[120%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-[120%]" />
 
-        {/* Explore More pill */}
-        <div className="mt-4 flex">
-          <Link
-            href={card.href}
-            className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:bg-white/25 hover:border-white/50"
-          >
-            Explore More
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </div>
+            {/* Glass inner border frame */}
+            <div className="pointer-events-none absolute inset-3 rounded-xl border border-white/25 transition-colors duration-500 group-hover:border-white/45" />
+
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col justify-end p-7">
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <h3 className="text-xl font-bold leading-snug text-white drop-shadow-md">
+                    {card.title}
+                  </h3>
+                  <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-white/50 transition-colors duration-300 group-hover:text-white/85">
+                    Explore Solution
+                  </span>
+                </div>
+
+                {/* Always-visible clickable affordance */}
+                <span
+                  style={{ backgroundImage: BRAND_GRADIENT }}
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-black shadow-lg transition-transform duration-300 ease-out group-hover:rotate-45 group-hover:scale-110"
+                >
+                  <ArrowUpRight className="h-4.5 w-4.5" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </TiltCard>
+      </Link>
     </motion.div>
   );
 }
@@ -92,12 +110,12 @@ export default function ServiceCards() {
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-neutral-500">
-            From boardroom AV and networking to data centers, end-computing, and power — every
+            From boardroom AV and networking to data centers, end-computing, and power, every
             solution, every scale, delivered PAN-India.
           </p>
         </div>
 
-        {/* Card layout — flex-wrap so an incomplete last row stays centered */}
+        {/* Card layout, flex-wrap so an incomplete last row stays centered */}
         <div className="flex flex-wrap justify-center gap-5">
           {SERVICE_CARDS.map((card, i) => (
             <ServiceCard key={card.title} card={card} index={i} />

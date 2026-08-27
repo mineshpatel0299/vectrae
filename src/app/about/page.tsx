@@ -10,7 +10,7 @@ import Footer from "@/components/sections/Footer";
 export const metadata: Metadata = {
   title: "About Vectrae | Enterprise Technology Solutions",
   description:
-    "Vectrae Infotech Pvt. Ltd. is a full-spectrum enterprise technology solutions provider headquartered in New Delhi, India — delivering AV, Networking, Data Center, End Computing, and Power solutions to 2,300+ enterprises PAN-India.",
+    "Vectrae Infotech Pvt. Ltd. is a full-spectrum enterprise technology solutions provider headquartered in New Delhi, India, delivering AV, Networking, Data Center, End Computing, and Power solutions to 2,300+ enterprises PAN-India.",
 };
 
 export default function AboutPage() {

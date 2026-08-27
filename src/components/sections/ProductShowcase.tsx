@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -114,10 +114,22 @@ export default function ProductShowcase() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All Products");
 
+  const isFiltered = selectedCategory !== "All Products";
+
   const filteredProducts = products.filter((p) => {
     if (selectedCategory === "All Products") return true;
     return p.category.toLowerCase().includes(selectedCategory.toLowerCase());
   });
+
+  // Auto-select the first product when a specific category filter is clicked
+  useEffect(() => {
+    if (isFiltered && filteredProducts.length > 0) {
+      setActiveId(filteredProducts[0].id);
+    } else {
+      setActiveId(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory]);
 
   const getPopoverClasses = (position: ProductPoint["popoverPosition"]) => {
     switch (position) {
@@ -201,8 +213,18 @@ export default function ProductShowcase() {
                   key={product.id}
                   product={product}
                   isActive={activeId === product.id}
-                  onMouseEnter={() => setActiveId(product.id)}
-                  onMouseLeave={() => setActiveId(null)}
+                  isFiltered={isFiltered}
+                  onClick={() =>
+                    setActiveId((prev) =>
+                      prev === product.id ? null : product.id
+                    )
+                  }
+                  onMouseEnter={() => {
+                    if (!isFiltered) setActiveId(product.id);
+                  }}
+                  onMouseLeave={() => {
+                    if (!isFiltered) setActiveId(null);
+                  }}
                   getPopoverClasses={getPopoverClasses}
                 />
               ))}
@@ -218,12 +240,16 @@ export default function ProductShowcase() {
 function MagneticPin({
   product,
   isActive,
+  isFiltered,
+  onClick,
   onMouseEnter,
   onMouseLeave,
   getPopoverClasses,
 }: {
   product: ProductPoint;
   isActive: boolean;
+  isFiltered: boolean;
+  onClick: () => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   getPopoverClasses: (position: ProductPoint["popoverPosition"]) => string;
@@ -273,6 +299,7 @@ function MagneticPin({
       onMouseMove={handleMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={isFiltered ? onClick : undefined}
     >
       {/* Magnetic wrapper for pin + aura */}
       <motion.div
@@ -294,7 +321,7 @@ function MagneticPin({
         </div>
       </motion.div>
 
-      {/* Popover — sibling to motion.div so it stays stable while pin nudges */}
+      {/* Popover, sibling to motion.div so it stays stable while pin nudges */}
       <AnimatePresence>
         {isActive && (
           <motion.div

@@ -180,7 +180,7 @@ export default function BlogGrid() {
 
         {rest.length === 0 && !featured && (
           <p className="mt-16 text-center text-sm text-neutral-400">
-            No articles in this category yet — check back soon.
+            No articles in this category yet, check back soon.
           </p>
         )}
       </div>

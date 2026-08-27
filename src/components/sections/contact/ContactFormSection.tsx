@@ -124,7 +124,7 @@ export default function ContactFormSection() {
                   <Check className="h-6 w-6" />
                 </span>
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
-                  Thanks — we&apos;ve got it.
+                  Thanks, we&apos;ve got it.
                 </h3>
                 <p className="mt-3 max-w-sm text-sm leading-relaxed text-neutral-500">
                   A Vectrae expert will reach out within 4 business hours. In the meantime, feel
@@ -332,7 +332,7 @@ export default function ContactFormSection() {
                 </li>
                 <li className="flex items-start gap-3 text-sm text-white/70">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#25D9C7]" />
-                  Mohan Co-Op, New Delhi — 110044
+                  Mohan Co-Op, New Delhi, 110044
                 </li>
                 <li className="flex items-start gap-3 text-sm text-white/70">
                   <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#25D9C7]" />
