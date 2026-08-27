@@ -4,16 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BRAND_GRADIENT } from "@/lib/brand";
-
-const NAV_LINKS = [
-  // { label: "Product", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Industries", href: "/industries" },
-  { label:"Blog", href: "/blog"},
-  { label: "Contact", href: "/contact" },
-  // { label: "Enterprise", href: "#" },
-];
+import { NAV_LINKS } from "@/lib/navLinks";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -49,13 +40,13 @@ export default function Navbar() {
       </nav>
 
       <div className="col-span-1 flex justify-self-end" data-aos="fade-down" data-aos-delay="200" data-aos-once="true">
-        <a
-          href="#"
+        <Link
+          href="/contact"
           style={{ backgroundImage: BRAND_GRADIENT }}
           className="rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
         >
-          Request access
-        </a>
+          Contact
+        </Link>
       </div>
     </header>
   );

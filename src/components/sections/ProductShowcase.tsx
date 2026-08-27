@@ -192,20 +192,23 @@ export default function ProductShowcase() {
 
         {/* Video Frame Canvas */}
         <div className="mt-12 sm:mt-16" data-aos="zoom-in" data-aos-delay="150">
-          <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-2.5 backdrop-blur-sm sm:p-4">
-            <div className="relative overflow-hidden rounded-2xl bg-black">
-              {/* Main Video */}
-              <video
-                src="/product.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-auto max-h-[700px] w-full object-cover"
-              />
+          <div className="group relative rounded-3xl border border-white/10 bg-white/[0.03] p-2.5 backdrop-blur-sm sm:p-4">
+            <div className="relative rounded-2xl bg-black">
+              {/* Clipped layer: video + vignette only, so popovers below can escape this boundary */}
+              <div className="relative overflow-hidden rounded-2xl">
+                {/* Main Video */}
+                <video
+                  src="/product.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="h-auto max-h-[700px] w-full object-cover"
+                />
 
-              {/* Subtle Ambient Vignette Overlay */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+                {/* Subtle Ambient Vignette Overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+              </div>
 
               {/* Interactive Product Pointers */}
               {filteredProducts.map((product) => (

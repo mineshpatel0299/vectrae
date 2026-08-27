@@ -10,12 +10,12 @@ export default function IndustriesHero() {
 
       <Navbar />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 pb-20 pt-8 text-center sm:pb-28 sm:pt-14">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-20 pt-8 text-center sm:pb-28 sm:pt-14">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">
           Industries We Serve
         </p>
         <h1
-          className="mt-4 text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
+          className="mt-4 text-balance text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
           data-aos="fade-up"
           data-aos-delay="100"
         >
