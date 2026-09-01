@@ -22,13 +22,35 @@ type Node = {
 };
 
 const nodes: Node[] = [
-  { id: "delhi", label: "Delhi NCR", svgX: 189, svgY: 215, hub: true, side: "right" },
+  // Central / HQ
+  {
+    id: "delhi",
+    label: "Delhi NCR",
+    svgX: 189,
+    svgY: 215,
+    hub: true,
+    side: "right",
+  },
+
+  // North — 7
+  { id: "chandigarh", label: "Chandigarh", svgX: 185, svgY: 165, side: "left" },
+  { id: "jaipur", label: "Jaipur", svgX: 135, svgY: 270, side: "left" },
+  { id: "lucknow", label: "Lucknow", svgX: 255, svgY: 260, side: "right" },
+  { id: "dehradun", label: "Dehradun", svgX: 230, svgY: 145, side: "right" },
+  { id: "amritsar", label: "Amritsar", svgX: 125, svgY: 125, side: "left" },
+  { id: "jammu", label: "Jammu", svgX: 145, svgY: 90, side: "left" },
+  { id: "kanpur", label: "Kanpur", svgX: 275, svgY: 290, side: "right" },
+
+  // West — 2
   { id: "ahmedabad", label: "Ahmedabad", svgX: 97, svgY: 345, side: "left" },
   { id: "mumbai", label: "Mumbai", svgX: 101, svgY: 436, side: "left" },
+
+  // South — 5
   { id: "pune", label: "Pune", svgX: 122, svgY: 449, side: "right" },
   { id: "hyderabad", label: "Hyderabad", svgX: 214, svgY: 476, side: "right" },
   { id: "bangalore", label: "Bangalore", svgX: 196, svgY: 579, side: "left" },
   { id: "chennai", label: "Chennai", svgX: 250, svgY: 576, side: "right" },
+  { id: "kochi", label: "Kochi", svgX: 165, svgY: 625, side: "left" },
 ];
 
 const SVG_W = 612;
@@ -52,7 +74,10 @@ export default function FootprintMap() {
   const [cycleIndex, setCycleIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setCycleIndex((v) => (v + 1) % spokes.length), 2600);
+    const id = setInterval(
+      () => setCycleIndex((v) => (v + 1) % spokes.length),
+      2600,
+    );
     return () => clearInterval(id);
   }, []);
 
@@ -76,7 +101,8 @@ export default function FootprintMap() {
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-500">
                 Every delivery hub connects back to our Delhi command center,
-                from initial consultation to long-term managed support, PAN-India.
+                from initial consultation to long-term managed support,
+                PAN-India.
               </p>
             </div>
 
@@ -146,7 +172,12 @@ export default function FootprintMap() {
                     className="pointer-events-none absolute inset-0 h-full w-full"
                   >
                     {spokes.map((node) => {
-                      const { d } = curvePath(hub.svgX, hub.svgY, node.svgX, node.svgY);
+                      const { d } = curvePath(
+                        hub.svgX,
+                        hub.svgY,
+                        node.svgX,
+                        node.svgY,
+                      );
                       const isActive = activeId === node.id;
                       return (
                         <g key={node.id}>
@@ -184,14 +215,21 @@ export default function FootprintMap() {
                       <div
                         key={node.id}
                         className="absolute -translate-x-1/2 -translate-y-1/2"
-                        style={{ left: `${leftPct}%`, top: `${topPct}%`, zIndex: isActive ? 30 : 10 }}
+                        style={{
+                          left: `${leftPct}%`,
+                          top: `${topPct}%`,
+                          zIndex: isActive ? 30 : 10,
+                        }}
                         onMouseEnter={() => setHoveredId(node.id)}
                         onMouseLeave={() => setHoveredId(null)}
                       >
                         {isActive && (
                           <span
                             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-white/60"
-                            style={{ width: node.hub ? 26 : 20, height: node.hub ? 26 : 20 }}
+                            style={{
+                              width: node.hub ? 26 : 20,
+                              height: node.hub ? 26 : 20,
+                            }}
                           />
                         )}
                         <span
@@ -209,7 +247,9 @@ export default function FootprintMap() {
                         {/* City label, always a legible chip so it reads over map or card background alike */}
                         <span
                           className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border text-[10px] font-semibold uppercase tracking-wide transition-all duration-300 ${
-                            node.side === "left" ? "right-full mr-2 text-right" : "left-full ml-2"
+                            node.side === "left"
+                              ? "right-full mr-2 text-right"
+                              : "left-full ml-2"
                           } ${
                             isActive
                               ? "border-neutral-200 bg-white px-2 py-1 text-neutral-900 shadow-md"
@@ -217,7 +257,9 @@ export default function FootprintMap() {
                           }`}
                         >
                           {node.label}
-                          {node.hub && <span className="ml-1 text-[#0f9ac9]">HQ</span>}
+                          {node.hub && (
+                            <span className="ml-1 text-[#0f9ac9]">HQ</span>
+                          )}
                         </span>
                       </div>
                     );
