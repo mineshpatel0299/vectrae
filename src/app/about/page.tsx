@@ -6,6 +6,10 @@ import AboutCapabilities from "@/components/sections/about/AboutCapabilities";
 // import AboutTrust from "@/components/sections/about/AboutTrust";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
+import AboutVision from "@/components/sections/about/AboutVision";
+import AboutMission from "@/components/sections/about/AboutMission";
+import AboutLeadership from "@/components/sections/about/AboutLeadership";
+import AboutCertifications from "@/components/sections/about/AboutCertifications";
 
 export const metadata: Metadata = {
   title: "About Vectrae | Enterprise Technology Solutions",
@@ -19,7 +23,11 @@ export default function AboutPage() {
       <AboutHero />
       <AboutStory />
       <AboutImpact />
+      <AboutVision />
       <AboutCapabilities />
+      <AboutMission />
+      <AboutLeadership />
+      <AboutCertifications />
       {/* <AboutTrust /> */}
       <CTA />
       <Footer />

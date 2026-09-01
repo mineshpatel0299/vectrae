@@ -124,11 +124,10 @@ function ServiceHoloCard({
   hover:shadow-[0_22px_50px_rgba(0,0,0,0.18)]
   will-change-transform
 
-  col-span-12
+    col-span-12
   md:col-span-6
-  lg:col-span-3
-
-${index === 4 ? "lg:col-start-2" : ""}
+  lg:col-span-4
+   ${index === 6 ? "lg:col-start-5" : ""}
 `}
     >
       {/* =====================================================
@@ -526,7 +525,7 @@ export default function ServicesOverview() {
         {/* =====================================================
             DESKTOP / TABLET GRID
         ===================================================== */}
-        <div className="mt-14 hidden justify-center grid-cols-12 gap-7 md:grid">
+        <div className="mt-14 hidden grid-cols-12 justify-items-center gap-7 md:grid">
           {solutions.slice(0, 7).map((service, i) => (
             <ServiceHoloCard key={service.slug} service={service} index={i} />
           ))}
