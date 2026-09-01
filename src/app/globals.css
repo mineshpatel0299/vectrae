@@ -23,12 +23,13 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  cursor: url('/cursor.png'), auto;
+  cursor: url("/cursor.png"), auto;
 }
 
-/* Ensure the custom cursor stays even when hovering clickable items */
-a, button, [role="button"] {
-  cursor: url('/cursor.png'), pointer;
+a,
+button,
+[role="button"] {
+  cursor: url("/cursor.png"), auto;
 }
 
 @keyframes marquee {
@@ -123,7 +124,8 @@ a, button, [role="button"] {
 }
 
 @keyframes aurora-drift-1 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   50% {
@@ -132,7 +134,8 @@ a, button, [role="button"] {
 }
 
 @keyframes aurora-drift-2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   50% {
