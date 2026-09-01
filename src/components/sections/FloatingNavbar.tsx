@@ -43,7 +43,7 @@ export default function FloatingNavbar() {
       initial={false}
       animate={{ y: visible ? "0%" : "-100%" }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50 grid grid-cols-2 items-center border-b border-white/10 bg-black/80 px-6 py-4 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] backdrop-blur-xl md:grid-cols-3 md:px-10"
+      className="fixed inset-x-0 top-0 z-50 grid grid-cols-2 items-center border-b border-white/10 bg-black/80 px-6 py-4 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] backdrop-blur-xl lg:grid-cols-3 lg:px-10"
     >
       <div className="flex items-center">
         <Link href="/">
@@ -51,14 +51,14 @@ export default function FloatingNavbar() {
         </Link>
       </div>
 
-      <nav className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm md:flex">
+      <nav className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm lg:flex">
         {NAV_LINKS.map((link) => {
           const isActive = link.href !== "#" && pathname === link.href;
           return (
             <Link
               key={link.label}
               href={link.href}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              className={`whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition ${
                 isActive ? "bg-white/10 text-white" : "text-white/60 hover:text-white"
               }`}
             >
