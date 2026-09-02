@@ -37,7 +37,6 @@ export default function About() {
       <div className="pointer-events-none absolute left-1/2 top-0 z-10 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[#29B9F2]/20 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">
-
         {/* Label */}
         <p
           className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]"
@@ -60,7 +59,11 @@ export default function About() {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.9,
+                delay: 0.35,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               style={{ originX: 0, backgroundImage: BRAND_GRADIENT }}
               className="absolute inset-x-0 bottom-1 z-0 h-3 rounded-sm opacity-25 sm:bottom-2 sm:h-4"
             />
@@ -78,7 +81,6 @@ export default function About() {
 
         {/* Stats row + mission, single clean row */}
         <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-0">
-
           {/* Stats, 4-col grid, consistent alignment */}
           <div className="grid grid-cols-2 gap-x-0 gap-y-8 lg:flex lg:flex-1 lg:divide-x lg:divide-white/10">
             {stats.map((stat, i) => (
@@ -107,7 +109,9 @@ export default function About() {
             data-aos-delay="200"
           >
             <p className="border-l border-[#29B9F2]/40 pl-5 text-sm leading-relaxed text-white/50">
-              Delivering the right solutions, the right partners, and the right outcomes, from initial consultation through long-term managed support.
+              Delivering the right solutions, the right partners, and the right
+              outcomes, from initial consultation through long-term managed
+              support.
             </p>
           </div>
         </div>
