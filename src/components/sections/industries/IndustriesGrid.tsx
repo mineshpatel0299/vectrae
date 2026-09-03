@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -24,6 +24,13 @@ export default function IndustriesGrid() {
   const active = industries[activeIndex];
   const ActiveIcon = active.icon;
 
+  // ---- mobile carousel refs ----
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const scrollSettleTimeout = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+
   useEffect(() => {
     if (paused) return;
 
@@ -33,6 +40,46 @@ export default function IndustriesGrid() {
 
     return () => clearInterval(id);
   }, [paused]);
+
+  // Keep the carousel scrolled to whichever card is active (covers
+  // autoplay advancing while off-screen, and dot-click navigation).
+  useEffect(() => {
+    const card = cardRefs.current[activeIndex];
+    if (card) {
+      card.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [activeIndex]);
+
+  function handleCarouselScroll() {
+    setPaused(true);
+    if (scrollSettleTimeout.current) clearTimeout(scrollSettleTimeout.current);
+
+    scrollSettleTimeout.current = setTimeout(() => {
+      const el = carouselRef.current;
+      if (!el) return;
+
+      const containerCenter = el.scrollLeft + el.clientWidth / 2;
+      let closestIndex = activeIndex;
+      let closestDistance = Infinity;
+
+      cardRefs.current.forEach((card, idx) => {
+        if (!card) return;
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(cardCenter - containerCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = idx;
+        }
+      });
+
+      setActiveIndex(closestIndex);
+      setPaused(false);
+    }, 120);
+  }
 
   return (
     <section className="relative overflow-hidden bg-[#f5f5f0] py-14 sm:py-20 lg:py-28">
@@ -83,95 +130,198 @@ export default function IndustriesGrid() {
         >
           {/* =====================================================
               SIDEBAR / INDUSTRY SELECTOR
+              - below lg: swipeable snap carousel + dots
+              - lg and up: original vertical list
           ====================================================== */}
 
-          <div className="rounded-[22px] bg-[#070909] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:rounded-[28px] sm:p-2.5">
-            <div className="flex gap-1.5 overflow-x-auto scrollbar-hide lg:flex-col lg:gap-2 lg:overflow-visible">
-              {industries.map((industry, i) => {
-                const Icon = industry.icon;
-                const isActive = i === activeIndex;
+          <div className="max-md:hidden">
+            <div className="rounded-[22px] bg-[#070909] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:rounded-[28px] sm:p-2.5">
+              {/* ---- Mobile / tablet carousel ---- */}
+              <div
+                ref={carouselRef}
+                onScroll={handleCarouselScroll}
+                className="flex snap-x snap-mandatory gap-2.5 overflow-x-auto scroll-px-3 pb-1 scrollbar-hide lg:hidden"
+              >
+                {industries.map((industry, i) => {
+                  const Icon = industry.icon;
+                  const isActive = i === activeIndex;
 
-                return (
-                  <Link
-                    key={industry.slug}
-                    href={`/industries/${industry.slug}`}
-                    onMouseEnter={() => setActiveIndex(i)}
-                    className="group relative min-w-[170px] shrink-0 lg:min-w-0 lg:shrink"
-                  >
-                    <motion.div
-                      animate={{
-                        backgroundColor: isActive
-                          ? "rgba(255,255,255,0.075)"
-                          : "rgba(255,255,255,0.025)",
+                  return (
+                    <Link
+                      key={industry.slug}
+                      href={`/industries/${industry.slug}`}
+                      ref={(el) => {
+                        cardRefs.current[i] = el;
                       }}
-                      transition={{ duration: 0.3 }}
-                      className={`relative flex min-h-[54px] items-center gap-2.5 overflow-hidden rounded-[15px] border px-2.5 py-2 sm:min-h-[58px] sm:gap-3 sm:rounded-[17px] sm:px-3 sm:py-2.5 ${
-                        isActive
-                          ? "border-cyan-400/50"
-                          : "border-white/[0.035] hover:border-white/10"
-                      }`}
+                      onClick={(e) => {
+                        // First tap on a non-active card just previews it,
+                        // like hover does on desktop. Tap again to navigate.
+                        if (!isActive) {
+                          e.preventDefault();
+                          setActiveIndex(i);
+                        }
+                      }}
+                      className="group relative w-[62%] shrink-0 snap-center min-[420px]:w-[46%] sm:w-[34%]"
                     >
-                      {/* Active gradient border */}
-                      {isActive && (
-                        <motion.span
-                          layoutId="industry-active-bar"
-                          className="absolute inset-y-0 left-0 w-[2px]"
-                          style={{
-                            backgroundImage: BRAND_GRADIENT,
-                          }}
-                          transition={{
-                            duration: 0.4,
-                            ease: [0.16, 1, 0.3, 1],
-                          }}
-                        />
-                      )}
-
-                      {/* Icon */}
-                      <motion.span
+                      <motion.div
                         animate={{
                           backgroundColor: isActive
-                            ? "rgba(41,185,242,0.10)"
-                            : "rgba(255,255,255,0.035)",
-                          color: isActive ? "#29B9F2" : "#73777a",
+                            ? "rgba(255,255,255,0.075)"
+                            : "rgba(255,255,255,0.025)",
                         }}
                         transition={{ duration: 0.3 }}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[11px] border border-white/[0.04] sm:h-10 sm:w-10 sm:rounded-xl"
-                      >
-                        <Icon
-                          className="h-4 w-4 sm:h-[17px] sm:w-[17px]"
-                          strokeWidth={1.7}
-                        />
-                      </motion.span>
-
-                      {/* Text */}
-                      <span
-                        className={`min-w-0 text-xs font-semibold leading-4 transition-colors duration-300 sm:text-sm sm:leading-5 ${
+                        className={`relative flex min-h-[108px] flex-col justify-between overflow-hidden rounded-[15px] border p-3 min-[420px]:min-h-[128px] min-[420px]:rounded-[17px] min-[420px]:p-3.5 ${
                           isActive
-                            ? "text-white"
-                            : "text-white/55 group-hover:text-white/80"
+                            ? "border-cyan-400/50"
+                            : "border-white/[0.035] active:border-white/15"
                         }`}
                       >
-                        {industry.title}
-                      </span>
+                        {isActive && (
+                          <motion.span
+                            layoutId="industry-active-bar-mobile"
+                            className="absolute inset-x-0 top-0 h-[2px]"
+                            style={{ backgroundImage: BRAND_GRADIENT }}
+                            transition={{
+                              duration: 0.4,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
+                          />
+                        )}
 
-                      {/* Active indicator */}
-                      {isActive && (
                         <motion.span
-                          initial={{
-                            opacity: 0,
-                            scale: 0.5,
-                          }}
                           animate={{
-                            opacity: 1,
-                            scale: 1,
+                            backgroundColor: isActive
+                              ? "rgba(41,185,242,0.10)"
+                              : "rgba(255,255,255,0.035)",
+                            color: isActive ? "#29B9F2" : "#73777a",
                           }}
-                          className="ml-auto hidden h-1.5 w-1.5 shrink-0 rounded-full bg-[#29B9F2] shadow-[0_0_12px_rgba(41,185,242,0.9)] lg:block"
-                        />
-                      )}
-                    </motion.div>
-                  </Link>
-                );
-              })}
+                          transition={{ duration: 0.3 }}
+                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.04] min-[420px]:h-10 min-[420px]:w-10 min-[420px]:rounded-xl"
+                        >
+                          <Icon
+                            className="h-4 w-4 min-[420px]:h-[18px] min-[420px]:w-[18px]"
+                            strokeWidth={1.7}
+                          />
+                        </motion.span>
+
+                        <span
+                          className={`mt-3 text-[12px] font-semibold leading-[15px] transition-colors duration-300 min-[420px]:mt-4 min-[420px]:text-sm min-[420px]:leading-5 ${
+                            isActive ? "text-white" : "text-white/55"
+                          }`}
+                        >
+                          {industry.title}
+                        </span>
+
+                        {isActive && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="absolute right-2.5 top-2.5 h-1.5 w-1.5 rounded-full bg-[#29B9F2] shadow-[0_0_12px_rgba(41,185,242,0.9)] min-[420px]:right-3.5 min-[420px]:top-3.5"
+                          />
+                        )}
+                      </motion.div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* ---- Desktop vertical list (unchanged) ---- */}
+              <div className="hidden lg:flex lg:flex-col lg:gap-2">
+                {industries.map((industry, i) => {
+                  const Icon = industry.icon;
+                  const isActive = i === activeIndex;
+
+                  return (
+                    <Link
+                      key={industry.slug}
+                      href={`/industries/${industry.slug}`}
+                      onMouseEnter={() => setActiveIndex(i)}
+                      className="group relative"
+                    >
+                      <motion.div
+                        animate={{
+                          backgroundColor: isActive
+                            ? "rgba(255,255,255,0.075)"
+                            : "rgba(255,255,255,0.025)",
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className={`relative flex min-h-[58px] items-center gap-3 overflow-hidden rounded-[17px] border px-3 py-2.5 ${
+                          isActive
+                            ? "border-cyan-400/50"
+                            : "border-white/[0.035] hover:border-white/10"
+                        }`}
+                      >
+                        {isActive && (
+                          <motion.span
+                            layoutId="industry-active-bar"
+                            className="absolute inset-y-0 left-0 w-[2px]"
+                            style={{ backgroundImage: BRAND_GRADIENT }}
+                            transition={{
+                              duration: 0.4,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
+                          />
+                        )}
+
+                        <motion.span
+                          animate={{
+                            backgroundColor: isActive
+                              ? "rgba(41,185,242,0.10)"
+                              : "rgba(255,255,255,0.035)",
+                            color: isActive ? "#29B9F2" : "#73777a",
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.04]"
+                        >
+                          <Icon
+                            className="h-[17px] w-[17px]"
+                            strokeWidth={1.7}
+                          />
+                        </motion.span>
+
+                        <span
+                          className={`min-w-0 text-sm font-semibold leading-5 transition-colors duration-300 ${
+                            isActive
+                              ? "text-white"
+                              : "text-white/55 group-hover:text-white/80"
+                          }`}
+                        >
+                          {industry.title}
+                        </span>
+
+                        {isActive && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="ml-auto hidden h-1.5 w-1.5 shrink-0 rounded-full bg-[#29B9F2] shadow-[0_0_12px_rgba(41,185,242,0.9)] lg:block"
+                          />
+                        )}
+                      </motion.div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Carousel dot pagination (mobile / tablet only) — outside the card */}
+            <div className="mt-3 flex items-center justify-center gap-1.5 lg:hidden">
+              {industries.map((industry, i) => (
+                <button
+                  key={industry.slug}
+                  type="button"
+                  aria-label={`Go to ${industry.title}`}
+                  onClick={() => setActiveIndex(i)}
+                  className="py-2"
+                >
+                  <span
+                    className={`block h-1 rounded-full transition-all duration-500 ${
+                      i === activeIndex
+                        ? "w-5 bg-[#29B9F2] shadow-[0_0_8px_rgba(41,185,242,0.6)]"
+                        : "w-1.5 bg-white/15"
+                    }`}
+                  />
+                </button>
+              ))}
             </div>
           </div>
 
@@ -266,22 +416,10 @@ export default function IndustriesGrid() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.slug}
-                initial={{
-                  opacity: 0,
-                  y: 18,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: -18,
-                }}
-                transition={{
-                  duration: 0.45,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="
                   relative
                   z-10
@@ -302,12 +440,8 @@ export default function IndustriesGrid() {
                 ================================================== */}
 
                 <div className="max-w-[650px]">
-                  {/* Icon */}
                   <motion.div
-                    whileHover={{
-                      scale: 1.05,
-                      rotate: -2,
-                    }}
+                    whileHover={{ scale: 1.05, rotate: -2 }}
                     className="
                       flex
                       h-14
@@ -331,7 +465,6 @@ export default function IndustriesGrid() {
                     />
                   </motion.div>
 
-                  {/* Heading */}
                   <h3
                     className="
                       mt-6
@@ -349,7 +482,6 @@ export default function IndustriesGrid() {
                     {active.title}
                   </h3>
 
-                  {/* Subtitle */}
                   <p
                     className="
                       mt-4
@@ -366,15 +498,11 @@ export default function IndustriesGrid() {
                     {active.headline}
                   </p>
 
-                  {/* Gradient line */}
                   <div
                     className="mt-4 h-[2px] w-20 rounded-full opacity-90 sm:mt-5 sm:w-28"
-                    style={{
-                      backgroundImage: BRAND_GRADIENT,
-                    }}
+                    style={{ backgroundImage: BRAND_GRADIENT }}
                   />
 
-                  {/* Description */}
                   <p
                     className="
                       mt-4
@@ -396,100 +524,10 @@ export default function IndustriesGrid() {
                 </div>
 
                 {/* =================================================
-                    MOBILE / TABLET GRAPHIC
-                    The graphic appears naturally after the text
-                    instead of overlapping the content.
-                ================================================== */}
-
-                <div className="relative mt-7 h-[230px] w-full lg:hidden sm:mt-8 sm:h-[250px] md:mt-5 md:h-[230px]">
-                  <div className="absolute inset-0">
-                    {/* Glow */}
-                    <div className="absolute bottom-4 left-1/2 h-20 w-48 -translate-x-1/2 rounded-full bg-cyan-400/[0.12] blur-[45px]" />
-
-                    {/* Grid */}
-                    <div
-                      className="absolute bottom-0 left-1/2 h-28 w-full max-w-[430px] -translate-x-1/2 rotate-[5deg] opacity-40"
-                      style={{
-                        backgroundImage: `
-                          linear-gradient(rgba(41,185,242,0.22) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(41,185,242,0.22) 1px, transparent 1px)
-                        `,
-                        backgroundSize: "28px 28px",
-                        maskImage:
-                          "linear-gradient(to top, black, transparent)",
-                        WebkitMaskImage:
-                          "linear-gradient(to top, black, transparent)",
-                      }}
-                    />
-
-                    {/* Main graphic */}
-                    <motion.div
-                      animate={{
-                        y: [0, -7, 0],
-                        rotateZ: [0, 1.5, 0],
-                      }}
-                      transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="absolute left-1/2 top-3 h-[145px] w-[145px] -translate-x-1/2 sm:top-0 sm:h-[165px] sm:w-[165px]"
-                    >
-                      {/* Outer diamond */}
-                      <div className="absolute inset-0 rotate-45 rounded-[7px] border border-cyan-400/50 bg-gradient-to-br from-cyan-400/[0.08] via-blue-500/[0.035] to-transparent" />
-
-                      {/* Inner diamond */}
-                      <div className="absolute left-1/2 top-1/2 h-[62px] w-[62px] -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[5px] border border-cyan-400/60 bg-cyan-400/[0.12] sm:h-[70px] sm:w-[70px]" />
-
-                      {/* Logo */}
-                      <div className="absolute left-1/2 top-1/2 z-20 flex h-[52px] w-[52px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden sm:h-[58px] sm:w-[58px]">
-                        <img
-                          src="/cursor-original.png"
-                          alt="Company Logo"
-                          className="relative z-10 h-full w-full object-contain"
-                        />
-                      </div>
-
-                      {/* Glow */}
-                      <div className="absolute inset-[25%] rounded-full bg-cyan-400/20 blur-[35px]" />
-                    </motion.div>
-
-                    {/* Floating points */}
-                    <motion.span
-                      animate={{
-                        y: [0, -10, 0],
-                        opacity: [0.25, 1, 0.25],
-                      }}
-                      transition={{
-                        duration: 2.8,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="absolute left-[20%] top-[65px] h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(41,185,242,1)]"
-                    />
-
-                    <motion.span
-                      animate={{
-                        y: [0, 8, 0],
-                        opacity: [0.2, 0.8, 0.2],
-                      }}
-                      transition={{
-                        duration: 3.2,
-                        repeat: Infinity,
-                        delay: 0.7,
-                        ease: "easeInOut",
-                      }}
-                      className="absolute right-[20%] top-[95px] h-1.5 w-1.5 rounded-full bg-lime-300 shadow-[0_0_12px_rgba(190,255,70,1)]"
-                    />
-                  </div>
-                </div>
-
-                {/* =================================================
                     BOTTOM CONTENT
                 ================================================== */}
 
                 <div className="mt-auto pt-5 sm:pt-8">
-                  {/* Feature cards */}
                   <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-2.5">
                     {active.focusAreas.slice(0, 3).map((area, index) => {
                       const FeatureIcon = featureIcons[index] ?? Sparkles;
@@ -501,30 +539,29 @@ export default function IndustriesGrid() {
                             y: -4,
                             borderColor: "rgba(41,185,242,0.25)",
                           }}
-                          transition={{
-                            duration: 0.25,
-                            ease: "easeOut",
-                          }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
                           className="
                               transform-gpu
-                              rounded-[16px]
+                              rounded-[14px]
                               border
                               border-white/[0.09]
                               bg-[#080d0d]/80
-                              p-3.5
+                              p-3
                               will-change-transform
+                              min-[420px]:rounded-[16px]
+                              min-[420px]:p-3.5
                               sm:rounded-[18px]
                               sm:p-4
                             "
                         >
-                          <div className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-cyan-400/20 bg-cyan-400/[0.04] text-[#29B9F2] sm:h-9 sm:w-9 sm:rounded-xl">
+                          <div className="flex h-7 w-7 items-center justify-center rounded-[9px] border border-cyan-400/20 bg-cyan-400/[0.04] text-[#29B9F2] min-[420px]:h-8 min-[420px]:w-8 min-[420px]:rounded-[10px] sm:h-9 sm:w-9 sm:rounded-xl">
                             <FeatureIcon
-                              className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                              className="h-3 w-3 min-[420px]:h-3.5 min-[420px]:w-3.5 sm:h-4 sm:w-4"
                               strokeWidth={1.6}
                             />
                           </div>
 
-                          <p className="mt-3 text-[11px] font-medium leading-4 text-white/65 sm:mt-4 sm:text-xs sm:leading-5">
+                          <p className="mt-2.5 text-[10px] font-medium leading-[14px] text-white/65 min-[420px]:mt-3 min-[420px]:text-[11px] min-[420px]:leading-4 sm:mt-4 sm:text-xs sm:leading-5">
                             {area}
                           </p>
                         </motion.div>
@@ -532,18 +569,13 @@ export default function IndustriesGrid() {
                     })}
                   </div>
 
-                  {/* CTA */}
                   <motion.span
                     whileHover={{
                       scale: 1.025,
                       boxShadow: "0 12px 45px rgba(37,217,199,0.28)",
                     }}
-                    whileTap={{
-                      scale: 0.98,
-                    }}
-                    style={{
-                      backgroundImage: BRAND_GRADIENT,
-                    }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{ backgroundImage: BRAND_GRADIENT }}
                     className="
                       mt-5
                       inline-flex
@@ -581,10 +613,8 @@ export default function IndustriesGrid() {
             ====================================================== */}
 
             <div className="pointer-events-none absolute bottom-[95px] right-[5%] hidden h-[330px] w-[390px] lg:block">
-              {/* Floor glow */}
               <div className="absolute bottom-5 left-1/2 h-24 w-72 -translate-x-1/2 rounded-full bg-cyan-400/[0.12] blur-[55px]" />
 
-              {/* Perspective grid */}
               <div
                 className="absolute -bottom-48 -right-24 h-124 w-[590px] -rotate-[18deg] opacity-50"
                 style={{
@@ -599,15 +629,8 @@ export default function IndustriesGrid() {
                 }}
               />
 
-              {/* =================================================
-                  MAIN GRAPHIC
-              ================================================== */}
-
               <motion.div
-                animate={{
-                  y: [0, -9, 0],
-                  rotateZ: [0, 1.5, 0],
-                }}
+                animate={{ y: [0, -9, 0], rotateZ: [0, 1.5, 0] }}
                 transition={{
                   duration: 5,
                   repeat: Infinity,
@@ -615,18 +638,11 @@ export default function IndustriesGrid() {
                 }}
                 className="absolute left-1/2 top-[55px] h-[170px] w-[170px] -translate-x-1/2"
               >
-                {/* Graphic glow */}
                 <div className="absolute inset-[25%] rounded-full bg-cyan-400/20 blur-[45px]" />
 
-                {/* Outer diamond */}
                 <div className="absolute inset-0 rotate-45 rounded-[7px] border border-cyan-400/50 bg-gradient-to-br from-cyan-400/[0.08] via-blue-500/[0.035] to-transparent shadow-[inset_0_0_45px_rgba(41,185,242,0.05)]" />
 
-                {/* Inner diamond */}
                 <div className="absolute left-1/2 top-1/2 h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[5px] border border-cyan-400/60 bg-cyan-400/[0.12]" />
-
-                {/* =================================================
-                    COMPANY LOGO
-                ================================================== */}
 
                 <div className="absolute left-1/2 top-1/2 z-20 flex h-[58px] w-[58px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden">
                   <img
@@ -637,12 +653,8 @@ export default function IndustriesGrid() {
                 </div>
               </motion.div>
 
-              {/* Floating data point */}
               <motion.span
-                animate={{
-                  y: [0, -12, 0],
-                  opacity: [0.25, 1, 0.25],
-                }}
+                animate={{ y: [0, -12, 0], opacity: [0.25, 1, 0.25] }}
                 transition={{
                   duration: 2.8,
                   repeat: Infinity,
@@ -651,12 +663,8 @@ export default function IndustriesGrid() {
                 className="absolute left-[30%] top-[100px] h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(41,185,242,1)]"
               />
 
-              {/* Floating lime point */}
               <motion.span
-                animate={{
-                  y: [0, 10, 0],
-                  opacity: [0.2, 0.8, 0.2],
-                }}
+                animate={{ y: [0, 10, 0], opacity: [0.2, 0.8, 0.2] }}
                 transition={{
                   duration: 3.2,
                   repeat: Infinity,
@@ -666,12 +674,8 @@ export default function IndustriesGrid() {
                 className="absolute right-[23%] top-[150px] h-1.5 w-1.5 rounded-full bg-lime-300 shadow-[0_0_12px_rgba(190,255,70,1)]"
               />
 
-              {/* Floating cyan point */}
               <motion.span
-                animate={{
-                  y: [0, -8, 0],
-                  opacity: [0.15, 0.9, 0.15],
-                }}
+                animate={{ y: [0, -8, 0], opacity: [0.15, 0.9, 0.15] }}
                 transition={{
                   duration: 2.4,
                   repeat: Infinity,
