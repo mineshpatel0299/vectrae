@@ -39,10 +39,10 @@ export default function AboutCapabilities() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-7">
                   <FeaturedIcon className="h-6 w-6 text-[#29B9F2]" />
-                  <h3 className="mt-4 text-2xl font-semibold text-black">
+                  <h3 className="mt-4 text-2xl font-semibold text-white">
                     {featured.title}
                   </h3>
-                  <p className="mt-2 max-w-sm text-sm leading-relaxed text-black/60">
+                  <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/60">
                     {featured.description}
                   </p>
                 </div>
