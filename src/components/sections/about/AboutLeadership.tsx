@@ -54,7 +54,7 @@ export default function AboutLeadership() {
   return (
     <section
       id="leadership"
-      className="relative isolate overflow-hidden bg-black py-28 sm:py-32 lg:py-40"
+      className="relative isolate overflow-hidden bg-white py-28 sm:py-32 lg:py-40"
     >
       {/* ========================================================
           BACKGROUND
@@ -119,7 +119,7 @@ export default function AboutLeadership() {
             </div>
 
             {/* Heading */}
-            <h2 className="mt-8 text-4xl font-semibold leading-[0.95] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-[5.5rem]">
+            <h2 className="mt-8 text-4xl font-semibold leading-[0.95] tracking-[-0.04em] text-black sm:text-5xl md:text-6xl lg:text-[5.5rem]">
               The people
               <br />
               behind the
@@ -142,7 +142,7 @@ export default function AboutLeadership() {
               duration: 0.7,
               delay: 0.2,
             }}
-            className="max-w-md text-sm leading-7 text-white/40 sm:text-base lg:mb-2"
+            className="max-w-md text-sm leading-7 text-black/40 sm:text-base lg:mb-2"
           >
             Experienced leadership driving Vectrae&apos;s vision, building
             trusted partnerships, and delivering enterprise technology outcomes
@@ -166,7 +166,7 @@ export default function AboutLeadership() {
                 delay: index * 0.12,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025] transition-colors duration-500 hover:border-white/[0.15] hover:bg-white/[0.04]"
+              className="group relative overflow-hidden rounded-2xl border border-black/[0.08] bg-black/[0.025] transition-colors duration-500 hover:border-black/[0.15] hover:bg-black/[0.04]"
             >
               {/* =================================================
                   IMAGE AREA
@@ -209,7 +209,7 @@ export default function AboutLeadership() {
                 )}
 
                 {/* Image gradient */}
-                <div className="absolute inset-0 bg-linear-to-t from-black via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-white/10 to-transparent" />
 
                 {/* Top metadata */}
                 <div className="absolute left-6 right-6 top-6 flex items-center justify-between">
@@ -217,7 +217,7 @@ export default function AboutLeadership() {
                     0{index + 1}
                   </span>
 
-                  <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40 backdrop-blur-md">
+                  <span className="rounded-full border border-white/10 bg-white/20 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40 backdrop-blur-md">
                     Leadership
                   </span>
                 </div>
@@ -238,7 +238,7 @@ export default function AboutLeadership() {
 
               <div className="relative p-7 sm:p-8">
                 {/* Name */}
-                <h3 className="text-2xl font-semibold tracking-[-0.025em] text-white sm:text-[1.7rem]">
+                <h3 className="text-2xl font-semibold tracking-[-0.025em] text-black sm:text-[1.7rem]">
                   {leader.name}
                 </h3>
 
@@ -251,14 +251,14 @@ export default function AboutLeadership() {
                 </p>
 
                 {/* Bio */}
-                <p className="mt-5 text-sm leading-6 text-white/40">
+                <p className="mt-5 text-sm leading-6 text-black/40">
                   {leader.bio}
                 </p>
 
                 {/* Bottom actions */}
-                <div className="mt-7 flex items-center justify-between border-t border-white/[0.07] pt-5">
+                <div className="mt-7 flex items-center justify-between border-t border-black/[0.07] pt-5">
                   {/* Profile indicator */}
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/20">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-black/20">
                     Vectrae Infotech
                   </span>
 
@@ -269,12 +269,12 @@ export default function AboutLeadership() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${leader.name} LinkedIn profile`}
-                      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/35 transition-all duration-300 hover:border-[#29B9F2]/40 hover:bg-[#29B9F2]/10 hover:text-[#29B9F2]"
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-black/35 transition-all duration-300 hover:border-[#29B9F2]/40 hover:bg-[#29B9F2]/10 hover:text-[#29B9F2]"
                     >
                       <FaLinkedinIn className="h-3.5 w-3.5" />
                     </a>
                   ) : (
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/20 transition-all duration-300 group-hover:border-[#29B9F2]/30 group-hover:text-[#29B9F2]">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-black/20 transition-all duration-300 group-hover:border-[#29B9F2]/30 group-hover:text-[#29B9F2]">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   )}
@@ -297,7 +297,7 @@ export default function AboutLeadership() {
           SECTION DIVIDER
       ======================================================== */}
 
-      <div className="absolute bottom-0 left-1/2 h-px w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 bg-white/[0.06]" />
+      <div className="absolute bottom-0 left-1/2 h-px w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 bg-black/[0.06]" />
     </section>
   );
 }
