@@ -9,20 +9,26 @@ import ReadingProgress from "@/components/sections/blog/ReadingProgress";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { blogPosts, getRelatedPosts, type BlogBlock } from "@/data/blogPosts";
+import { getPublishedPost, getPublishedSlugs, getRelatedPosts } from "@/lib/blog";
+import { slugifyHeading, type BlogBlock } from "@/lib/blog-types";
 import { categoryIcons, DEFAULT_CATEGORY_ICON } from "@/lib/blogCategoryIcon";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+// Rebuilt on demand by the admin panel via `revalidatePath`, with an hourly
+// backstop so a missed revalidation can never strand a post for long.
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = await getPublishedSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPublishedPost(slug);
   if (!post) return {};
 
   return {
@@ -31,19 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
-
 function BlockRenderer({ block, dropCap }: { block: BlogBlock; dropCap?: boolean }) {
   switch (block.type) {
     case "heading":
       return (
         <h2
-          id={slugify(block.text)}
+          id={slugifyHeading(block.text)}
           className="mt-14 scroll-mt-28 text-2xl font-semibold leading-snug tracking-tight text-neutral-900 sm:text-3xl"
         >
           {block.text}
@@ -95,14 +94,14 @@ function BlockRenderer({ block, dropCap }: { block: BlogBlock; dropCap?: boolean
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPublishedPost(slug);
   if (!post) notFound();
 
   const CategoryIcon = categoryIcons[post.category] ?? DEFAULT_CATEGORY_ICON;
-  const related = getRelatedPosts(post.slug, 3);
+  const related = await getRelatedPosts(post.slug, post.category, 3);
   const headings = post.content
     .filter((b): b is Extract<BlogBlock, { type: "heading" }> => b.type === "heading")
-    .map((b) => ({ text: b.text, id: slugify(b.text) }));
+    .map((b) => ({ text: b.text, id: slugifyHeading(b.text) }));
 
   return (
     <>
@@ -110,7 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Full-bleed editorial hero */}
       <section className="relative isolate flex min-h-[62vh] flex-col overflow-hidden bg-black sm:min-h-[78vh]">
-        <Image src={post.image} alt="" fill priority className="object-cover" />
+        <Image src={post.image} alt="" fill priority unoptimized className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/25 to-black/90" />
 
         <div className="relative z-10">
@@ -299,6 +298,7 @@ export default async function BlogPostPage({ params }: Props) {
                           src={r.image}
                           alt={r.title}
                           fill
+                          unoptimized
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <span

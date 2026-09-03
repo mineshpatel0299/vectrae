@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
@@ -220,7 +220,7 @@ function ServiceHoloCard({
           absolute
           inset-0
           z-[3]
-          opacity-0
+          opacity-100
           transition-opacity
           duration-500
           group-hover:opacity-0
@@ -468,8 +468,42 @@ function ServiceHoloCard({
 }
 
 export default function ServicesOverview() {
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
+  const mobileItemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
+
+  const handleMobileScroll = useCallback(() => {
+    const container = mobileScrollRef.current;
+    if (!container) return;
+
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    mobileItemRefs.current.forEach((item, i) => {
+      if (!item) return;
+      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+      const distance = Math.abs(itemCenter - containerCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = i;
+      }
+    });
+
+    setMobileActiveIndex(closestIndex);
+  }, []);
+
+  const goToMobileIndex = (i: number) => {
+    mobileItemRefs.current[i]?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  };
+
   return (
-    <section className="relative overflow-hidden bg-white py-20 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-white py-20 sm:py-28">
       <div className="relative mx-auto max-w-[1320px] px-6">
         {/* =====================================================
             SECTION HEADER
@@ -543,6 +577,8 @@ export default function ServicesOverview() {
         ===================================================== */}
         <div className="mt-10 md:hidden">
           <div
+            ref={mobileScrollRef}
+            onScroll={handleMobileScroll}
             className="
               -mx-6
               flex
@@ -561,6 +597,9 @@ export default function ServicesOverview() {
             {solutions.slice(0, 7).map((service, i) => (
               <div
                 key={service.slug}
+                ref={(el) => {
+                  mobileItemRefs.current[i] = el;
+                }}
                 className="
                   w-[95%]
                   max-w-[420px]
@@ -576,7 +615,17 @@ export default function ServicesOverview() {
           {/* Dot indicators */}
           <div className="mt-5 flex justify-center gap-1.5">
             {solutions.slice(0, 7).map((_, i) => (
-              <span key={i} className="h-1.5 w-1.5 rounded-full bg-black/15" />
+              <button
+                key={i}
+                type="button"
+                aria-label={`Go to ${solutions[i].title}`}
+                onClick={() => goToMobileIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === mobileActiveIndex
+                    ? "w-4 bg-black/60"
+                    : "w-1.5 bg-black/15"
+                }`}
+              />
             ))}
           </div>
         </div>

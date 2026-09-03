@@ -1,29 +1,10 @@
-export type BlogBlock =
-  | { type: "paragraph"; text: string }
-  | { type: "heading"; text: string }
-  | { type: "quote"; text: string; attribution?: string }
-  | { type: "list"; items: string[] };
+// Seed data only. The blog is served from Postgres (`blog_posts`) and edited in
+// the admin panel — this file is the one-time migration source, replayed by
+// `npm run db:seed`. Editing a post here does NOT change the live site.
+import type { BlogAuthor, BlogPost } from "@/lib/blog-types";
+import { siteImages } from "@/lib/site-images";
 
-export type BlogAuthor = {
-  name: string;
-  role: string;
-  initials: string;
-};
-
-export type BlogPost = {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  color: string;
-  image: string;
-  featured?: boolean;
-  author: BlogAuthor;
-  tags: string[];
-  content: BlogBlock[];
-};
+export type { BlogAuthor, BlogBlock, BlogPost } from "@/lib/blog-types";
 
 const rohan: BlogAuthor = { name: "Rohan Mehta", role: "Practice Lead, Audio Visual", initials: "RM" };
 const ananya: BlogAuthor = { name: "Ananya Kapoor", role: "Practice Lead, Networking & Security", initials: "AK" };
@@ -40,7 +21,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 12, 2026",
     readTime: "6 min read",
     color: "#29B9F2",
-    image: "/images/blog/av-tech.png",
+    image: siteImages.blog.avTech,
     featured: true,
     author: rohan,
     tags: ["Audio Visual", "Hybrid Work", "Meeting Rooms"],
@@ -100,7 +81,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 08, 2026",
     readTime: "5 min read",
     color: "#25D9C7",
-    image: "/images/blog/managed-it.png",
+    image: siteImages.blog.managedIt,
     author: karan,
     tags: ["Managed IT", "AMC", "IT Operations"],
     content: [
@@ -154,7 +135,7 @@ export const blogPosts: BlogPost[] = [
     date: "March 02, 2026",
     readTime: "8 min read",
     color: "#29B9F2",
-    image: "/images/blog/teams-zoom.png",
+    image: siteImages.blog.teamsZoom,
     author: rohan,
     tags: ["Collaboration", "Microsoft Teams", "Zoom"],
     content: [
@@ -208,7 +189,7 @@ export const blogPosts: BlogPost[] = [
     date: "February 25, 2026",
     readTime: "7 min read",
     color: "#25D9C7",
-    image: "/images/products/power-supply.png",
+    image: siteImages.products.powerSupply,
     author: vikram,
     tags: ["Power Solutions", "Data Center", "UPS"],
     content: [
@@ -265,7 +246,7 @@ export const blogPosts: BlogPost[] = [
     date: "February 18, 2026",
     readTime: "5 min read",
     color: "#29B9F2",
-    image: "/images/products/router.png",
+    image: siteImages.products.router,
     author: ananya,
     tags: ["Network Security", "Firewall", "Enterprise IT"],
     content: [
@@ -315,7 +296,7 @@ export const blogPosts: BlogPost[] = [
     date: "February 10, 2026",
     readTime: "9 min read",
     color: "#25D9C7",
-    image: "/images/products/server-ram.png",
+    image: siteImages.products.serverRam,
     author: vikram,
     tags: ["Data Center", "Infrastructure", "Planning"],
     content: [
@@ -365,14 +346,3 @@ export const blogPosts: BlogPost[] = [
     ],
   },
 ];
-
-export function getRelatedPosts(slug: string, limit = 3): BlogPost[] {
-  const current = blogPosts.find((p) => p.slug === slug);
-  if (!current) return blogPosts.filter((p) => p.slug !== slug).slice(0, limit);
-
-  const sameCategory = blogPosts.filter((p) => p.slug !== slug && p.category === current.category);
-  const rest = blogPosts.filter((p) => p.slug !== slug && p.category !== current.category);
-  return [...sameCategory, ...rest].slice(0, limit);
-}
-
-export const blogCategories = Array.from(new Set(blogPosts.map((p) => p.category)));

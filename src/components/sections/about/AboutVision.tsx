@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
 export default function AboutVision() {
@@ -232,7 +232,13 @@ export default function AboutVision() {
               <div className="absolute inset-3 rounded-full border border-white/[0.06]" />
 
               <div className="relative text-center">
-                <img src="/cursor-original.png" alt="" />
+                <Image
+                  src="/cursor-original.png"
+                  alt=""
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 object-contain"
+                />
               </div>
             </div>
           </motion.div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Building, MapPin, ShieldCheck, Users } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
+import { siteImages } from "@/lib/site-images";
 
 const metrics = [
   { label: "Enterprise Clients", value: "2,300+", icon: Building },
@@ -151,8 +152,8 @@ export default function FootprintMap() {
                     aria-hidden
                     className="absolute inset-0"
                     style={{
-                      WebkitMaskImage: "url(/india-map.svg)",
-                      maskImage: "url(/india-map.svg)",
+                      WebkitMaskImage: `url(${siteImages.indiaMap})`,
+                      maskImage: `url(${siteImages.indiaMap})`,
                       WebkitMaskRepeat: "no-repeat",
                       maskRepeat: "no-repeat",
                       WebkitMaskPosition: "center",

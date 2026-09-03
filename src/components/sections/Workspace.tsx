@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { siteImages } from "@/lib/site-images";
 import {
   LayoutGrid,
   Users,
@@ -223,10 +224,11 @@ export default function Workspace() {
               className="relative aspect-[16/10] w-full overflow-hidden rounded-[1.25rem] bg-black"
             >
               <Image
-                src="/workspace-wallpaper.jpg"
+                src={siteImages.workspaceWallpaper}
                 alt=""
                 fill
                 priority
+                unoptimized
                 sizes="(min-width: 1024px) 960px, 100vw"
                 className="pointer-events-none object-cover"
               />

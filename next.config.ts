@@ -1,9 +1,28 @@
 import path from "path";
 import type { NextConfig } from "next";
 
+type RemotePattern = NonNullable<NonNullable<NextConfig["images"]>["remotePatterns"]>[number];
+
+// Blog cover images uploaded through the admin panel live in Cloudflare R2.
+// Always allow the default `r2.dev` dev subdomain, plus the exact host from
+// R2_PUBLIC_URL when a custom domain is configured instead.
+const r2RemotePatterns: RemotePattern[] = [{ protocol: "https", hostname: "*.r2.dev" }];
+
+if (process.env.R2_PUBLIC_URL) {
+  try {
+    const { protocol, hostname } = new URL(process.env.R2_PUBLIC_URL);
+    r2RemotePatterns.push({ protocol: protocol.replace(":", "") as "https" | "http", hostname });
+  } catch {
+    console.warn("[next.config] R2_PUBLIC_URL is not a valid URL, ignoring it.");
+  }
+}
+
 const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
+  },
+  images: {
+    remotePatterns: r2RemotePatterns,
   },
   async redirects() {
     return [

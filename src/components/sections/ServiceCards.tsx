@@ -58,6 +58,7 @@ function ServiceCard({
               src={card.image}
               alt={card.alt}
               fill
+              unoptimized
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               sizes="(max-width: 640px) 82vw, (max-width: 1024px) 50vw, 25vw"
             />
