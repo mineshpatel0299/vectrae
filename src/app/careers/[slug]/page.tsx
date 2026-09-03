@@ -8,19 +8,25 @@ import PremiumHeroBackdrop from "@/components/ui/PremiumHeroBackdrop";
 import ReadingProgress from "@/components/sections/blog/ReadingProgress";
 import JobApplyForm from "@/components/sections/careers/JobApplyForm";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { departmentIcons, jobOpenings, getJobOpening } from "@/data/careers";
+import { getPublishedJob, getPublishedJobs, getPublishedJobSlugs } from "@/lib/careers";
+import { departmentIcons } from "@/lib/careers-types";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return jobOpenings.map((job) => ({ slug: job.slug }));
+// Rebuilt on demand by the admin panel via `revalidatePath`, with an hourly
+// backstop so a missed revalidation can never strand a posting for long.
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = await getPublishedJobSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const job = getJobOpening(slug);
+  const job = await getPublishedJob(slug);
   if (!job) return {};
 
   return {
@@ -31,11 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function JobDetailPage({ params }: Props) {
   const { slug } = await params;
-  const job = getJobOpening(slug);
+  const job = await getPublishedJob(slug);
   if (!job) notFound();
 
   const Icon = departmentIcons[job.department];
-  const otherRoles = jobOpenings.filter((j) => j.slug !== job.slug).slice(0, 3);
+  const allJobs = await getPublishedJobs();
+  const otherRoles = allJobs.filter((j) => j.slug !== job.slug).slice(0, 3);
 
   return (
     <>
@@ -170,7 +177,7 @@ export default async function JobDetailPage({ params }: Props) {
           </div>
 
           <div className="mt-12" data-aos="fade-up" data-aos-delay="100">
-            <JobApplyForm jobTitle={job.title} />
+            <JobApplyForm jobTitle={job.title} jobSlug={job.slug} />
           </div>
         </div>
       </section>

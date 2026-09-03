@@ -6,6 +6,7 @@ import { useRef } from "react";
 import Odometer from "@/components/ui/Odometer";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { stats } from "@/data/stats";
+import { siteImages } from "@/lib/site-images";
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,9 +24,10 @@ export default function About() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/about-bg.png"
+          src={siteImages.aboutBg}
           alt="About Vectrae Background"
           fill
+          unoptimized
           className="object-cover opacity-100"
           priority
         />

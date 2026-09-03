@@ -4,10 +4,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Navbar from "@/components/sections/Navbar";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { blogCategories, blogPosts } from "@/data/blogPosts";
+
 import { categoryIcons, DEFAULT_CATEGORY_ICON } from "@/lib/blogCategoryIcon";
 
-export default function BlogHero() {
+type Props = {
+  postCount: number;
+  categories: string[];
+};
+
+export default function BlogHero({ postCount, categories }: Props) {
   return (
     <section className="relative isolate overflow-hidden bg-black">
       <div className="pointer-events-none absolute left-1/2 top-0 h-130 w-225 -translate-x-1/2 -translate-y-1/3 rounded-full bg-[#29B9F2]/15 blur-[140px]" />
@@ -37,7 +42,7 @@ export default function BlogHero() {
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg"
         >
           Practical field notes from our AV, networking, data center, and managed services teams,
-          {" "}{blogPosts.length} articles across {blogCategories.length} disciplines.
+          {" "}{postCount} articles across {categories.length} disciplines.
         </motion.p>
 
         <motion.div
@@ -46,7 +51,7 @@ export default function BlogHero() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-2.5"
         >
-          {blogCategories.map((category) => {
+          {categories.map((category) => {
             const Icon = categoryIcons[category] ?? DEFAULT_CATEGORY_ICON;
             return (
               <Link

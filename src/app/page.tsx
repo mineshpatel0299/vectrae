@@ -9,11 +9,14 @@ import TrustSignals from "@/components/sections/TrustSignals";
 import SampleAboutUs from "@/components/sections/SampleAboutUs";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Blog from "@/components/sections/Blog";
+import { getPublishedPosts } from "@/lib/blog";
 import FootprintMap from "@/components/sections/FootprintMap";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPublishedPosts();
+
   return (
     <>
       <Hero />
@@ -27,7 +30,7 @@ export default function Home() {
       <SampleAboutUs />
       {/* <Services /> */}
       <CoreValues />
-      <Blog />
+      <Blog posts={posts} />
       <CTA />
       <Footer />
     </>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { siteImages } from "@/lib/site-images";
 
 export default function SampleAboutUs() {
   const containerRef = useRef<HTMLElement>(null);
@@ -46,9 +47,10 @@ export default function SampleAboutUs() {
               className="absolute inset-0"
             >
               <Image
-                src="/images/sample_about_us.png"
+                src={siteImages.sampleAboutUs}
                 alt="About Us Sample"
                 fill
+                unoptimized
                 className="object-cover"
                 priority
               />

@@ -6,17 +6,22 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import { blogCategories, blogPosts } from "@/data/blogPosts";
+import type { BlogPost } from "@/lib/blog-types";
 import { categoryIcons, DEFAULT_CATEGORY_ICON } from "@/lib/blogCategoryIcon";
 
 const ALL = "All";
 
-export default function BlogGrid() {
+type Props = {
+  posts: BlogPost[];
+  categories: string[];
+};
+
+export default function BlogGrid({ posts, categories }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category");
   const [activeCategory, setActiveCategory] = useState<string>(
-    initialCategory && blogCategories.includes(initialCategory) ? initialCategory : ALL,
+    initialCategory && categories.includes(initialCategory) ? initialCategory : ALL,
   );
 
   function selectCategory(category: string) {
@@ -26,8 +31,8 @@ export default function BlogGrid() {
   }
 
   const filtered = useMemo(
-    () => (activeCategory === ALL ? blogPosts : blogPosts.filter((p) => p.category === activeCategory)),
-    [activeCategory],
+    () => (activeCategory === ALL ? posts : posts.filter((p) => p.category === activeCategory)),
+    [activeCategory, posts],
   );
 
   const featured = filtered.find((p) => p.featured) ?? null;
@@ -51,7 +56,7 @@ export default function BlogGrid() {
           >
             All Articles
           </button>
-          {blogCategories.map((category) => (
+          {categories.map((category) => (
             <button
               key={category}
               type="button"
@@ -78,6 +83,7 @@ export default function BlogGrid() {
                 src={featured.image}
                 alt={featured.title}
                 fill
+                unoptimized
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent lg:bg-gradient-to-r" />
@@ -141,6 +147,7 @@ export default function BlogGrid() {
                       src={post.image}
                       alt={post.title}
                       fill
+                      unoptimized
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />

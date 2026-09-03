@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { Check, Send } from "lucide-react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { Check, FileText, Send, Upload, X } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
 type FormState = {
@@ -29,13 +29,60 @@ const inputClasses =
 
 const labelClasses = "text-sm font-medium text-neutral-700";
 
-export default function JobApplyForm({ jobTitle }: { jobTitle: string }) {
+const MAX_RESUME_BYTES = 5 * 1024 * 1024;
+const ACCEPTED_RESUME_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
+function formatBytes(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+export default function JobApplyForm({ jobTitle, jobSlug }: { jobTitle: string; jobSlug: string }) {
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
+  const [resume, setResume] = useState<File | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function selectResume(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0] ?? null;
+
+    if (!file) {
+      setResume(null);
+      return;
+    }
+
+    if (!ACCEPTED_RESUME_TYPES.includes(file.type)) {
+      setStatus("error");
+      setErrorMessage("Resume must be a PDF, DOC, or DOCX file.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > MAX_RESUME_BYTES) {
+      setStatus("error");
+      setErrorMessage("Resume must be 5 MB or smaller.");
+      event.target.value = "";
+      return;
+    }
+
+    setStatus("idle");
+    setErrorMessage("");
+    setResume(file);
+  }
+
+  function clearResume() {
+    setResume(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -43,12 +90,20 @@ export default function JobApplyForm({ jobTitle }: { jobTitle: string }) {
     setStatus("submitting");
     setErrorMessage("");
 
+    if (!resume && !form.resumeLink.trim()) {
+      setStatus("error");
+      setErrorMessage("Please attach your resume, or paste a link to it.");
+      return;
+    }
+
     try {
-      const res = await fetch("/api/careers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, roleApplyingFor: jobTitle }),
-      });
+      const payload = new FormData();
+      Object.entries(form).forEach(([key, value]) => payload.append(key, value));
+      payload.append("roleApplyingFor", jobTitle);
+      payload.append("jobSlug", jobSlug);
+      if (resume) payload.append("resume", resume);
+
+      const res = await fetch("/api/careers", { method: "POST", body: payload });
 
       const data = await res.json().catch(() => null);
 
@@ -58,6 +113,8 @@ export default function JobApplyForm({ jobTitle }: { jobTitle: string }) {
 
       setStatus("success");
       setForm(INITIAL_STATE);
+      setResume(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please try again.");
@@ -150,8 +207,52 @@ export default function JobApplyForm({ jobTitle }: { jobTitle: string }) {
             />
           </div>
           <div className="space-y-2 sm:col-span-2">
+            <label className={labelClasses} htmlFor="resume">
+              Resume <span className="text-[#E8500A]">*</span>
+              <span className="ml-1 font-normal text-neutral-400">PDF, DOC, or DOCX, up to 5 MB</span>
+            </label>
+
+            <input
+              ref={fileInputRef}
+              id="resume"
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={selectResume}
+              className="sr-only"
+            />
+
+            {resume ? (
+              <div className="flex items-center gap-3 rounded-xl border border-[#29B9F2]/40 bg-[#29B9F2]/5 px-4 py-3">
+                <FileText className="h-5 w-5 shrink-0 text-[#0f9ac9]" />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-neutral-900">{resume.name}</p>
+                  <p className="text-xs text-neutral-500">{formatBytes(resume.size)}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={clearResume}
+                  aria-label="Remove attached resume"
+                  className="rounded-full p-1.5 text-neutral-400 transition hover:bg-black/5 hover:text-neutral-700"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <label
+                htmlFor="resume"
+                className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-neutral-300 bg-neutral-50/60 px-4 py-7 text-center transition hover:border-[#29B9F2] hover:bg-[#29B9F2]/5"
+              >
+                <Upload className="h-5 w-5 text-neutral-400" />
+                <span className="text-sm font-medium text-neutral-700">Click to attach your resume</span>
+                <span className="text-xs text-neutral-400">or paste a link below instead</span>
+              </label>
+            )}
+          </div>
+
+          <div className="space-y-2 sm:col-span-2">
             <label className={labelClasses} htmlFor="resumeLink">
               Resume / Portfolio Link
+              <span className="ml-1 font-normal text-neutral-400">optional</span>
             </label>
             <input
               id="resumeLink"

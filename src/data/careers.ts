@@ -1,45 +1,14 @@
-import {
-  Briefcase,
-  Clock,
-  GraduationCap,
-  HeartPulse,
-  MapPin,
-  PartyPopper,
-  TrendingUp,
-  Users,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+// Seed data only. Job openings are served from Postgres (`job_openings`) and
+// edited in the admin panel — this array is the one-time migration source,
+// replayed by `npm run db:seed-careers`. Editing it does NOT change the live
+// site. `departments`, `departmentIcons`, and `perks` below remain static —
+// they are not part of the CMS.
+import { GraduationCap, HeartPulse, MapPin, PartyPopper, TrendingUp, Users, type LucideIcon } from "lucide-react";
+import type { JobOpening } from "@/lib/careers-types";
 
-export const departments = [
-  "Engineering & Technical",
-  "Sales & Business Development",
-  "Operations & Support",
-  "Corporate & Admin",
-] as const;
+export { departments, departmentIcons, type Department } from "@/lib/careers-types";
 
-export type Department = (typeof departments)[number];
-
-export const departmentIcons: Record<Department, LucideIcon> = {
-  "Engineering & Technical": Wrench,
-  "Sales & Business Development": Briefcase,
-  "Operations & Support": Clock,
-  "Corporate & Admin": Users,
-};
-
-export type JobOpening = {
-  slug: string;
-  title: string;
-  department: Department;
-  location: string;
-  type: "Full-time" | "Internship";
-  experience: string;
-  summary: string;
-  responsibilities: string[];
-  requirements: string[];
-};
-
-export const jobOpenings: JobOpening[] = [
+const seedJobOpenings: JobOpening[] = [
   {
     slug: "av-solutions-engineer",
     title: "AV Solutions Engineer",
@@ -196,9 +165,7 @@ export const jobOpenings: JobOpening[] = [
   },
 ];
 
-export function getJobOpening(slug: string) {
-  return jobOpenings.find((job) => job.slug === slug);
-}
+export { seedJobOpenings };
 
 export type Perk = {
   icon: LucideIcon;

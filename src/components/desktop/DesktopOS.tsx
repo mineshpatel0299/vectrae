@@ -53,6 +53,7 @@ import {
 } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { desktopFolders, type OSFolder, type OSFile } from "@/data/desktopOS";
+import { siteImages } from "@/lib/site-images";
 
 const ICONS: Record<string, LucideIcon> = {
   layoutGrid: LayoutGrid,
@@ -252,10 +253,11 @@ export default function DesktopOS() {
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
       <Image
-        src="/workspace-wallpaper.jpg"
+        src={siteImages.workspaceWallpaper}
         alt=""
         fill
         priority
+        unoptimized
         sizes="100vw"
         className="pointer-events-none object-cover"
       />

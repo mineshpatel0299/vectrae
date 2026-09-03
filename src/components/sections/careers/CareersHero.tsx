@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { type MouseEvent } from "react";
 import Navbar from "@/components/sections/Navbar";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { departments } from "@/data/careers";
+import { departments } from "@/lib/careers-types";
 
 const HEADLINE = ["Build The Backbone", "OF ENTERPRISE TECHNOLOGY"];
 

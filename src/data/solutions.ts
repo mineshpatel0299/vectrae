@@ -26,6 +26,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
+import { siteImages } from "@/lib/site-images";
 
 export type ServiceCapability = {
   icon: LucideIcon;
@@ -62,7 +63,7 @@ export const solutions: Solution[] = [
     title: "Audio Visual Solutions",
     tagline: "Immersive meeting experiences, engineered for the enterprise.",
     icon: MonitorPlay,
-    heroImage: "/images/blog/av-tech.png",
+    heroImage: siteImages.blog.avTech,
     description:
       "From huddle rooms to command centres, we design and deploy audio-visual systems that make every meeting effortless, video conferencing, digital signage, and unified communications, integrated and supported end-to-end.",
     capabilities: [
@@ -173,7 +174,7 @@ export const solutions: Solution[] = [
     title: "Networking & Security",
     tagline: "Resilient connectivity for the always-on enterprise.",
     icon: Network,
-    heroImage: "/images/products/router.png",
+    heroImage: siteImages.products.router,
     description:
       "We design, deploy, and secure the network backbone your business runs on, structured cabling, enterprise Wi-Fi, and firewall infrastructure built for performance at scale.",
     capabilities: [
@@ -250,7 +251,7 @@ export const solutions: Solution[] = [
     title: "Data Center Solutions",
     tagline: "Infrastructure built for uptime, scale, and resilience.",
     icon: Server,
-    heroImage: "/images/products/server-ram.png",
+    heroImage: siteImages.products.serverRam,
     description:
       "We build and secure the infrastructure behind your business, from greenfield data centers to disaster recovery and physical security, engineered for enterprise-grade reliability.",
     capabilities: [
@@ -344,7 +345,7 @@ export const solutions: Solution[] = [
     title: "End Computing Solutions",
     tagline: "Equip every desk, every workstation, every employee.",
     icon: Laptop,
-    heroImage: "/images/products/laptop.png",
+    heroImage: siteImages.products.laptop,
     description:
       "From laptops to thin clients, we procure, configure, and manage the devices your workforce uses every day, with lifecycle support that keeps IT overhead low.",
     capabilities: [
@@ -421,7 +422,7 @@ export const solutions: Solution[] = [
     title: "IT Spares & Accessories",
     tagline: "Fast-turnaround components that keep your infrastructure running.",
     icon: PackageCheck,
-    heroImage: "/images/products/motherboard.png",
+    heroImage: siteImages.products.motherboard,
     description:
       "When hardware fails, downtime isn't an option. We stock and dispatch genuine OEM spare parts and accessories, so your IT and AV systems stay operational.",
     capabilities: [
@@ -481,7 +482,7 @@ export const solutions: Solution[] = [
     title: "Power Solutions",
     tagline: "Zero downtime starts with the right power strategy.",
     icon: Zap,
-    heroImage: "/images/products/power-supply.png",
+    heroImage: siteImages.products.powerSupply,
     description:
       "From UPS systems to distribution infrastructure, Vectrae designs and deploys the power backbone that keeps enterprise operations running, critical infrastructure, engineered for zero downtime.",
     capabilities: [
@@ -541,7 +542,7 @@ export const solutions: Solution[] = [
     title: "Managed IT Services",
     tagline: "Focus on your business. We'll run your IT.",
     icon: LifeBuoy,
-    heroImage: "/images/blog/managed-it.png",
+    heroImage: siteImages.blog.managedIt,
     description:
       "Proactive AMC, remote monitoring, and full-scope IT support, Vectrae's managed services keep enterprise technology running so your team can focus on the business, not the break-fix.",
     capabilities: [

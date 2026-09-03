@@ -13,7 +13,7 @@ const REVEAL_THRESHOLD = 120;
 // Ignore sub-pixel/momentum scroll noise so the bar doesn't flicker.
 const DIRECTION_DEADZONE = 4;
 // Routes that render their own bespoke header — don't overlay the shared nav there.
-const EXCLUDED_PREFIXES = ["/premium", "/desktop"];
+const EXCLUDED_PREFIXES = ["/premium", "/desktop", "/admin"];
 
 export default function FloatingNavbar() {
   const pathname = usePathname();

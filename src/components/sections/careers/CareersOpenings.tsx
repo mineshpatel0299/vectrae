@@ -6,15 +6,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { departmentIcons, departments, jobOpenings } from "@/data/careers";
+import { departmentIcons, departments } from "@/lib/careers-types";
+import type { JobOpening } from "@/lib/careers-types";
 
 const FILTERS = ["All Roles", ...departments] as const;
 
-export default function CareersOpenings() {
+export default function CareersOpenings({ jobs }: { jobs: JobOpening[] }) {
   const [activeFilter, setActiveFilter] = useState<(typeof FILTERS)[number]>("All Roles");
 
   const visibleJobs =
-    activeFilter === "All Roles" ? jobOpenings : jobOpenings.filter((job) => job.department === activeFilter);
+    activeFilter === "All Roles" ? jobs : jobs.filter((job) => job.department === activeFilter);
 
   return (
     <section id="openings" className="relative overflow-hidden bg-black py-20 sm:py-28">
@@ -24,7 +25,7 @@ export default function CareersOpenings() {
         <div className="text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">Open Roles</p>
           <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-            {jobOpenings.length} Positions, PAN-India
+            {jobs.length} Position{jobs.length === 1 ? "" : "s"}, PAN-India
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/55">
             Don&apos;t see the right fit?{" "}

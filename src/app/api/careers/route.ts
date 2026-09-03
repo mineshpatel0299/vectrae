@@ -1,27 +1,35 @@
 import { NextResponse } from "next/server";
-
-type ApplicationPayload = {
-  fullName?: string;
-  email?: string;
-  phone?: string;
-  roleApplyingFor?: string;
-  experience?: string;
-  resumeLink?: string;
-  message?: string;
-};
+import { getDb, withRetry } from "@/db";
+import { jobApplications } from "@/db/schema";
+import { describeResumeProblem, uploadResume } from "@/lib/resume";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_FIELD_LENGTH = 2000;
+
+function clean(value: FormDataEntryValue | null): string | null {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const trimmed = value.trim().slice(0, MAX_FIELD_LENGTH);
+  return trimmed.length > 0 ? trimmed : null;
+}
 
 export async function POST(request: Request) {
-  const body = (await request.json().catch(() => null)) as ApplicationPayload | null;
+  let form: FormData;
 
-  if (!body) {
+  try {
+    form = await request.formData();
+  } catch {
     return NextResponse.json({ ok: false, error: "Invalid request body." }, { status: 400 });
   }
 
-  const { fullName, email, phone, roleApplyingFor } = body;
+  const fullName = clean(form.get("fullName"));
+  const email = clean(form.get("email"));
+  const phone = clean(form.get("phone"));
+  const roleApplyingFor = clean(form.get("roleApplyingFor"));
 
-  if (!fullName?.trim() || !email?.trim() || !phone?.trim() || !roleApplyingFor?.trim()) {
+  if (!fullName || !email || !phone || !roleApplyingFor) {
     return NextResponse.json(
       { ok: false, error: "Full name, email, phone number, and role are required." },
       { status: 400 },
@@ -35,11 +43,60 @@ export async function POST(request: Request) {
     );
   }
 
-  // No email/ATS provider is wired up yet (deferred at the user's request during
-  // this build phase), applications are only logged server-side right now and are
-  // NOT delivered to anyone. Wire this up to a real provider (e.g. Resend, an ATS)
-  // via the Vercel Marketplace before this form collects real applications.
-  console.log("[careers] New application received:", body);
+  const resume = form.get("resume");
+  const resumeLink = clean(form.get("resumeLink"));
+  const hasFile = resume instanceof File && resume.size > 0;
+
+  if (!hasFile && !resumeLink) {
+    return NextResponse.json(
+      { ok: false, error: "Please attach your resume, or paste a link to it." },
+      { status: 400 },
+    );
+  }
+
+  let stored: Awaited<ReturnType<typeof uploadResume>> | null = null;
+
+  if (hasFile) {
+    const problem = describeResumeProblem(resume);
+
+    if (problem) {
+      return NextResponse.json({ ok: false, error: problem }, { status: 400 });
+    }
+
+    try {
+      stored = await uploadResume(resume, fullName);
+    } catch (error) {
+      console.error("[careers] Resume upload failed:", error);
+      return NextResponse.json(
+        { ok: false, error: "We couldn't upload your resume. Please try again shortly." },
+        { status: 500 },
+      );
+    }
+  }
+
+  try {
+    await withRetry(() =>
+      getDb().insert(jobApplications).values({
+        fullName,
+        email: email.toLowerCase(),
+        phone,
+        roleApplyingFor,
+        jobSlug: clean(form.get("jobSlug")),
+        experience: clean(form.get("experience")),
+        resumeUrl: stored?.url ?? null,
+        resumeFilename: stored?.filename ?? null,
+        resumeSize: stored?.size ?? null,
+        resumeLink,
+        message: clean(form.get("message")),
+      }),
+    );
+  } catch (error) {
+    console.error("[careers] Failed to save application:", error);
+    return NextResponse.json(
+      { ok: false, error: "We couldn't save your application just now. Please try again shortly." },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }

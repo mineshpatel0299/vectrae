@@ -5,6 +5,7 @@ import TiltCard from "@/components/ui/TiltCard";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { coreValues } from "@/data/coreValues";
 import { perks } from "@/data/careers";
+import { siteImages } from "@/lib/site-images";
 
 export default function CareersCulture() {
   return (
@@ -25,9 +26,10 @@ export default function CareersCulture() {
             <TiltCard className="h-full">
               <div className="group relative h-full min-h-[360px] overflow-hidden rounded-3xl border border-black/10">
                 <Image
-                  src="/images/sample_about_us.png"
+                  src={siteImages.sampleAboutUs}
                   alt="Team at Vectrae"
                   fill
+                  unoptimized
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
