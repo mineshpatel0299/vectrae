@@ -4,7 +4,7 @@ import Navbar from "@/components/sections/Navbar";
 
 export default function Hero() {
   return (
-    <section className="relative isolate flex min-h-screen flex-col overflow-hidden bg-black">
+    <section className="relative isolate flex min-h-screen flex-col overflow-hidden bg-[#141414]">
       <WovenCanvas />
 
       {/* Subtle overlays to ensure text readability without hiding the 3D canvas */}
@@ -21,7 +21,8 @@ export default function Hero() {
           data-aos-delay="50"
           data-aos-once="true"
         >
-          Trusted by <span className="font-semibold text-white">2,300+ Enterprises</span>{" "}
+          Trusted by{" "}
+          <span className="font-semibold text-white">2,300+ Enterprises</span>{" "}
           Across India
         </div>
 
@@ -32,7 +33,10 @@ export default function Hero() {
             data-aos-duration="900"
             data-aos-once="true"
           >
-            <span className="xl:whitespace-nowrap">Integrated Technology Solutions&nbsp;For</span> <br className="hidden md:block" />
+            <span className="xl:whitespace-nowrap">
+              Integrated Technology Solutions&nbsp;For
+            </span>{" "}
+            <br className="hidden md:block" />
             <span
               className="text-transparent bg-clip-text drop-shadow-sm"
               style={{
@@ -51,7 +55,8 @@ export default function Hero() {
           data-aos-delay="250"
           data-aos-once="true"
         >
-          From AV and Networking to Data Centers and Power, Vectrae delivers end-to-end enterprise technology across PAN-India.
+          From AV and Networking to Data Centers and Power, Vectrae delivers
+          end-to-end enterprise technology across PAN-India.
         </p>
 
         <div
@@ -81,11 +86,10 @@ export default function Hero() {
           data-aos-delay="450"
           data-aos-once="true"
         >
-          Trusted by 2,300+ enterprises&nbsp;|&nbsp;250+ Technology Experts&nbsp;|&nbsp;PAN-India Delivery
+          Trusted by 2,300+ enterprises&nbsp;|&nbsp;250+ Technology
+          Experts&nbsp;|&nbsp;PAN-India Delivery
         </p>
       </div>
-
-
     </section>
   );
 }

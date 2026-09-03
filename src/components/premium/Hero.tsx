@@ -41,7 +41,14 @@ export default function Hero() {
 
       <header className="relative z-20 flex items-center justify-between border-b border-white/10 px-6 py-5 sm:px-10">
         <div className="flex items-center gap-3">
-          <Image src="/logo.png" alt="Vectrae" width={140} height={29} className="h-7 w-auto" priority />
+          <Image
+            src="/logo.png"
+            alt="Vectrae"
+            width={140}
+            height={29}
+            className="h-7 w-auto"
+            priority
+          />
         </div>
 
         <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 md:flex">
@@ -68,7 +75,9 @@ export default function Hero() {
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
         <Reveal>
           <p className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70 backdrop-blur-sm">
-            Trusted by <span className="font-semibold text-white">2,300+ Enterprises</span> Across India
+            Trusted by{" "}
+            <span className="font-semibold text-white">2,300+ Enterprises</span>{" "}
+            Across India
           </p>
         </Reveal>
 
@@ -98,7 +107,12 @@ export default function Hero() {
           ))}
           <span className="mt-2 flex w-full items-baseline justify-center whitespace-nowrap">
             <TypewriterWord
-              words={["Audio Visual Setup", "Data Centers", "Power", "The Modern Enterprise"]}
+              words={[
+                "Audio Visual Setup",
+                "Data Centers",
+                "Power",
+                "The Modern Enterprise",
+              ]}
               className="text-[#29B9F2]"
               cursorClassName="bg-[#29B9F2]"
               align="center"
@@ -108,8 +122,8 @@ export default function Hero() {
 
         <Reveal delay={0.15}>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/60">
-            From AV and Networking to Data Centers and Power, Vectrae delivers end-to-end
-            enterprise technology across PAN-India.
+            From AV and Networking to Data Centers and Power, Vectrae delivers
+            end-to-end enterprise technology across PAN-India.
           </p>
         </Reveal>
 
@@ -133,7 +147,10 @@ export default function Hero() {
         </Reveal>
       </div>
 
-      <Reveal delay={0.1} className="relative z-10 border-t border-white/10 py-4">
+      <Reveal
+        delay={0.1}
+        className="relative z-10 border-t border-white/10 py-4"
+      >
         <div className="group relative overflow-hidden">
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-linear-to-r from-black to-transparent sm:w-32" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-linear-to-l from-black to-transparent sm:w-32" />
