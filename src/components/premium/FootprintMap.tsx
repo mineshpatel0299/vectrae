@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Building, MapPin, ShieldCheck, Users } from "lucide-react";
 import TiltCard from "@/components/ui/TiltCard";
 import Reveal from "./Reveal";
+import { siteImages } from "@/lib/site-images";
 
 const metrics = [
   { label: "Enterprise Clients", value: "2,300+", icon: Building },
@@ -91,7 +92,7 @@ export default function FootprintMap() {
 
               <div className="relative mx-auto w-full max-w-80" style={{ aspectRatio: `${SVG_W} / ${SVG_H}` }}>
                 <img
-                  src="/india-map.svg"
+                  src={siteImages.indiaMap}
                   alt="Map of India"
                   className="pointer-events-none absolute inset-0 h-full w-full opacity-20"
                   style={{ objectFit: "fill" }}

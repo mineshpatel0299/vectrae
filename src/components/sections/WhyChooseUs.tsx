@@ -89,11 +89,11 @@ export default function WhyChooseUs() {
                     data-aos-delay="200"
                   >
                     <div className="group relative h-56 w-full overflow-hidden rounded-2xl border border-white/10 shadow-lg sm:h-64">
-                      {/* Using as any to bypass TS error if type is not updated across files immediately */}
                       <Image
-                        src={(item as any).image || "/images/about-bg.png"}
+                        src={item.image}
                         alt={item.title}
                         fill
+                        unoptimized
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>

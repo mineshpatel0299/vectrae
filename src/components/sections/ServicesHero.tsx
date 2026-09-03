@@ -6,6 +6,7 @@ import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import Navbar from "@/components/sections/Navbar";
+import { siteImages } from "@/lib/site-images";
 
 export default function ServicesHero() {
   return (
@@ -49,10 +50,11 @@ export default function ServicesHero() {
             className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
           >
             <Image
-              src="/images/blog/av-tech.png"
+              src={siteImages.blog.avTech}
               alt="Vectrae enterprise AV boardroom deployment"
               fill
               priority
+              unoptimized
               className="object-cover"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
@@ -67,9 +69,10 @@ export default function ServicesHero() {
           >
             <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
               <Image
-                src="/images/blog/teams-zoom.png"
+                src={siteImages.blog.teamsZoom}
                 alt="Enterprise video collaboration setup"
                 fill
+                unoptimized
                 className="object-cover"
               />
             </div>
@@ -84,9 +87,10 @@ export default function ServicesHero() {
           >
             <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
               <Image
-                src="/images/blog/managed-it.png"
+                src={siteImages.blog.managedIt}
                 alt="24/7 managed IT monitoring"
                 fill
+                unoptimized
                 className="object-cover"
               />
             </div>

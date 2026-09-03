@@ -134,7 +134,7 @@ export default function IndustriesGrid() {
               - lg and up: original vertical list
           ====================================================== */}
 
-          <div className="max-md:hidden">
+          <div>
             <div className="rounded-[22px] bg-[#070909] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:rounded-[28px] sm:p-2.5">
               {/* ---- Mobile / tablet carousel ---- */}
               <div

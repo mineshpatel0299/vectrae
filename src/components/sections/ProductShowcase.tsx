@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Monitor, Server, ShieldCheck, Zap, Laptop, Cpu, Wifi } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
+import { siteImages } from "@/lib/site-images";
 
 type ProductPoint = {
   id: string;
@@ -29,7 +30,7 @@ const products: ProductPoint[] = [
     description:
       "High-performance enterprise laptop for heavy workloads and secure remote access.",
     specs: "Intel Core i9 • 64GB RAM • 2TB NVMe",
-    image: "/images/products/laptop.png",
+    image: siteImages.products.laptop,
     icon: Laptop,
     top: "22%",
     left: "18%",
@@ -43,7 +44,7 @@ const products: ProductPoint[] = [
     description:
       "Dual-socket enterprise server motherboard built for intense computing and virtualization.",
     specs: "Dual LGA 4189 • 16x DIMM • PCIe 4.0",
-    image: "/images/products/motherboard.png",
+    image: siteImages.products.motherboard,
     icon: Server,
     top: "85%",
     left: "15%",
@@ -57,7 +58,7 @@ const products: ProductPoint[] = [
     description:
       "Reliable and highly efficient power supply unit designed for continuous server operation.",
     specs: "1600W • 80 Plus Titanium • Hot-Swappable",
-    image: "/images/products/power-supply.png",
+    image: siteImages.products.powerSupply,
     icon: Zap,
     top: "85%",
     left: "55%",
@@ -71,7 +72,7 @@ const products: ProductPoint[] = [
     description:
       "High-speed ECC memory modules designed for intensive computing and virtualization.",
     specs: "128GB DDR5 • 4800MT/s • ECC",
-    image: "/images/products/server-ram.png",
+    image: siteImages.products.serverRam,
     icon: Cpu,
     top: "85%",
     left: "35%",
@@ -85,7 +86,7 @@ const products: ProductPoint[] = [
     description:
       "High-performance WiFi 7 access point built for dense enterprise environments.",
     specs: "WiFi 7 • 10GbE Uplink • AI Roaming",
-    image: "/images/products/router.png",
+    image: siteImages.products.router,
     icon: Wifi,
     top: "85%",
     left: "85%",
@@ -99,7 +100,7 @@ const products: ProductPoint[] = [
     description:
       "Secure and powerful small form factor desktop built for enterprise deployments.",
     specs: "Intel vPro • 32GB RAM • TPM 2.0",
-    image: "/images/products/desktop.png",
+    image: siteImages.products.desktop,
     icon: Monitor,
     top: "45%",
     left: "18%",
@@ -342,6 +343,7 @@ function MagneticPin({
                 src={product.image}
                 alt={product.name}
                 fill
+                unoptimized
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />

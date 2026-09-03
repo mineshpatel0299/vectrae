@@ -120,6 +120,7 @@ export default async function SolutionOverviewPage({ params }: Props) {
                 alt={solution.title}
                 fill
                 priority
+                unoptimized
                 className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
@@ -345,6 +346,7 @@ export default async function SolutionOverviewPage({ params }: Props) {
                     src={r.heroImage}
                     alt={r.title}
                     fill
+                    unoptimized
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/80" />

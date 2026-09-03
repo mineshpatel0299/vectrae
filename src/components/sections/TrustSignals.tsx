@@ -103,7 +103,7 @@ function ClientWall() {
     }, ROTATE_INTERVAL_MS);
 
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, batchIndex]);
 
   const activeBatch = BATCHES[batchIndex];
 

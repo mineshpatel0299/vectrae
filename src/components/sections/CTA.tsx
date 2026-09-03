@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, PhoneCall } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
+import { siteImages } from "@/lib/site-images";
 
 export default function CTA() {
   return (
@@ -66,9 +67,10 @@ export default function CTA() {
             data-aos-delay="200"
           >
             <Image
-              src="/images/wcu/solutions.png"
+              src={siteImages.wcuSolutions}
               alt="Enterprise Technology Setup"
               fill
+              unoptimized
               className="object-cover transition-transform duration-700 hover:scale-105"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/20" />

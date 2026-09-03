@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Award, BadgeCheck, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
 /* ============================================================

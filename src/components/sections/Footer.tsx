@@ -15,6 +15,8 @@ const links = {
   ],
   company: [
     { label: "About Us", href: "/about" },
+    { label: "OEM Partners", href: "/oem-partners" },
+    { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blog" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Use", href: "/terms-of-use" },

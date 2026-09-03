@@ -4,9 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Calendar, Clock, ChevronRight } from "lucide-react";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import { blogPosts } from "@/data/blogPosts";
+import type { BlogPost } from "@/lib/blog-types";
 
-export default function Blog() {
+export default function Blog({ posts }: { posts: BlogPost[] }) {
+  if (posts.length === 0) return null;
+
   return (
     <section className="relative overflow-hidden bg-[#0A0A0A] py-24 sm:py-32">
       {/* Background ambient lighting glows */}
@@ -27,7 +29,7 @@ export default function Blog() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post, i) => (
+          {posts.slice(0, 3).map((post, i) => (
             <div
               key={post.slug}
               className="group relative h-full"
@@ -41,6 +43,7 @@ export default function Blog() {
                       src={post.image}
                       alt={post.title}
                       fill
+                      unoptimized
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
