@@ -4,8 +4,11 @@ import Navbar from "@/components/sections/Navbar";
 
 export default function Hero() {
   return (
-    <section className="relative isolate flex min-h-screen flex-col overflow-hidden bg-[#141414]">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#141414]">
       <WovenCanvas />
+
+      {/* Mobile-only blur + dim layer: the canvas pattern is too busy behind text on small screens */}
+      <div className="pointer-events-none absolute inset-0 backdrop-blur-[1px] bg-black/35 sm:hidden" />
 
       {/* Subtle overlays to ensure text readability without hiding the 3D canvas */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/80" />
@@ -14,29 +17,33 @@ export default function Hero() {
 
       <Navbar />
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-8 text-center sm:px-6">
+        {/* Top Badge */}
         <div
-          className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70 backdrop-blur-sm"
+          className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] text-white/80 backdrop-blur-md sm:mb-6 sm:px-4 sm:text-sm"
           data-aos="fade-up"
           data-aos-delay="50"
           data-aos-once="true"
         >
-          Trusted by{" "}
-          <span className="font-semibold text-white">2,300+ Enterprises</span>{" "}
-          Across India
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#25D9C7] animate-pulse" />
+          <span className="whitespace-nowrap">
+            Trusted by{" "}
+            <span className="font-semibold text-white">2,300+ Enterprises</span>
+          </span>
         </div>
 
-        <h1 className="w-full px-4 text-center text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-[0_4px_30px_rgba(0,0,0,1)]">
-          <span
-            className="block drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
-            data-aos="fade-up"
-            data-aos-duration="900"
-            data-aos-once="true"
-          >
-            <span className="xl:whitespace-nowrap">
-              Integrated Technology Solutions&nbsp;For
-            </span>{" "}
-            <br className="hidden md:block" />
+        {/* Responsive Heading */}
+        <h1
+          className="w-full max-w-4xl font-extrabold leading-[1.15] tracking-tight text-white drop-shadow-[0_4px_30px_rgba(0,0,0,1)] [font-size:clamp(1.75rem,6vw+0.5rem,3.75rem)]"
+          data-aos="fade-up"
+          data-aos-duration="900"
+          data-aos-once="true"
+        >
+          <span className="block text-balance drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+            Integrated Technology Solutions
+          </span>
+          <span className="mt-1 block sm:mt-2">
+            <span className="text-white/90">For </span>
             <span
               className="text-transparent bg-clip-text drop-shadow-sm"
               style={{
@@ -49,45 +56,54 @@ export default function Hero() {
           </span>
         </h1>
 
+        {/* Subtitle */}
         <p
-          className="mt-6 max-w-2xl text-lg text-white"
+          className="mt-4 max-w-[22rem] text-sm leading-relaxed text-white/80 sm:mt-6 sm:max-w-2xl sm:text-lg sm:text-white"
           data-aos="fade-up"
           data-aos-delay="250"
           data-aos-once="true"
         >
-          From AV and Networking to Data Centers and Power, Vectrae delivers
-          end-to-end enterprise technology across PAN-India.
+          <span className="sm:hidden">
+            End-to-end Audio Visual &amp; enterprise IT infrastructure delivered
+            PAN-India.
+          </span>
+          <span className="hidden sm:inline">
+            From AV and Networking to Data Centers and Power, Vectrae delivers
+            end-to-end enterprise technology across PAN-India.
+          </span>
         </p>
 
+        {/* CTAs */}
         <div
-          className="mt-10 flex w-full max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center"
+          className="mt-6 flex w-full max-w-md flex-col gap-2.5 sm:mt-10 sm:w-auto sm:flex-row sm:gap-3"
           data-aos="fade-up"
           data-aos-delay="350"
           data-aos-once="true"
         >
           <button
-            className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl px-6 py-3.5 text-sm font-semibold text-black transition hover:brightness-110 sm:w-auto"
+            className="flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-5 py-3 text-sm font-bold text-black transition hover:brightness-110 active:scale-95 sm:px-6 sm:py-3.5"
             style={{
               backgroundImage:
                 "linear-gradient(90deg, #B6D93B 0%, #84D96C 35%, #25D9C7 68%, #29B9F2 100%)",
             }}
           >
-            Request a Free Consultation
+            Request Consultation
             <ArrowRight className="h-4 w-4" />
           </button>
-          <button className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 sm:w-auto">
-            Explore Our Solutions
+          <button className="flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 active:scale-95 sm:px-6 sm:py-3.5">
+            Explore Solutions
           </button>
         </div>
 
+        {/* Trust metrics footer */}
         <p
           className="mt-6 text-xs font-medium tracking-wide text-white/40"
           data-aos="fade-up"
           data-aos-delay="450"
           data-aos-once="true"
         >
-          Trusted by 2,300+ enterprises&nbsp;|&nbsp;250+ Technology
-          Experts&nbsp;|&nbsp;PAN-India Delivery
+          250+ Technology Experts&nbsp;|&nbsp;PAN-India
+          Delivery&nbsp;|&nbsp;2,300+ Enterprise Clients
         </p>
       </div>
     </section>

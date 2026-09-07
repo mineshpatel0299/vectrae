@@ -36,9 +36,7 @@ export default function ServicesHero() {
           className="mt-6 flex items-center justify-center gap-1.5 text-sm text-white/40"
           data-aos="fade-up"
           data-aos-delay="200"
-        >
-
-        </div>
+        ></div>
       </div>
 
       <div className="relative z-10 mx-auto mt-16 max-w-5xl px-6 pb-24 sm:mt-20 sm:pb-32">
@@ -65,7 +63,7 @@ export default function ServicesHero() {
             initial={{ opacity: 0, x: -48, scale: 0.94 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute -left-8 top-16 rounded-2xl bg-white p-1 shadow-2xl sm:-left-18 sm:top-20"
+            className="absolute -left-4 top-16 rounded-2xl bg-white p-1 shadow-2xl sm:-left-18 sm:top-20"
           >
             <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
               <Image
@@ -83,7 +81,7 @@ export default function ServicesHero() {
             initial={{ opacity: 0, x: 48, scale: 0.94 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-16 -right-6 rounded-2xl bg-white p-1 shadow-2xl sm:bottom-20 sm:-right-16"
+            className="absolute bottom-16 -right-4 rounded-2xl bg-white p-1 shadow-2xl sm:bottom-20 sm:-right-16"
           >
             <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
               <Image
@@ -99,9 +97,13 @@ export default function ServicesHero() {
 
         {/* Paragraph + CTA */}
         <div className="mx-auto mt-16 flex max-w-xl flex-col items-center gap-6 text-center">
-          <p className="text-base leading-relaxed text-white/55" data-aos="fade-up">
-            From boardrooms to data centers, Vectrae designs, deploys, and supports every layer of
-            enterprise technology so your teams can focus on the work that matters.
+          <p
+            className="text-base leading-relaxed text-white/55"
+            data-aos="fade-up"
+          >
+            From boardrooms to data centers, Vectrae designs, deploys, and
+            supports every layer of enterprise technology so your teams can
+            focus on the work that matters.
           </p>
 
           <Link
