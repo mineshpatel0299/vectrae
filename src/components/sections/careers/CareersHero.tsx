@@ -42,19 +42,31 @@ export default function CareersHero() {
       <Navbar />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 pb-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">
+        <p
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]"
+          data-aos="fade-up"
+        >
           Careers at Vectrae
         </p>
 
-        <h1 className="mt-8 font-semibold leading-[0.95] tracking-tight text-white sm:text-xl lg:text-[5rem]">
+        <h1 className="mt-8 font-semibold leading-[1.1] tracking-tight text-white text-4xl lg:text-[5rem]">
           {HEADLINE.map((line, i) => (
-            <span key={line} className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
+            <span
+              key={line}
+              className="block overflow-hidden pb-[0.2em] -mb-[0.2em]"
+            >
               <motion.span
                 initial={{ y: "110%" }}
                 animate={{ y: "0%" }}
-                transition={{ duration: 1, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  duration: 1,
+                  delay: 0.15 + i * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className={`block ${i === 1 ? "bg-clip-text text-transparent" : ""}`}
-                style={i === 1 ? { backgroundImage: BRAND_GRADIENT } : undefined}
+                style={
+                  i === 1 ? { backgroundImage: BRAND_GRADIENT } : undefined
+                }
               >
                 {line}
               </motion.span>
@@ -68,8 +80,9 @@ export default function CareersHero() {
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg"
         >
-          250+ certified experts deliver AV, Networking, Data Center, End Computing, and Power
-          solutions to 2,300+ enterprises PAN-India. Come build it with us.
+          250+ certified experts deliver AV, Networking, Data Center, End
+          Computing, and Power solutions to 2,300+ enterprises PAN-India. Come
+          build it with us.
         </motion.p>
 
         <motion.div

@@ -38,7 +38,11 @@ export default function AboutStory() {
     offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${(chapters.length - 1) * 100}%`]);
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", `-${(chapters.length - 1) * 100}%`],
+  );
   const railWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
@@ -89,7 +93,10 @@ export default function AboutStory() {
         </motion.div>
 
         <div className="absolute bottom-10 left-1/2 z-10 h-px w-48 -translate-x-1/2 bg-black/10 sm:w-64">
-          <motion.div style={{ width: railWidth, backgroundImage: BRAND_GRADIENT }} className="h-full" />
+          <motion.div
+            style={{ width: railWidth, backgroundImage: BRAND_GRADIENT }}
+            className="h-full"
+          />
         </div>
       </div>
     </section>

@@ -1,15 +1,36 @@
 import { coreValues } from "@/data/coreValues";
 import { BRAND_GRADIENT } from "@/lib/brand";
 
-// Split across two explicit rows (3 + 2) instead of leaving the wrap to
-// flex-wrap, which left a lone value stranded on the second line.
+// Explicit 3 + 2 grouping for the desktop/tablet row layout.
 const ROWS = [coreValues.slice(0, 3), coreValues.slice(3)];
 
-export default function CoreValues() {
-  let index = 0;
-
+function Dot({ delay }: { delay: number }) {
   return (
-    <section className="relative border-t border-black/5 bg-white py-20 sm:py-28">
+    <span
+      aria-hidden
+      className="h-1.5 w-1.5 shrink-0 rounded-full sm:h-2 sm:w-2"
+      style={{ backgroundImage: BRAND_GRADIENT }}
+      data-aos="fade-up"
+      data-aos-delay={delay}
+    />
+  );
+}
+
+function Value({ value, delay }: { value: string; delay: number }) {
+  return (
+    <span
+      className="cursor-default text-xl font-semibold tracking-tight text-neutral-900 transition-colors duration-300 hover:text-[#0f9ac9] sm:text-2xl md:text-4xl"
+      data-aos="fade-up"
+      data-aos-delay={delay}
+    >
+      {value}
+    </span>
+  );
+}
+
+export default function CoreValues() {
+  return (
+    <section className="relative border-t border-black/5 bg-white py-16 sm:py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-6 text-center">
         <p
           className="text-xs font-semibold uppercase tracking-widest text-[#0f9ac9]"
@@ -18,32 +39,30 @@ export default function CoreValues() {
           Our Core Values
         </p>
 
-        <div className="mt-8 flex flex-col items-center gap-y-5">
+        {/* Mobile: simple vertical stack, no separators — dots only make
+            sense between items sharing a line, which isn't guaranteed here. */}
+        <div className="mt-6 flex flex-col items-center gap-y-4 sm:hidden">
+          {coreValues.map((value, i) => (
+            <Value key={value} value={value} delay={i * 80} />
+          ))}
+        </div>
+
+        {/* sm and up: explicit 3 + 2 row layout with separator dots. */}
+        <div className="mt-8 hidden flex-col items-center gap-y-5 sm:flex">
           {ROWS.map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className="flex flex-wrap items-center justify-center gap-x-4 gap-y-5 sm:gap-x-6"
+              className="flex items-center justify-center gap-x-4 sm:gap-x-6"
             >
               {row.map((value, i) => {
-                const delay = index++ * 80;
+                const delay = (rowIndex * 3 + i) * 80;
                 return (
-                  <div key={value} className="flex items-center gap-x-4 sm:gap-x-6">
-                    <span
-                      className="cursor-default text-2xl font-semibold tracking-tight text-neutral-900 transition-colors duration-300 hover:text-[#0f9ac9] sm:text-4xl"
-                      data-aos="fade-up"
-                      data-aos-delay={delay}
-                    >
-                      {value}
-                    </span>
-                    {i < row.length - 1 && (
-                      <span
-                        aria-hidden
-                        className="h-2 w-2 shrink-0 rounded-full"
-                        style={{ backgroundImage: BRAND_GRADIENT }}
-                        data-aos="fade-up"
-                        data-aos-delay={delay}
-                      />
-                    )}
+                  <div
+                    key={value}
+                    className="flex items-center gap-x-4 sm:gap-x-6"
+                  >
+                    <Value value={value} delay={delay} />
+                    {i < row.length - 1 && <Dot delay={delay} />}
                   </div>
                 );
               })}

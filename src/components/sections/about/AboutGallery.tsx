@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { BRAND_GRADIENT } from "@/lib/brand";
@@ -56,6 +57,15 @@ export default function AboutGallery() {
   const [direction, setDirection] = useState(1);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isLightboxImageLoaded, setIsLightboxImageLoaded] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  /*
+   * Portals need a browser document to attach to, so we only
+   * flip this on after mount (also keeps SSR happy).
+   */
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   /*
    * Automatically divide all images into groups of 9.
@@ -169,6 +179,95 @@ export default function AboutGallery() {
   }, [isLightboxOpen]);
 
   if (!slides.length) return null;
+
+  const lightboxMarkup = (
+    <AnimatePresence>
+      {isLightboxOpen && lightboxIndex !== null && (
+        <motion.div
+          key="lightbox"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          onClick={closeLightbox}
+        >
+          {/* Close */}
+          <button
+            type="button"
+            onClick={closeLightbox}
+            aria-label="Close preview"
+            className="absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-[10000] flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/70 backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/[0.1] hover:text-white sm:right-5 sm:top-5 sm:h-11 sm:w-11"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          {/* Counter */}
+          <div
+            className="absolute left-4 top-[calc(env(safe-area-inset-top)+1.25rem)] z-[10000] font-mono text-xs tracking-[0.18em] text-white/40 sm:left-5 sm:top-5"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {String(lightboxIndex + 1).padStart(2, "0")} /{" "}
+            {String(totalImages).padStart(2, "0")}
+          </div>
+
+          {/* Previous */}
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              previousLightboxImage();
+            }}
+            aria-label="Previous image"
+            className="absolute left-3 top-1/2 z-[10000] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:left-6"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          {/* Next */}
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              nextLightboxImage();
+            }}
+            aria-label="Next image"
+            className="absolute right-3 top-1/2 z-[10000] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:right-6"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          {/* Image */}
+          <motion.div
+            key={lightboxIndex}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mx-4 h-[80vh] w-full max-w-5xl sm:mx-16"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {/* Skeleton loader */}
+            {!isLightboxImageLoaded && (
+              <div className="absolute inset-0 animate-pulse rounded-md bg-gradient-to-br from-white/[0.4] via-white/[0.03] to-transparent" />
+            )}
+
+            <Image
+              src={galleryImages[lightboxIndex]}
+              alt="Vectrae gallery preview"
+              fill
+              sizes="90vw"
+              className={`object-contain transition-opacity duration-500 ${
+                isLightboxImageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setIsLightboxImageLoaded(true)}
+              priority
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 
   return (
     <section
@@ -313,95 +412,11 @@ export default function AboutGallery() {
       />
 
       {/* ========================================================
-          LIGHTBOX
+          LIGHTBOX (portaled to <body> so it escapes this section's
+          `isolate` stacking context and always sits above the navbar)
       ======================================================== */}
 
-      <AnimatePresence>
-        {isLightboxOpen && lightboxIndex !== null && (
-          <motion.div
-            key="lightbox"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm"
-            onClick={closeLightbox}
-          >
-            {/* Close */}
-            <button
-              type="button"
-              onClick={closeLightbox}
-              aria-label="Close preview"
-              className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* Counter */}
-            <div
-              className="absolute left-5 top-5 z-10 font-mono text-xs tracking-[0.18em] text-white/40"
-              onClick={(event) => event.stopPropagation()}
-            >
-              {String(lightboxIndex + 1).padStart(2, "0")} /{" "}
-              {String(totalImages).padStart(2, "0")}
-            </div>
-
-            {/* Previous */}
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                previousLightboxImage();
-              }}
-              aria-label="Previous image"
-              className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:left-6"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-
-            {/* Next */}
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                nextLightboxImage();
-              }}
-              aria-label="Next image"
-              className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:right-6"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-
-            {/* Image */}
-            <motion.div
-              key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mx-4 h-[80vh] w-full max-w-5xl sm:mx-16"
-              onClick={(event) => event.stopPropagation()}
-            >
-              {/* Skeleton loader */}
-              {!isLightboxImageLoaded && (
-                <div className="absolute inset-0 animate-pulse rounded-md bg-gradient-to-br from-white/[0.4] via-white/[0.03] to-transparent" />
-              )}
-
-              <Image
-                src={galleryImages[lightboxIndex]}
-                alt="Vectrae gallery preview"
-                fill
-                sizes="90vw"
-                className={`object-contain transition-opacity duration-500 ${
-                  isLightboxImageLoaded ? "opacity-100" : "opacity-0"
-                }`}
-                onLoad={() => setIsLightboxImageLoaded(true)}
-                priority
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isMounted && createPortal(lightboxMarkup, document.body)}
     </section>
   );
 }

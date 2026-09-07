@@ -44,19 +44,31 @@ export default function PartnersHero() {
       <Navbar />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 pb-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">
+        <p
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]"
+          data-aos="fade-up"
+        >
           Our OEM Partners
         </p>
 
-        <h1 className="mt-8 font-semibold leading-[0.95] tracking-tight text-white sm:text-xl lg:text-[5rem]">
+        <h1 className="mt-8 font-semibold leading-[1] tracking-tight text-white text-4xl lg:text-[5rem]">
           {HEADLINE.map((line, i) => (
-            <span key={line} className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
+            <span
+              key={line}
+              className="block overflow-hidden pb-[0.2em] -mb-[0.2em]"
+            >
               <motion.span
                 initial={{ y: "110%" }}
                 animate={{ y: "0%" }}
-                transition={{ duration: 1, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  duration: 1,
+                  delay: 0.15 + i * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className={`block ${i === 1 ? "bg-clip-text text-transparent" : ""}`}
-                style={i === 1 ? { backgroundImage: BRAND_GRADIENT } : undefined}
+                style={
+                  i === 1 ? { backgroundImage: BRAND_GRADIENT } : undefined
+                }
               >
                 {line}
               </motion.span>
@@ -70,8 +82,9 @@ export default function PartnersHero() {
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg"
         >
-          We partner with the world&apos;s leading technology brands across AV, Networking,
-          Security, and End Computing, so every solution we deliver is best-in-class.
+          We partner with the world&apos;s leading technology brands across AV,
+          Networking, Security, and End Computing, so every solution we deliver
+          is best-in-class.
         </motion.p>
 
         <motion.div
@@ -104,7 +117,9 @@ export default function PartnersHero() {
       <div className="relative z-10 border-t border-white/5 py-6">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30">
-            {oemStat.value}{oemStat.suffix} OEM & Technology Partners across every solution vertical
+            {oemStat.value}
+            {oemStat.suffix} OEM & Technology Partners across every solution
+            vertical
           </p>
         </div>
       </div>
