@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { WovenCanvas } from "@/components/ui/woven-light-hero";
 import Navbar from "@/components/sections/Navbar";
 
@@ -14,29 +14,32 @@ export default function Hero() {
 
       <Navbar />
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 py-6 text-center sm:px-6">
+        {/* Top Badge */}
         <div
-          className="mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70 backdrop-blur-sm"
+          className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 backdrop-blur-md sm:mb-6 sm:px-4 sm:py-1.5 sm:text-sm"
           data-aos="fade-up"
           data-aos-delay="50"
           data-aos-once="true"
         >
-          Trusted by{" "}
-          <span className="font-semibold text-white">2,300+ Enterprises</span>{" "}
-          Across India
+          <span className="h-1.5 w-1.5 rounded-full bg-[#25D9C7] animate-pulse" />
+          <span>
+            Trusted by <span className="font-semibold text-white">2,300+ Enterprises</span>
+          </span>
         </div>
 
-        <h1 className="w-full px-4 text-center text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-[0_4px_30px_rgba(0,0,0,1)]">
-          <span
-            className="block drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
-            data-aos="fade-up"
-            data-aos-duration="900"
-            data-aos-once="true"
-          >
-            <span className="xl:whitespace-nowrap">
-              Integrated Technology Solutions&nbsp;For
-            </span>{" "}
-            <br className="hidden md:block" />
+        {/* Responsive Heading - Strictly 2 Lines */}
+        <h1
+          className="w-full max-w-4xl text-lg font-extrabold leading-tight tracking-tight text-white min-[380px]:text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-[0_4px_30px_rgba(0,0,0,1)]"
+          data-aos="fade-up"
+          data-aos-duration="900"
+          data-aos-once="true"
+        >
+          <span className="block truncate sm:overflow-visible sm:whitespace-normal drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+            Integrated Technology Solutions
+          </span>
+          <span className="block mt-0.5 sm:mt-1">
+            <span className="text-white/90">For </span>
             <span
               className="text-transparent bg-clip-text drop-shadow-sm"
               style={{
@@ -49,45 +52,51 @@ export default function Hero() {
           </span>
         </h1>
 
+        {/* Subtitle - Tailored for Mobile & Desktop */}
         <p
-          className="mt-6 max-w-2xl text-lg text-white"
+          className="mt-3.5 max-w-2xl text-xs leading-relaxed text-white/80 sm:mt-6 sm:text-lg sm:text-white"
           data-aos="fade-up"
           data-aos-delay="250"
           data-aos-once="true"
         >
-          From AV and Networking to Data Centers and Power, Vectrae delivers
-          end-to-end enterprise technology across PAN-India.
+          <span className="sm:hidden">
+            End-to-end Audio Visual & enterprise IT infrastructure delivered PAN-India.
+          </span>
+          <span className="hidden sm:inline">
+            From AV and Networking to Data Centers and Power, Vectrae delivers end-to-end enterprise technology across PAN-India.
+          </span>
         </p>
 
+        {/* CTAs */}
         <div
-          className="mt-10 flex w-full max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center"
+          className="mt-6 flex w-full max-w-md flex-row items-center gap-2.5 justify-center sm:mt-10 sm:gap-3"
           data-aos="fade-up"
           data-aos-delay="350"
           data-aos-once="true"
         >
           <button
-            className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl px-6 py-3.5 text-sm font-semibold text-black transition hover:brightness-110 sm:w-auto"
+            className="flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3.5 py-3 text-xs font-bold text-black transition hover:brightness-110 active:scale-95 sm:flex-initial sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               backgroundImage:
                 "linear-gradient(90deg, #B6D93B 0%, #84D96C 35%, #25D9C7 68%, #29B9F2 100%)",
             }}
           >
-            Request a Free Consultation
-            <ArrowRight className="h-4 w-4" />
+            Request Consultation
+            <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
-          <button className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 sm:w-auto">
-            Explore Our Solutions
+          <button className="flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-3.5 py-3 text-xs font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 active:scale-95 sm:flex-initial sm:px-6 sm:py-3.5 sm:text-sm">
+            Explore Solutions
           </button>
         </div>
 
+        {/* Trust metrics footer - Hidden on mobile to keep viewport clean */}
         <p
-          className="mt-6 text-xs font-medium tracking-wide text-white/40"
+          className="mt-6 hidden text-xs font-medium tracking-wide text-white/40 sm:block"
           data-aos="fade-up"
           data-aos-delay="450"
           data-aos-once="true"
         >
-          Trusted by 2,300+ enterprises&nbsp;|&nbsp;250+ Technology
-          Experts&nbsp;|&nbsp;PAN-India Delivery
+          250+ Technology Experts&nbsp;|&nbsp;PAN-India Delivery&nbsp;|&nbsp;2,300+ Enterprise Clients
         </p>
       </div>
     </section>

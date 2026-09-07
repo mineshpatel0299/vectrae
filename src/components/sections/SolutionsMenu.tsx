@@ -16,7 +16,9 @@ export default function SolutionsMenu() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const isActive = pathname.startsWith("/solutions");
+  const isActive =
+    pathname === "/solutions" ||
+    (pathname.startsWith("/solutions") && pathname !== "/solutions/av-solutions");
 
   const show = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);

@@ -30,6 +30,24 @@ export default function Navbar() {
             return <SolutionsMenu key={link.label} />;
           }
 
+          if (link.label === "Audio Visual Solutions") {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`group relative flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-[#25D9C7]/20 text-[#25D9C7] ring-1 ring-[#25D9C7]/40 shadow-[0_0_12px_rgba(37,217,199,0.25)]"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-[#25D9C7]" />
+                <span>{link.label}</span>
+              </Link>
+            );
+          }
+
           const isActive = link.href !== "#" && pathname === link.href;
           return (
             <Link

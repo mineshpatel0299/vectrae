@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import AosInit from "@/components/AosInit";
 import FloatingNavbar from "@/components/sections/FloatingNavbar";
+import FloatingAvWidget from "@/components/sections/FloatingAvWidget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,11 +28,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AosInit />
         <FloatingNavbar />
+        <FloatingAvWidget />
         {children}
       </body>
     </html>

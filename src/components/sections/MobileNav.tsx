@@ -213,6 +213,37 @@ function MobileMenuOverlay({
               );
             }
 
+            /* ── Audio Visual Solutions Flagship Link ── */
+            if (link.label === "Audio Visual Solutions") {
+              const isActive = pathname === link.href;
+              return (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={onClose}
+                    className="flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-bold transition active:scale-[0.99]"
+                    style={{
+                      background: isActive
+                        ? "linear-gradient(90deg, rgba(37,217,199,0.25) 0%, rgba(37,217,199,0.12) 100%)"
+                        : "linear-gradient(90deg, rgba(37,217,199,0.12) 0%, rgba(37,217,199,0.05) 100%)",
+                      border: "1px solid rgba(37,217,199,0.35)",
+                      color: "#fff",
+                    }}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-[#25D9C7]" />
+                      {link.label}
+                    </span>
+                  </Link>
+                </motion.div>
+              );
+            }
+
             /* ── Regular link ── */
             const isActive = pathname === link.href;
             return (
