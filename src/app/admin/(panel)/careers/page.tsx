@@ -176,7 +176,7 @@ export default async function CareersListPage({ searchParams }: Props) {
                     const Icon = departmentIcons[row.department as Department] ?? Briefcase;
 
                     return (
-                      <tr key={row.id} className="transition-colors duration-200 hover:bg-white/[0.03]">
+                      <tr key={row.id} className="relative transition-colors duration-200 hover:bg-white/[0.03]">
                         <td className={TABLE_CELL}>
                           <div className="flex items-start gap-3">
                             <span
@@ -188,7 +188,7 @@ export default async function CareersListPage({ searchParams }: Props) {
                             <div className="min-w-0">
                               <Link
                                 href={`/admin/careers/${row.id}`}
-                                className="font-medium text-white underline-offset-4 transition-colors hover:text-[#7bd4f7] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#29B9F2]"
+                                className="font-medium text-white underline-offset-4 transition-colors after:absolute after:inset-0 hover:text-[#7bd4f7] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#29B9F2]"
                               >
                                 <span className="line-clamp-1">{row.title}</span>
                               </Link>
@@ -216,7 +216,7 @@ export default async function CareersListPage({ searchParams }: Props) {
                               target="_blank"
                               rel="noreferrer"
                               aria-label={`View "${row.title}" on the live site`}
-                              className="flex h-9 w-9 items-center justify-center rounded-lg text-white/30 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#29B9F2]"
+                              className="relative z-10 flex h-9 w-9 items-center justify-center rounded-lg text-white/30 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#29B9F2]"
                             >
                               <ExternalLink className="h-4 w-4" aria-hidden />
                             </a>

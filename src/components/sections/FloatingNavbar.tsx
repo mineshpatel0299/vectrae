@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { NAV_LINKS } from "@/lib/navLinks";
+import SolutionsMenu from "@/components/sections/SolutionsMenu";
+import MobileNav from "@/components/sections/MobileNav";
 
 // Past this scroll offset the floating bar takes over from the in-hero navbar.
 const REVEAL_THRESHOLD = 120;
@@ -53,6 +55,10 @@ export default function FloatingNavbar() {
 
       <nav className="hidden items-center gap-1 justify-self-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm lg:flex">
         {NAV_LINKS.map((link) => {
+          if (link.label === "Solutions") {
+            return <SolutionsMenu key={link.label} />;
+          }
+
           const isActive = link.href !== "#" && pathname === link.href;
           return (
             <Link
@@ -68,14 +74,15 @@ export default function FloatingNavbar() {
         })}
       </nav>
 
-      <div className="col-span-1 flex justify-self-end">
+      <div className="col-span-1 flex items-center justify-self-end gap-3">
         <Link
           href="/contact"
           style={{ backgroundImage: BRAND_GRADIENT }}
-          className="rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
+          className="hidden lg:inline-flex rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
         >
           Contact
         </Link>
+        <MobileNav />
       </div>
     </motion.header>
   );

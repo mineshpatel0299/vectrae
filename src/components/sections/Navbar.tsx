@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { NAV_LINKS } from "@/lib/navLinks";
+import SolutionsMenu from "@/components/sections/SolutionsMenu";
+import MobileNav from "@/components/sections/MobileNav";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -24,6 +26,10 @@ export default function Navbar() {
         data-aos-once="true"
       >
         {NAV_LINKS.map((link) => {
+          if (link.label === "Solutions") {
+            return <SolutionsMenu key={link.label} />;
+          }
+
           const isActive = link.href !== "#" && pathname === link.href;
           return (
             <Link
@@ -39,14 +45,15 @@ export default function Navbar() {
         })}
       </nav>
 
-      <div className="col-span-1 flex justify-self-end" data-aos="fade-down" data-aos-delay="200" data-aos-once="true">
+      <div className="col-span-1 flex items-center justify-self-end gap-3" data-aos="fade-down" data-aos-delay="200" data-aos-once="true">
         <Link
           href="/contact"
           style={{ backgroundImage: BRAND_GRADIENT }}
-          className="rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
+          className="hidden lg:inline-flex rounded-full px-5 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
         >
           Contact
         </Link>
+        <MobileNav />
       </div>
     </header>
   );
