@@ -223,6 +223,18 @@ export default function IndustriesGrid() {
               Below lg this IS the carousel: swipe it left/right,
               autoplay still runs, and the dots at bottom-right
               (already in this card) are the navigation dots.
+
+              Height is FIXED (h-*, not min-h-*) at every
+              breakpoint so switching industries never resizes
+              the card. The content block inside is positioned
+              absolute inset-0 so its natural text height can
+              never push the card around — it just fills the
+              fixed box. No overflow/scrollbar is applied on
+              purpose: the fixed heights below already have
+              enough headroom for the longest copy across all
+              industries. If you add an industry with notably
+              longer headline/description text, bump the
+              h-[...] values here (and only here) to match.
           ====================================================== */}
 
           <Link
@@ -235,19 +247,51 @@ export default function IndustriesGrid() {
               group
               touch-pan-y
               relative
-              min-h-[560px]
+              h-[640px]
               w-full
               max-w-full
               overflow-hidden
               rounded-[22px]
               bg-[#020505]
-              shadow-[0_25px_70px_rgba(0,0,0,0.15)]
-              sm:min-h-[650px]
+              shadow-[0_25px_70px_rgba(0,0,0,.7)]
+              sm:h-[720px]
               sm:rounded-[28px]
-              md:min-h-[620px]
-              lg:min-h-[650px]
+              md:h-[680px]
+              lg:h-[700px]
             "
           >
+            {/* ===================================================
+                PER-INDUSTRY BACKGROUND IMAGE
+                Crossfades with the content on industry change.
+                Sits below the glow/grid/content layers and gets
+                a dark gradient overlay so the white text on top
+                stays readable regardless of the image.
+            ==================================================== */}
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`bg-${active.slug}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0"
+              >
+                <img
+                  src={active.image}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                {/* readability overlay: light base tint + extra darken
+                    toward bottom-left where the text sits, so the
+                    image stays visible instead of being blacked out */}
+                <div className="absolute inset-0 bg-[#020505]/75" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-[#020505] via-[#020505]/35 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#020505]/60 via-transparent to-transparent" /> */}
+              </motion.div>
+            </AnimatePresence>
+
             {/* ===================================================
                 BACKGROUND RADIAL GLOW
             ==================================================== */}
@@ -315,6 +359,8 @@ export default function IndustriesGrid() {
 
             {/* ===================================================
                 CONTENT
+                absolute inset-0 => fills the fixed-height card,
+                never drives its own height.
             ==================================================== */}
 
             <AnimatePresence mode="wait">
@@ -325,17 +371,14 @@ export default function IndustriesGrid() {
                 exit={{ opacity: 0, y: -18 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="
-                  relative
+                  absolute
+                  inset-0
                   z-10
                   flex
-                  min-h-[560px]
                   flex-col
                   p-5
-                  sm:min-h-[650px]
                   sm:p-10
-                  md:min-h-[620px]
                   md:p-11
-                  lg:min-h-[650px]
                   lg:p-14
                 "
               >
@@ -536,7 +579,7 @@ export default function IndustriesGrid() {
                 }}
               />
 
-              <motion.div
+              {/* <motion.div
                 animate={{ y: [0, -9, 0], rotateZ: [0, 1.5, 0] }}
                 transition={{
                   duration: 5,
@@ -558,7 +601,7 @@ export default function IndustriesGrid() {
                     className="relative z-10 h-full w-full object-contain"
                   />
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               <motion.span
                 animate={{ y: [0, -12, 0], opacity: [0.25, 1, 0.25] }}

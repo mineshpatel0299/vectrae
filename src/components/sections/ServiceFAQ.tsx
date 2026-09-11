@@ -26,7 +26,7 @@ const faqs = [
   {
     question: "Which brands and OEMs do you work with?",
     answer:
-      "We partner with 43 leading OEMs and technology brands, including Cisco, Palo Alto Networks, Crestron, Microsoft, Dell, and HP, so you get best-in-class hardware regardless of the solution.",
+      "We partner with leading OEMs and technology brands, including Cisco, Palo Alto Networks, Crestron, Microsoft, Dell, and HP, so you get best-in-class hardware regardless of the solution.",
   },
   {
     question: "Do you deliver projects outside Delhi NCR?",
@@ -52,7 +52,11 @@ function FAQItem({ item, index, isOpen, onToggle }: FAQItemProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.06,
+        ease: [0.16, 1, 0.3, 1],
+      }}
     >
       <SpotlightCard
         className={`rounded-2xl border bg-white/[0.03] backdrop-blur-sm transition-colors duration-300 ${
@@ -117,13 +121,15 @@ export default function ServiceFAQ() {
 
       <div className="relative mx-auto max-w-3xl px-6">
         <div className="text-center" data-aos="fade-up">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">FAQ</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">
+            FAQ
+          </p>
           <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
             Common Questions, Answered
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/55">
-            Everything you need to know before reaching out. Can&apos;t find your answer? We
-            respond within 4 business hours.
+            Everything you need to know before reaching out. Can&apos;t find
+            your answer? We respond within 4 business hours.
           </p>
         </div>
 

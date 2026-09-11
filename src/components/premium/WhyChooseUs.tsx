@@ -23,7 +23,10 @@ function StackCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.55]);
 
@@ -50,7 +53,9 @@ function StackCard({
         </span>
         <div className="flex-1">
           <span className="font-mono text-xs text-white/30">0{index + 1}</span>
-          <h3 className="mt-1 text-xl font-semibold text-white sm:text-2xl">{title}</h3>
+          <h3 className="mt-1 text-xl font-semibold text-white sm:text-2xl">
+            {title}
+          </h3>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-white/50 sm:text-base">
             {description}
           </p>
@@ -67,7 +72,9 @@ export default function WhyChooseUs() {
 
       <div className="relative mx-auto max-w-5xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#0f9ac9]">Why Choose Us</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#0f9ac9]">
+            Why Choose Us
+          </p>
           <h2 className="mx-auto mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
             Five Reasons Enterprises Choose Vectrae
           </h2>

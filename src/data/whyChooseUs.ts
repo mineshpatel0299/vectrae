@@ -12,7 +12,7 @@ export const whyChooseUs = [
     image: siteImages.blog.managedIt,
   },
   {
-    title: "43 OEM Partnerships",
+    title: "OEM Partnerships",
     description: "Best-in-class technology from the world's leading brands.",
     image: siteImages.blog.teamsZoom,
   },

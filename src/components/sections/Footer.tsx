@@ -26,6 +26,10 @@ const links = {
       external: true,
     },
   ],
+  career: [
+    { label: "Employment Opportunities", href: "/careers" },
+    { label: "Join Us", href: "/careers#join-us" },
+  ],
 };
 
 const socials = [
@@ -48,9 +52,9 @@ export default function Footer() {
       {/* Top gradient line */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#29B9F2]/40 to-transparent" />
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative mx-auto max-w-7xl px-6">
         {/* Main row */}
-        <div className="grid grid-cols-2 gap-10 pt-14 pb-10 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-10 pt-14 pb-10 md:grid-cols-4 lg:grid-cols-7">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1" data-aos="fade-up">
             <Image
@@ -119,12 +123,27 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Career */}
+          <div data-aos="fade-up" data-aos-delay="250">
+            <h4 className="text-[11px] font-semibold uppercase tracking-widest text-white/25">
+              Career
+            </h4>
+            <ul className="mt-4 space-y-2.5">
+              {links.career.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-white/45 transition hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contact */}
-          <div
-            className="col-span-2 md:col-span-1"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
+          <div data-aos="fade-up" data-aos-delay="300">
             <h4 className="text-[11px] font-semibold uppercase tracking-widest text-white/25">
               Contact
             </h4>
@@ -163,6 +182,34 @@ export default function Footer() {
             >
               <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
               WhatsApp us
+            </a>
+          </div>
+
+          {/* Map */}
+          <div className="col-span-2" data-aos="fade-up" data-aos-delay="400">
+            <h4 className="text-[11px] font-semibold uppercase tracking-widest text-white/25">
+              Find Us
+            </h4>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Mohan+Co-Op+Industrial+Estate+New+Delhi+110044"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-4 block overflow-hidden rounded-lg border border-white/10 bg-white/[0.03] transition hover:border-[#29B9F2]/40"
+            >
+              <div className="relative h-56 w-full">
+                <iframe
+                  title="Vectrae Infotech location map"
+                  src="https://maps.google.com/maps?q=Mohan%20Co-Op%20Industrial%20Estate%2C%20New%20Delhi%2C%20110044&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  className="h-full w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+              </div>
+              <span className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-white/45 transition group-hover:text-white">
+                Get directions
+                <ArrowRight className="h-3.5 w-3.5 -translate-x-0.5 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" />
+              </span>
             </a>
           </div>
         </div>

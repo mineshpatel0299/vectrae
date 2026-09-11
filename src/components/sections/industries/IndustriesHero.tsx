@@ -1,7 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import Navbar from "@/components/sections/Navbar";
+import Link from "next/link";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { siteImages } from "@/lib/site-images";
 
 export default function IndustriesHero() {
   return (
@@ -10,16 +15,16 @@ export default function IndustriesHero() {
 
       <Navbar />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-20 pt-8 text-center sm:pb-28 sm:pt-14">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">
-          Industries We Serve
-        </p>
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-8 text-center sm:pt-14">
+        {/* <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">
+          Solutions &amp; Services
+        </p> */}
         <h1
-          className="mt-4 text-balance text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
+          className="mt-4 text-6xl font-normal tracking-normal text-white sm:text-7xl lg:text-8xl"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          Serving India&apos;s Most Demanding Enterprises
+          Industries
         </h1>
         <div
           className="mx-auto mt-6 h-1 w-16 rounded-full"
@@ -27,14 +32,80 @@ export default function IndustriesHero() {
           data-aos="fade-up"
           data-aos-delay="150"
         />
-        <p
-          className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/55"
+        <div
+          className="mt-6 flex items-center justify-center gap-1.5 text-sm text-white/40"
           data-aos="fade-up"
           data-aos-delay="200"
-        >
-          From banking to broadcast, every industry runs on different technology requirements.
-          Vectrae builds the AV, networking, and infrastructure solutions matched to yours.
-        </p>
+        ></div>
+      </div>
+
+      <div className="relative z-10 mx-auto mt-16 max-w-5xl px-6 pb-24 sm:mt-20 sm:pb-32">
+        <div className="relative mx-auto w-full max-w-sm sm:max-w-md">
+          <motion.div
+            initial={{ clipPath: "inset(50% 50% 50% 50%)" }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
+          >
+            <Image
+              src={"/images/industry/industry_hero.png"}
+              alt="Vectrae enterprise AV boardroom deployment"
+              fill
+              priority
+              unoptimized
+              className="object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+          </motion.div>
+
+          {/* Top-left overlapping photo */}
+          <motion.div
+            initial={{ opacity: 0, x: -48, scale: 0.94 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute -left-4 top-16 rounded-2xl bg-white p-1 shadow-2xl sm:-left-18 sm:top-20"
+          >
+            <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
+              <Image
+                src={"/images/industry/industry_hero_sub_01.png"}
+                alt="Enterprise video collaboration setup"
+                fill
+                unoptimized
+                className="object-cover"
+              />
+            </div>
+          </motion.div>
+
+          {/* Bottom-right overlapping photo */}
+          <motion.div
+            initial={{ opacity: 0, x: 48, scale: 0.94 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute bottom-16 -right-4 rounded-2xl bg-white p-1 shadow-2xl sm:bottom-20 sm:-right-16"
+          >
+            <div className="relative h-24 w-24 overflow-hidden rounded-xl sm:h-28 sm:w-28">
+              <Image
+                src={"/images/industry/industry_hero_sub_02.png"}
+                alt="24/7 managed IT monitoring"
+                fill
+                unoptimized
+                className="object-cover"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Paragraph + CTA */}
+        <div className="mx-auto mt-16 flex max-w-xl flex-col items-center gap-6 text-center">
+          <p
+            className="text-base leading-relaxed text-white/55"
+            data-aos="fade-up"
+          >
+            From banking to broadcast, every industry runs on different
+            technology requirements. Vectrae builds the AV, networking, and
+            infrastructure solutions matched to yours.
+          </p>
+        </div>
       </div>
     </section>
   );

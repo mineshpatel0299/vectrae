@@ -7,7 +7,7 @@ import Navbar from "@/components/sections/Navbar";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { stats } from "@/data/stats";
 
-const HEADLINE = ["43 Global Brands.", "ONE TRUSTED PARTNER"];
+const HEADLINE = ["Global Brands.", "ONE TRUSTED PARTNER"];
 
 export default function PartnersHero() {
   const mouseX = useMotionValue(0);

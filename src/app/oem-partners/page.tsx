@@ -9,7 +9,7 @@ import Footer from "@/components/sections/Footer";
 export const metadata: Metadata = {
   title: "OEM Partners | Vectrae Enterprise Technology Solutions",
   description:
-    "Vectrae partners with 43 leading OEMs and technology brands, including Cisco, Microsoft, Crestron, Dell, HP, and Palo Alto Networks, to deliver best-in-class AV, Networking, Data Center, End Computing, and Power solutions PAN-India.",
+    "Vectrae partners with leading OEMs and technology brands, including Cisco, Microsoft, Crestron, Dell, HP, and Palo Alto Networks, to deliver best-in-class AV, Networking, Data Center, End Computing, and Power solutions across PAN-India.",
 };
 
 export default function OemPartnersPage() {

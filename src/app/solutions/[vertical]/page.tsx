@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronRight, PhoneCall, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  ChevronRight,
+  PhoneCall,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import Navbar from "@/components/sections/Navbar";
 import Odometer from "@/components/ui/Odometer";
 import CTA from "@/components/sections/CTA";
@@ -40,6 +48,15 @@ export default async function SolutionOverviewPage({ params }: Props) {
   const Icon = solution.icon;
   const related = solutions.filter((s) => s.slug !== vertical).slice(0, 3);
 
+  const capabilityImages = [
+    "/images/audioCard/audioCardImg1.png",
+    "/images/audioCard/audioCardImg2.png",
+    "/images/audioCard/audioCardImg3.png",
+    "/images/audioCard/audioCardImg4.png",
+    "/images/audioCard/audioCardImg5.png",
+    "/images/audioCard/audioCardImg6.png",
+  ];
+
   return (
     <>
       <ReadingProgress />
@@ -49,7 +66,10 @@ export default async function SolutionOverviewPage({ params }: Props) {
         <Navbar />
 
         <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-6 sm:pb-28">
-          <div className="flex items-center gap-1.5 text-sm text-white/40" data-aos="fade-up">
+          <div
+            className="flex items-center gap-1.5 text-sm text-white/40"
+            data-aos="fade-up"
+          >
             <Link href="/" className="transition hover:text-white/70">
               Home
             </Link>
@@ -76,7 +96,11 @@ export default async function SolutionOverviewPage({ params }: Props) {
               >
                 {solution.title}
               </h1>
-              <p className="mt-4 text-lg text-white/60" data-aos="fade-up" data-aos-delay="150">
+              <p
+                className="mt-4 text-lg text-white/60"
+                data-aos="fade-up"
+                data-aos-delay="150"
+              >
                 {solution.tagline}
               </p>
               <p
@@ -138,7 +162,9 @@ export default async function SolutionOverviewPage({ params }: Props) {
                   <Sparkles className="h-4 w-4" />
                 </span>
                 <div>
-                  <p className="text-sm font-bold leading-none text-white">2,300+ Enterprises</p>
+                  <p className="text-sm font-bold leading-none text-white">
+                    2,300+ Enterprises
+                  </p>
                   <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-white/50">
                     Trust Vectrae PAN-India
                   </p>
@@ -193,6 +219,7 @@ export default async function SolutionOverviewPage({ params }: Props) {
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {solution.capabilities.map((cap, i) => {
               const CapIcon = cap.icon;
+
               return (
                 <div
                   key={cap.title}
@@ -200,15 +227,40 @@ export default async function SolutionOverviewPage({ params }: Props) {
                   data-aos="fade-up"
                   data-aos-delay={i * 60}
                 >
+                  {/* Hover Background Image */}
+                  {capabilityImages[i] && (
+                    <Image
+                      src={capabilityImages[i]}
+                      alt=""
+                      fill
+                      unoptimized
+                      className="pointer-events-none absolute inset-0 z-0 object-cover opacity-0 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+                    />
+                  )}
+
+                  {/* Black Overlay */}
+                  <div className="pointer-events-none absolute inset-0 z-0 bg-black/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                  {/* Top Gradient Line */}
                   <span
-                    className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
+                    className="absolute inset-x-0 top-0 z-10 h-[3px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
                     style={{ backgroundImage: BRAND_GRADIENT }}
                   />
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-black/3 text-[#0f9ac9] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:border-[#25D9C7]/40 group-hover:bg-[#25D9C7]/10 group-hover:shadow-[0_0_18px_rgba(37,217,199,0.4)]">
-                    <CapIcon className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-5 text-lg font-semibold text-neutral-900">{cap.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-neutral-500">{cap.description}</p>
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-black/3 text-[#0f9ac9] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:border-[#25D9C7]/40 group-hover:bg-[#25D9C7]/10 group-hover:text-white group-hover:shadow-[0_0_18px_rgba(37,217,199,0.4)]">
+                      <CapIcon className="h-5 w-5" />
+                    </span>
+
+                    <h3 className="mt-5 text-lg font-semibold text-neutral-900 transition-colors duration-500 group-hover:text-white">
+                      {cap.title}
+                    </h3>
+
+                    <p className="mt-2 text-sm leading-relaxed text-neutral-500 transition-colors duration-500 group-hover:text-white/70">
+                      {cap.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}
@@ -251,8 +303,12 @@ export default async function SolutionOverviewPage({ params }: Props) {
                         <ArrowUpRight className="h-3.5 w-3.5" />
                       </span>
                     </div>
-                    <h3 className="mt-5 text-lg font-semibold text-neutral-900">{sub.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-neutral-500">{sub.tagline}</p>
+                    <h3 className="mt-5 text-lg font-semibold text-neutral-900">
+                      {sub.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+                      {sub.tagline}
+                    </p>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-neutral-400 transition-colors duration-300 group-hover:text-[#0f9ac9]">
                       Explore
                     </span>
@@ -273,7 +329,10 @@ export default async function SolutionOverviewPage({ params }: Props) {
         />
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]" data-aos="fade-up">
+          <p
+            className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]"
+            data-aos="fade-up"
+          >
             Why Vectrae
           </p>
           <h2
@@ -355,9 +414,12 @@ export default async function SolutionOverviewPage({ params }: Props) {
                     <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
                       <RelIcon className="h-4 w-4" />
                     </span>
-                    <h3 className="mt-3 text-lg font-bold text-white">{r.title}</h3>
+                    <h3 className="mt-3 text-lg font-bold text-white">
+                      {r.title}
+                    </h3>
                     <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-white/70">
-                      Explore <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+                      Explore{" "}
+                      <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </span>
                   </div>
                 </Link>
