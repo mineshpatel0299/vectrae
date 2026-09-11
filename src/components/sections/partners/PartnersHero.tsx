@@ -5,7 +5,6 @@ import { ArrowUpRight } from "lucide-react";
 import { type MouseEvent } from "react";
 import Navbar from "@/components/sections/Navbar";
 import { BRAND_GRADIENT } from "@/lib/brand";
-import { stats } from "@/data/stats";
 
 const HEADLINE = ["Global Brands.", "ONE TRUSTED PARTNER"];
 
@@ -22,8 +21,6 @@ export default function PartnersHero() {
     mouseX.set((e.clientX - rect.left - rect.width / 2) * 0.15);
     mouseY.set((e.clientY - rect.top - rect.height / 2) * 0.15);
   }
-
-  const oemStat = stats.find((s) => s.label.includes("OEM")) ?? stats[2];
 
   return (
     <section
@@ -117,9 +114,7 @@ export default function PartnersHero() {
       <div className="relative z-10 border-t border-white/5 py-6">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30">
-            {oemStat.value}
-            {oemStat.suffix} OEM & Technology Partners across every solution
-            vertical
+            Direct OEM & Technology Partners across every solution vertical
           </p>
         </div>
       </div>
