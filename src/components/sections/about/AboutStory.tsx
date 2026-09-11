@@ -8,26 +8,26 @@ const chapters = [
   {
     n: "01",
     kicker: "The Foundation",
-    title: "A specialist AV integrator.",
-    body: "Vectrae began by engineering precision boardrooms and command centres for enterprise clients across Delhi NCR.",
+    title: "A simple premise.",
+    body: "Founded in 2014 on the belief that businesses don't want to think about their IT infrastructure, as long as it works, we're an IT infrastructure company based in Delhi, built to source, deploy, secure, and maintain the technology that forms the backbone of the enterprises we serve.",
   },
   {
     n: "02",
-    kicker: "The Expansion",
-    title: "Into Networking & Security.",
-    body: "As client needs grew, so did we, building the resilient, secure infrastructure enterprises depend on every day.",
+    kicker: "The Growth",
+    title: "From Nehru Place, outward.",
+    body: "The start-up team has grown from a small unit based out of Nehru Place to a full-fledged organization, partnering with some of the world's most recognizable tech brands to get things done, while staying accessible and reactive to client demands.",
   },
   {
     n: "03",
-    kicker: "The Scale",
-    title: "Data Center. End Computing. Power.",
-    body: "One partner, every layer, from the server room to the boardroom, delivered PAN-India.",
+    kicker: "The Reach",
+    title: "One partner, every layer.",
+    body: "From end-devices to data centers, our verticals are built around the full lifecycle of enterprise IT infrastructure, so our clients don't have to deal with the fragmented ecosystem that comes with working with multiple vendors.",
   },
   {
     n: "04",
     kicker: "Today",
     title: "A full-spectrum partner.",
-    body: "25+ years. 250+ certified experts. 2,300+ enterprises trust Vectrae with their technology backbone.",
+    body: "More than a decade later, the philosophy remains the same: a deep, hands-on, client-centric approach to infrastructure, backed by a team of 250+ professionals and an annual turnover of over ₹400 crores.",
   },
 ];
 

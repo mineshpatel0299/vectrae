@@ -18,7 +18,7 @@ export default function AboutImpact() {
         <div className="max-w-2xl" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#0f9ac9]">Impact</p>
           <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-4xl">
-            Numbers built over two decades of trust.
+            Numbers built over more than a decade of trust.
           </h2>
         </div>
 

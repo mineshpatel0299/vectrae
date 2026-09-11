@@ -47,7 +47,7 @@ export default function AboutHero() {
           className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]"
           data-aos="fade-up"
         >
-          About Vectrae
+          About Us
         </p>
 
         <h1 className="mt-8 font-semibold leading-[1.1] tracking-tight text-white text-4xl lg:text-[5.5rem]">
@@ -81,9 +81,9 @@ export default function AboutHero() {
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg"
         >
-          Vectrae Infotech Pvt. Ltd. is India&apos;s full-spectrum enterprise
-          technology partner, Audio Visual, Networking, Data Center, End
-          Computing and Power, delivered PAN-India from a single window.
+          The people who make it possible for you to not have to think about
+          your IT infrastructure, working in the background so that you can
+          focus on what matters.
         </motion.p>
 
         <motion.div
