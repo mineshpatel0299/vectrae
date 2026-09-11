@@ -1,11 +1,11 @@
 "use client";
 
-import { Building2, Users, ShieldCheck, CalendarClock } from "lucide-react";
+import { Building2, Users, CalendarClock } from "lucide-react";
 import Odometer from "@/components/ui/Odometer";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import { stats } from "@/data/stats";
 
-const icons = [Building2, Users, ShieldCheck, CalendarClock];
+const icons = [Building2, Users, CalendarClock];
 
 export default function AboutImpact() {
   const [primary, ...rest] = stats;
@@ -58,7 +58,7 @@ export default function AboutImpact() {
           })}
 
           <div
-            className="relative flex flex-col justify-center overflow-hidden rounded-3xl border border-black/10 bg-black p-8 sm:col-span-2 lg:col-span-1"
+            className="relative flex flex-col justify-center overflow-hidden rounded-3xl border border-black/10 bg-black p-8 sm:col-span-2 lg:col-span-2"
             data-aos="fade-up"
             data-aos-delay="240"
           >

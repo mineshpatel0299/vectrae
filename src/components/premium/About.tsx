@@ -6,8 +6,8 @@ import { stats } from "@/data/stats";
 import { BRAND_GRADIENT } from "@/lib/brand";
 import Reveal from "./Reveal";
 
-const RING_FILL = [88, 72, 58, 95];
-const RING_COLORS = ["#29B9F2", "#25D9C7", "#84D96C", "#B6D93B"];
+const RING_FILL = [88, 72, 95];
+const RING_COLORS = ["#29B9F2", "#25D9C7", "#B6D93B"];
 
 function useCountUp(target: number, active: boolean, duration = 1.6) {
   const [value, setValue] = useState(0);
@@ -106,7 +106,7 @@ export default function About() {
         </Reveal>
 
         <div className="mt-16 flex flex-col gap-14 lg:flex-row lg:items-center lg:gap-0">
-          <div className="grid flex-1 grid-cols-2 gap-y-12 sm:flex sm:flex-wrap sm:justify-between sm:gap-8">
+          <div className="grid flex-1 grid-cols-3 gap-y-12 sm:flex sm:flex-wrap sm:justify-between sm:gap-8">
             {stats.map((stat, i) => (
               <Reveal key={stat.label} delay={0.1 + i * 0.08}>
                 <StatRing

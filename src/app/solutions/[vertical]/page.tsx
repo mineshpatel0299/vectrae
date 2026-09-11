@@ -181,7 +181,7 @@ export default async function SolutionOverviewPage({ params }: Props) {
           className="pointer-events-none absolute inset-x-0 top-0 h-px"
           style={{ backgroundImage: BRAND_GRADIENT }}
         />
-        <div className="relative mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-6 lg:grid-cols-4 lg:divide-x lg:divide-neutral-100">
+        <div className="relative mx-auto grid max-w-6xl grid-cols-3 gap-x-6 gap-y-10 px-6 lg:grid-cols-3 lg:divide-x lg:divide-neutral-100">
           {stats.map((stat, i) => (
             <div
               key={stat.label}

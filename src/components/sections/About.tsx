@@ -84,7 +84,7 @@ export default function About() {
         {/* Stats row + mission, single clean row */}
         <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-0">
           {/* Stats, 4-col grid, consistent alignment */}
-          <div className="grid grid-cols-2 gap-x-0 gap-y-8 lg:flex lg:flex-1 lg:divide-x lg:divide-white/10">
+          <div className="grid grid-cols-3 gap-x-0 gap-y-8 lg:flex lg:flex-1 lg:divide-x lg:divide-white/10">
             {stats.map((stat, i) => (
               <div
                 key={stat.label}
