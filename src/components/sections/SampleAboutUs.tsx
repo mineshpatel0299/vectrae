@@ -1,51 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { siteImages } from "@/lib/site-images";
 
 export default function SampleAboutUs() {
-  const containerRef = useRef<HTMLElement>(null);
-  
-  // Track scroll progress of this section
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 90%", "center center"] 
-    // Animation starts when the top of the section is 90% down the viewport
-    // Animation finishes when the center of the section reaches the center of the viewport
-  });
-
-  // Calculate the clip-path inset percentage from 100% down to 0% based on scroll
-  const clipPercent = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  const clipPath = useTransform(clipPercent, (val) => `inset(0 ${val}% 0 0)`);
-  
-  // Calculate the image scale from 1.15 down to 1
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
-
-  // Calculate content sliding (x from 400px to 0px) and opacity (0 to 1)
-  const contentX = useTransform(scrollYProgress, [0, 1], [400, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
   return (
-    <section ref={containerRef} className="relative w-full min-h-screen bg-white overflow-hidden flex items-center py-24 sm:py-32 border-t border-black/5">
+    <section className="relative w-full min-h-screen bg-white overflow-hidden flex items-center py-24 sm:py-32 border-t border-black/5">
       {/* Background ambient glow */}
       <div className="pointer-events-none absolute left-1/4 top-1/4 z-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-[#29B9F2]/10 blur-[120px]" />
       
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-16 items-center">
           
-          {/* Image Card - Curtain reveal tied to scroll */}
+          {/* Image Card - Clean fade-up animation */}
           <motion.div
-            style={{ clipPath }}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative h-[400px] w-full rounded-2xl overflow-hidden lg:h-[600px] shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-black/10"
           >
-            
-            {/* The Image with zoom-out effect tied to scroll */}
-            <motion.div
-              style={{ scale: imageScale }}
-              className="absolute inset-0"
-            >
+            <div className="absolute inset-0">
               <Image
                 src={siteImages.sampleAboutUs}
                 alt="About Us Sample"
@@ -56,12 +32,15 @@ export default function SampleAboutUs() {
               />
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Content - Slides from right to left tied to scroll */}
+          {/* Content - Clean fade-up animation */}
           <motion.div
-            style={{ x: contentX, opacity: contentOpacity }}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col justify-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#29B9F2]">
