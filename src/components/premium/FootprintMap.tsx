@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Building, MapPin, ShieldCheck, Users } from "lucide-react";
+import { Building, Headset, MapPin, Users } from "lucide-react";
 import TiltCard from "@/components/ui/TiltCard";
 import Reveal from "./Reveal";
 import { siteImages } from "@/lib/site-images";
@@ -10,7 +10,7 @@ import { siteImages } from "@/lib/site-images";
 const metrics = [
   { label: "Enterprise Clients", value: "2,300+", icon: Building },
   { label: "Technology Experts", value: "250+", icon: Users },
-  { label: "OEM & Tech Partners", value: "43", icon: ShieldCheck },
+  { label: "Managed Support", value: "24/7", icon: Headset },
   { label: "Years of Experience", value: "25+", icon: MapPin },
 ];
 

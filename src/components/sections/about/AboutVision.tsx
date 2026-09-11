@@ -90,16 +90,21 @@ export default function AboutVision() {
               />
 
               <p className="text-xl font-medium leading-relaxed text-white/85 sm:text-2xl lg:text-[1.8rem]">
-                To be India&apos;s most trusted, full-spectrum enterprise
-                technology solutions company.
+                To be the default choice of IT infrastructure for the
+                enterprises of India.
               </p>
             </div>
 
             {/* Supporting text */}
             <p className="mt-8 max-w-xl text-base leading-7 text-white/45 sm:text-lg">
-              We envision a future where enterprises can make technology
-              decisions with confidence — powered by the right solutions,
-              trusted partnerships, and outcomes that create lasting value.
+              We believe we can be the most reliable partner for Indian
+              businesses who want to focus on what they do best, without
+              having to worry about the IT infrastructure that enables them to
+              do so. As these organizations continue to digitalize and
+              transform, and as they leverage emerging disruptive
+              technologies such as artificial intelligence, we want to
+              continue being there for them, not as a transactional vendor,
+              but as a true partner in growth.
             </p>
           </motion.div>
 

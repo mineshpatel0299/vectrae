@@ -3,6 +3,8 @@ import AboutHero from "@/components/sections/about/AboutHero";
 import AboutStory from "@/components/sections/about/AboutStory";
 import AboutImpact from "@/components/sections/about/AboutImpact";
 import AboutCapabilities from "@/components/sections/about/AboutCapabilities";
+import AboutPresence from "@/components/sections/about/AboutPresence";
+import AboutValues from "@/components/sections/about/AboutValues";
 // import AboutTrust from "@/components/sections/about/AboutTrust";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
@@ -15,7 +17,7 @@ import AboutGallery from "@/components/sections/about/AboutGallery";
 export const metadata: Metadata = {
   title: "About Vectrae | Enterprise Technology Solutions",
   description:
-    "Vectrae Infotech Pvt. Ltd. is a full-spectrum enterprise technology solutions provider headquartered in New Delhi, India, delivering AV, Networking, Data Center, End Computing, and Power solutions to 2,300+ enterprises PAN-India.",
+    "Vectrae Infotech Pvt. Ltd. is a full-spectrum enterprise IT infrastructure company headquartered in New Delhi, India, delivering End-Computing, Data Centre & Security, Networking, Boardroom & AV, and IT Services PAN-India.",
 };
 
 export default function AboutPage() {
@@ -24,8 +26,10 @@ export default function AboutPage() {
       <AboutHero />
       <AboutStory />
       <AboutImpact />
-      <AboutVision />
       <AboutCapabilities />
+      <AboutPresence />
+      <AboutValues />
+      <AboutVision />
       <AboutMission />
       <AboutLeadership />
       <AboutCertifications />

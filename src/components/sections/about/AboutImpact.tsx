@@ -11,14 +11,14 @@ export default function AboutImpact() {
   const [primary, ...rest] = stats;
 
   return (
-    <section className="relative overflow-hidden border-t border-black/5 bg-white py-20 sm:py-28">
+    <section id="impact" className="relative overflow-hidden border-t border-black/5 bg-white py-20 sm:py-28">
       <div className="pointer-events-none absolute bottom-0 right-1/4 h-100 w-100 translate-y-1/2 rounded-full bg-[#25D9C7]/10 blur-[130px]" />
 
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="max-w-2xl" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#0f9ac9]">Impact</p>
           <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-neutral-900 sm:text-4xl">
-            Numbers built over two decades of trust.
+            Numbers built over more than a decade of trust.
           </h2>
         </div>
 
