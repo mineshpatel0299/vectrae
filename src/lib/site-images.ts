@@ -17,6 +17,7 @@ export const siteImages = {
   wcuSolutions: `${R2_BASE}/images/wcu/solutions.webp`,
   workspaceWallpaper: `${R2_BASE}/workspace-wallpaper.webp`,
   indiaMap: `${R2_BASE}/india-map.svg`,
+  indiaMapNetwork: "/map.png",
   blog: {
     avTech: `${R2_BASE}/images/blog/av-tech.webp`,
     managedIt: `${R2_BASE}/images/blog/managed-it.webp`,

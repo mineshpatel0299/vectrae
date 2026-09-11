@@ -223,7 +223,7 @@ export default async function SolutionOverviewPage({ params }: Props) {
               return (
                 <div
                   key={cap.title}
-                  className="group relative overflow-hidden rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_1.5px_rgba(37,217,199,0.45),0_20px_45px_-15px_rgba(15,23,42,0.18)]"
+                  className="group relative overflow-hidden rounded-2xl border border-black/10 bg-white px-6 py-14 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_1.5px_rgba(37,217,199,0.45),0_20px_45px_-15px_rgba(15,23,42,0.18)]"
                   data-aos="fade-up"
                   data-aos-delay={i * 60}
                 >
@@ -253,11 +253,11 @@ export default async function SolutionOverviewPage({ params }: Props) {
                       <CapIcon className="h-5 w-5" />
                     </span>
 
-                    <h3 className="mt-5 text-lg font-semibold text-neutral-900 transition-colors duration-500 group-hover:text-white">
+                    <h3 className="mt-5 text-2xl font-semibold text-neutral-900 transition-colors duration-500 group-hover:text-white">
                       {cap.title}
                     </h3>
 
-                    <p className="mt-2 text-sm leading-relaxed text-neutral-500 transition-colors duration-500 group-hover:text-white/70">
+                    <p className="mt-2 text-md leading-relaxed text-neutral-500 transition-colors duration-500 group-hover:text-white/70">
                       {cap.description}
                     </p>
                   </div>
@@ -288,7 +288,7 @@ export default async function SolutionOverviewPage({ params }: Props) {
                   <Link
                     key={sub.slug}
                     href={`/solutions/${solution.slug}/${sub.slug}`}
-                    className="group relative flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-[#f5f5f0] p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-transparent hover:bg-white hover:shadow-[0_0_0_1.5px_rgba(37,217,199,0.45),0_20px_45px_-15px_rgba(15,23,42,0.18)]"
+                    className="group relative flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-[#f5f5f0] py-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-transparent hover:bg-white hover:shadow-[0_0_0_1.5px_rgba(37,217,199,0.45),0_20px_45px_-15px_rgba(15,23,42,0.18)]"
                     data-aos="fade-up"
                     data-aos-delay={i * 60}
                   >

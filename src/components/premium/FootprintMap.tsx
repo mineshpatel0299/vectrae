@@ -81,14 +81,20 @@ export default function FootprintMap() {
   const [cycleIndex, setCycleIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setCycleIndex((v) => (v + 1) % lineSpokes.length), 2200);
+    const id = setInterval(
+      () => setCycleIndex((v) => (v + 1) % lineSpokes.length),
+      2200,
+    );
     return () => clearInterval(id);
   }, [lineSpokes.length]);
 
   const activeId = hoveredId ?? lineSpokes[cycleIndex % lineSpokes.length]?.id;
 
   return (
-    <section id="footprint" className="relative overflow-hidden border-t border-black/5 bg-white py-24 sm:py-32">
+    <section
+      id="footprint"
+      className="relative overflow-hidden border-t border-black/5 bg-white py-24 sm:py-32"
+    >
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#25D9C7]/10 blur-[140px]" />
 
       <div className="relative mx-auto max-w-5xl px-6">
@@ -102,15 +108,19 @@ export default function FootprintMap() {
                 A Live Network, Not Just a Map
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-500">
-                Every delivery hub connects back to our Delhi command center, from initial
-                consultation to long-term managed support, PAN-India.
+                Every delivery hub connects back to our Delhi command center,
+                from initial consultation to long-term managed support,
+                PAN-India.
               </p>
             </Reveal>
 
             <div className="mt-10 grid grid-cols-2 gap-4">
               {metrics.map((metric, i) => (
                 <Reveal key={metric.label} delay={i * 0.08}>
-                  <TiltCard className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm" strength={5}>
+                  <TiltCard
+                    className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm"
+                    strength={5}
+                  >
                     <div style={{ transform: "translateZ(20px)" }}>
                       <metric.icon className="h-4 w-4 text-neutral-400" />
                       <div className="mt-2 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl bg-[linear-gradient(90deg,#29B9F2,#25D9C7)]">
@@ -136,7 +146,10 @@ export default function FootprintMap() {
                 }}
               />
 
-              <div className="relative mx-auto w-full max-w-80" style={{ aspectRatio: `${SVG_W} / ${SVG_H}` }}>
+              <div
+                className="relative mx-auto w-full max-w-80"
+                style={{ aspectRatio: `${SVG_W} / ${SVG_H}` }}
+              >
                 <img
                   src={siteImages.indiaMap}
                   alt="Map of India"
@@ -144,7 +157,10 @@ export default function FootprintMap() {
                   style={{ objectFit: "fill" }}
                 />
 
-                <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="pointer-events-none absolute inset-0 h-full w-full">
+                <svg
+                  viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+                  className="pointer-events-none absolute inset-0 h-full w-full"
+                >
                   {lineSpokes.map((node) => (
                     <motion.line
                       key={node.id}
@@ -167,8 +183,10 @@ export default function FootprintMap() {
                   const leftPct = (node.svgX / SVG_W) * 100;
                   const topPct = (node.svgY / SVG_H) * 100;
                   const isHub = !!node.hub;
-                  const isLineCity = !isHub && "hasLine" in node && node.hasLine;
-                  const isActive = (isHub || activeId === node.id) && (isHub || isLineCity);
+                  const isLineCity =
+                    !isHub && "hasLine" in node && node.hasLine;
+                  const isActive =
+                    (isHub || activeId === node.id) && (isHub || isLineCity);
                   const isHovered = hoveredId === node.id;
 
                   // Remaining cities rendered as normal light dots
@@ -177,7 +195,11 @@ export default function FootprintMap() {
                       <div
                         key={node.id}
                         className="group absolute -translate-x-1/2 -translate-y-1/2"
-                        style={{ left: `${leftPct}%`, top: `${topPct}%`, zIndex: isHovered ? 35 : 12 }}
+                        style={{
+                          left: `${leftPct}%`,
+                          top: `${topPct}%`,
+                          zIndex: isHovered ? 35 : 12,
+                        }}
                         onMouseEnter={() => setHoveredId(node.id)}
                         onMouseLeave={() => setHoveredId(null)}
                       >
@@ -190,7 +212,9 @@ export default function FootprintMap() {
                         />
                         <div
                           className={`pointer-events-none absolute bottom-full left-1/2 mb-2 whitespace-nowrap rounded-lg border border-black/10 bg-white px-2 py-0.5 text-[10px] font-bold text-neutral-900 shadow-md backdrop-blur-sm transition-all duration-200 ${
-                            isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                            isHovered
+                              ? "opacity-100 scale-100"
+                              : "opacity-0 scale-95"
                           }`}
                           style={{ transform: "translateX(-50%)" }}
                         >
@@ -205,14 +229,22 @@ export default function FootprintMap() {
                     <div
                       key={node.id}
                       className="absolute -translate-x-1/2 -translate-y-1/2"
-                      style={{ left: `${leftPct}%`, top: `${topPct}%`, zIndex: isActive ? 30 : 10 }}
+                      style={{
+                        left: `${leftPct}%`,
+                        top: `${topPct}%`,
+                        zIndex: isActive ? 30 : 10,
+                      }}
                       onMouseEnter={() => setHoveredId(node.id)}
                       onMouseLeave={() => setHoveredId(null)}
                     >
                       {isActive && (
                         <span
                           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full"
-                          style={{ width: node.hub ? 22 : 16, height: node.hub ? 22 : 16, backgroundColor: "rgba(41,185,242,0.3)" }}
+                          style={{
+                            width: node.hub ? 22 : 16,
+                            height: node.hub ? 22 : 16,
+                            backgroundColor: "rgba(41,185,242,0.3)",
+                          }}
                         />
                       )}
                       <span

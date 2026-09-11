@@ -6,6 +6,7 @@ import TrustSignals from "@/components/sections/TrustSignals";
 import ServiceFAQ from "@/components/sections/ServiceFAQ";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
+import SolutionsCards from "@/components/sections/SolutionsCards";
 
 export const metadata: Metadata = {
   title: "Solutions | Vectrae Enterprise Technology Solutions",
@@ -17,8 +18,9 @@ export default function SolutionsPage() {
   return (
     <>
       <ServicesHero />
-      <div id="solutions">
-        <ServiceCards />
+      <div id="solutions" className="py-16 px-24">
+        {/* <ServiceCards /> */}
+        <SolutionsCards />
       </div>
       <ServiceProcess />
       <ServiceFAQ />
