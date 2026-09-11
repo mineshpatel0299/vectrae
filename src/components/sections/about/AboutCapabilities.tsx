@@ -59,7 +59,7 @@ export default function AboutCapabilities() {
   const FeaturedIcon = icons[0];
 
   return (
-    <section className="relative overflow-hidden border-t border-black/5 bg-white py-20 sm:py-28">
+    <section id="capabilities" className="relative overflow-hidden border-t border-black/5 bg-white py-20 sm:py-28">
       <div className="pointer-events-none absolute left-1/4 top-0 h-100 w-100 -translate-y-1/2 rounded-full bg-[#84D96C]/10 blur-[130px]" />
 
       <div className="relative mx-auto max-w-6xl px-6">
